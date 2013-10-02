@@ -14,7 +14,6 @@
             <?
                include('sidebar.php');
             ?>
-
         </div>
         <div class="span10">
             <!--Body content-->
