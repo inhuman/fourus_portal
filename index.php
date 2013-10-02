@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<?php
 
-#echo "<h1>Fourus portal</h1>";
+
+
 
