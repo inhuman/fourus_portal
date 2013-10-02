@@ -11,16 +11,21 @@
     <div class="row-fluid">
         <div class="span2">
             <!--Sidebar content-->
-            sidebar
+            <?
+               include('sidebar.php');
+            ?>
+
         </div>
         <div class="span10">
             <!--Body content-->
-            body
+            <?
+               include('body.php');
+            ?>
         </div>
     </div>
 </div>
 
 <?php
 
-echo "<h1>Fourus portal</h1>";
+#echo "<h1>Fourus portal</h1>";
 
