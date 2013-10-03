@@ -1,6 +1,6 @@
 <?php
 
-echo '<br>THIS HOME BODY !<br>';
+echo 'THIS HOME BODY !<br>';
 
 $page = $_GET['page'];
 
