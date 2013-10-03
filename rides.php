@@ -1,4 +1,5 @@
 <?php
+include('class/Ride.php');
 echo "тут будет список райдов, с картинками, со всеми делами";
 ?>
 <table class="table table-bordered table-hover">
