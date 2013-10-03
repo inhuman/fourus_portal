@@ -3,29 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <title>Bootstrap dropdown with navbar example</title>
-    <link href="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="navbar navbar-inverse">
     <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-                <a class="brand" href="#">Fourus</a>
+                <a class="brand" href="/portal/">Fourus</a>
                    <li class="dropdown" id="accountmenu">
                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-list"></i> Лицензии<b class="caret"></b></a>
                    <ul class="dropdown-menu">
-                     <li><a href="#"><i class="icon-file"></i>Создать</a></li>
-                     <li><a href="#"><i class="icon-calendar"></i> Сроки</a></li>
+                     <li><a href="index.php?page=create_lic"><i class="icon-file"></i>Создать</a></li>
+                     <li><a href="index.php?page=validity"><i class="icon-calendar"></i> Сроки</a></li>
                    </ul>
                 </li>
-                <li ><a href="#"><i class="icon-facetime-video"></i> Аттракицоны</a></li>
-                <li><a href="#"><i class="icon-film"></i> Райды</a></li>
-                <li><a href="#"><i class="icon-wrench"></i> Инструкции</a></li>
-                <li><a href="#"><i class="icon-book"></i> Настройки</a></li>
-
+                <li ><a href="index.php?page=attraction"><i class="icon-facetime-video"></i> Аттракицоны</a></li>
+                <li><a href="index.php?page=rides"><i class="icon-film"></i> Райды</a></li>
+                <li><a href="index.php?page=manuals"><i class="icon-wrench"></i> Инструкции</a></li>
+                <li><a href="index.php?page=settings"><i class="icon-book"></i> Настройки</a></li>
             </ul>
             <form class="navbar-search pull-right" >
-                <input type="text" class="search-query" size="10%" placeholder="Search">
+                <input type="text" class="search-query" placeholder="Search">
             </form>
         </div>
     </div>

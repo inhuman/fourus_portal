@@ -8,13 +8,11 @@
     <script src="js/bootstrap.js"></script>
 </head>
 <body>
-
 <div class="container">
  <?
    include('top.php');
    include('body.php');
  ?>
-
 </div>
 
 
