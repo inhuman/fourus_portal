@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 </head>
 <body>
-
+<?
+include('top.php');
+?>
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span2">
