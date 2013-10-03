@@ -6,7 +6,7 @@
     <link href="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div class="navbar">
+<div class="navbar navbar-inverse">
     <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
@@ -14,7 +14,7 @@
                    <li class="dropdown" id="accountmenu">
                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-list"></i> Лицензии<b class="caret"></b></a>
                    <ul class="dropdown-menu">
-                     <li><a href="#">Создать</a></li>
+                     <li><a href="#"><i class="icon-file"></i>Создать</a></li>
                      <li><a href="#"><i class="icon-calendar"></i> Сроки</a></li>
                    </ul>
                 </li>
