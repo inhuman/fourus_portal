@@ -1,29 +1,20 @@
 <!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <html lang="ru">
 <html>
 <head>
     <title>Fourus portal</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <script src="js/bootstrap.js"></script>
 </head>
 <body>
-<?
-include('top.php');
-?>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span2">
-            <!--Sidebar content-->
-            <?
-               include('sidebar.php');
-            ?>
-        </div>
-        <div class="span10">
-            <!--Body content-->
-            <?
-               include('body.php');
-            ?>
-        </div>
-    </div>
+
+<div class="container">
+ <?
+   include('top.php');
+   include('body.php');
+ ?>
+
 </div>
 
 
