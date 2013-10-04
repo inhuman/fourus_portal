@@ -41,3 +41,14 @@ function findRide($id)
 
 }
 
+function CountAllRides()
+{
+    $dbh = new PDOConfig();
+    $query=$dbh->query("SELECT COUNT(*) as id FROM Rides");
+    $query->setFetchMode(PDO::FETCH_ASSOC);
+    $row=$query->fetch();
+    $members=$row['id'];
+    return $members;
+
+}
+
