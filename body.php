@@ -1,7 +1,5 @@
 <?php
 
-echo 'THIS HOME BODY !<br>';
-
 $page = $_GET['page'];
 
 switch($page){
@@ -11,7 +9,5 @@ switch($page){
     case rides:     $page = 'rides.php';        break;
     case manuals:   $page = 'manuals.php';      break;
     case settings:  $page = 'settings.php';     break;
-
 }
-echo "U choose ".$page.'<br>';
 include ($page);

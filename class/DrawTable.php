@@ -43,7 +43,7 @@ class DrawTable {
 
     public function ImageStatTable()
     {
-       // TODO: написать сабж
+       // TODO: написать  ImageStatTable()
     }
 
 }
