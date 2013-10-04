@@ -1,6 +1,13 @@
 <?php
 include('class/Ride.php');
+include('class/PDOConfig.php');
 echo "тут будет список райдов, с картинками, со всеми делами";
+
+$ride = new Ride("2");
+echo "<br>ride_name: ".$ride->getRideName();
+echo "<br>adfasdfa: ".$ride->getValuesFromDB();
+var_dump($ride);
+
 ?>
 <table class="table table-bordered table-hover">
 
