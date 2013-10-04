@@ -41,6 +41,9 @@ class DrawTable {
 
     }
 
-
+    public function ImageStatTable()
+    {
+       // TODO: написать сабж
+    }
 
 }
