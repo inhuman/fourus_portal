@@ -24,14 +24,14 @@ while($i<100)
   $ride = findRide($i);
 
   echo '<tr>';
-  echo '<th>'.$i.'</th>';
-  echo '<th>'.$ride->getRideName().'</th>';
-  echo '<th>'.$ride->getDuration().'</th>';
-  echo '<th>'.$ride->getDemo().'</th>';
-  echo '<th>'.$ride->getPoster60x80().'</th>';
-  echo '<th>'.$ride->getPrvk.'</th>';
-  echo '<th>эффекты</th>';
-  echo '<th>'.$ride->getDescription().'</th>';
+  echo '<td>'.$i.'</td>';
+  echo '<td>'.$ride->getRideName().'</td>';
+  echo '<td>'.$ride->getDuration().'</td>';
+  echo '<td>'.$ride->getDemo().'</td>';
+  echo '<td>'.$ride->getPoster60x80().'</td>';
+  echo '<td>'.$ride->getPrvk.'</td>';
+  echo '<td>эффекты</td>';
+  echo '<td>'.$ride->getDescription().'</td>';
   echo '</tr>';
 }
 echo "</tbody></table>";
