@@ -29,6 +29,8 @@ class Ride
 
 }
 
+// TODO: write class RideFactory, place to RideFactory.php
+
 function findRide($id)
 {
 

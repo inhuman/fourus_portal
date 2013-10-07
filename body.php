@@ -9,6 +9,7 @@ switch($page){
     case rides:     $page = 'rides.php';        break;
     case manuals:   $page = 'manuals.php';      break;
     case settings:  $page = 'settings.php';     break;
+
     case ride_card: $page = 'card/RideCard.php';break;
     case attr_card: $page = 'card/AttractionCard.php';break;
 
