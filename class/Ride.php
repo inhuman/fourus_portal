@@ -1,5 +1,5 @@
 <?php
-include('PDOConfig.php');
+require_once('PDOConfig.php');
 class Ride
 {
 

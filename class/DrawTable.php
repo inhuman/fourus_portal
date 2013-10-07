@@ -1,6 +1,8 @@
 <?php
-include('Ride.php');
-include('ImageStat.php');
+//require_once('Ride.php');
+require_once('ImageStat.php');
+require_once('FactoryRide.php');
+
 
 class DrawTable {
 
@@ -21,10 +23,10 @@ class DrawTable {
         echo "</tr></thead><tbody></b>";
 
         $i=0;
-        while (CountAllRides() > $i)
+        while (FactoryRide::CountAllRides() > $i)
         {
             $i++ ;
-            $ride = findRide($i);
+            $ride = FactoryRide::findRide($i);
             echo '<tr>';
             echo '<td>'.$i.'</td>';
             echo '<td>'.$ride->getRideName().'</td>';
