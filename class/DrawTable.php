@@ -1,5 +1,4 @@
 <?php
-//require_once('Ride.php');
 require_once('ImageStat.php');
 require_once('FactoryRide.php');
 
@@ -33,8 +32,12 @@ class DrawTable {
             echo '<td>'.$ride->getDuration().'</td>';
             echo '<td>'.$ride->getDemo().'</td>';
             echo '<td>'.$ride->getPoster60x80().'</td>';
-            echo '<td>'.$ride->getPrvk.'</td>';
-            echo '<td>эффекты</td>';
+            echo '<td>'.$ride->getPrvk().'</td>';
+
+            echo '<td>';
+            foreach($ride->getEffx() as $img){echo '<img src='.$img[0].'>';}
+            echo '<td>';
+
             echo '<td>'.$ride->getDescription().'</td>';
             echo '</tr>';
         }
