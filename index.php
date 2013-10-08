@@ -10,8 +10,8 @@
 <body>
 <div class="container">
  <?
-   include('top.php');
-   include('body.php');
+   require_once __DIR__."/top.php";
+   require_once __DIR__."/body.php";
  ?>
 </div>
 

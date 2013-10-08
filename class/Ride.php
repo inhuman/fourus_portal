@@ -1,5 +1,5 @@
 <?php
-require_once('PDOConfig.php');
+require_once __DIR__."/PDOConfig.php";
 class Ride
 {
 
@@ -7,8 +7,6 @@ class Ride
 
     private $official_name, $file_name, $duration, $description, $effx;
     private $banner_big, $banner_medium, $banner_small, $file_size_mb, $dynamic_prv, $dynamic_prvk, $demo_1080p ;
-
-
 
     public function  __construct($id)
     {

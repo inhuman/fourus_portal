@@ -14,4 +14,4 @@ switch($page){
     case attr_card: $page = 'card/AttractionCard.php';break;
 
 }
-include ($page);
+require_once __DIR__."/".$page;
