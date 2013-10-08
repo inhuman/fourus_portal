@@ -6,7 +6,7 @@ require_once('FactoryRide.php');
 class DrawTable {
 
 
-    public  function RideTable()
+    public static function RideTable()
     {
 
         echo '<table class="table table-bordered table-hover">';
