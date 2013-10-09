@@ -14,21 +14,21 @@
                    <li class="dropdown" id="licmenu">
                      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-list"></i> Лицензии<b class="caret"></b></a>
                      <ul class="dropdown-menu">
-                       <li><a href="index.php?page=create_lic"><i class="icon-file"></i>Создать</a></li>
-                       <li><a href="index.php?page=validity"><i class="icon-calendar"></i> Сроки</a></li>
+                       <li><a href="?page=create_lic"><i class="icon-file"></i>Создать</a></li>
+                       <li><a href="?page=validity"><i class="icon-calendar"></i> Сроки</a></li>
                     </ul>
                    </li>
-                <li ><a href="index.php?page=attraction"><i class="icon-facetime-video"></i> Аттракицоны</a></li>
-                <li><a href="index.php?page=rides"><i class="icon-film"></i> Райды</a></li>
-                <li><a href="index.php?page=manuals"><i class="icon-book"></i> Инструкции</a></li>
+                <li ><a href="?page=attraction"><i class="icon-facetime-video"></i> Аттракицоны</a></li>
+                <li><a href="?page=rides"><i class="icon-film"></i> Райды</a></li>
+                <li><a href="?page=manuals"><i class="icon-book"></i> Инструкции</a></li>
 
 
 
                 <li class="dropdown" id="settingsmenu">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-wrench"></i> Настройки<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="index.php?page=ride_card">Карточка райда</a></li>
-                        <li><a href="index.php?page=attr_card">Карточка аттракциона</a></li>
+                        <li><a href="?page=ride_card">Карточка райда</a></li>
+                        <li><a href="?page=attr_card">Карточка аттракциона</a></li>
                     </ul>
                 </li>
 
