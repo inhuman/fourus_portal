@@ -2,19 +2,13 @@
 //require_once __DIR__."/ImageStat.php";
 require_once __DIR__."/FactoryRide.php";
 
-
-
-
-
-
 class DrawTable {
-
 
    public static function AllRideTable()
     {
 
-        echo '<table class="table table-bordered table-hover">';
-        echo "<thead style='background:#000000; color:#777777'><tr>";
+        echo '<table class="table table-bordered table-hover tbl_pointer">';
+        echo "<thead style='background:#000000; color:#777777'  ><tr>";
         echo "<th>#</th>";
         echo "<th>Название</th>";
         echo "<th>Время</th>";
@@ -31,7 +25,7 @@ class DrawTable {
             $i++ ;
             $ride = FactoryRide::findRide($i);
 
-            echo "<tr id=tr$i href=?page=ride_card&id=$i>";
+            echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
             echo '<td>' . $i . '</td>';
             echo '<td>' . $ride->getRideName() . '</td>';
             echo '<td>' . $ride->getDuration() . '</td>';
