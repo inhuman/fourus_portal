@@ -3,6 +3,10 @@
 require_once __DIR__."/FactoryRide.php";
 
 
+
+
+
+
 class DrawTable {
 
 
@@ -27,20 +31,19 @@ class DrawTable {
             $i++ ;
             $ride = FactoryRide::findRide($i);
 
-            //echo "<tr id=tr$i href=?page=ride_card&id=$i>";
-            echo "<tr>";
-            echo '<td>'.$i.'</td>';
-            echo '<td><a href=?page=ride_card&id='.$i.'>'.$ride->getRideName().'</a></td>';
-            echo '<td>'.$ride->getDuration().'</td>';
-            echo '<td>'.$ride->getDemo().'</td>';
-            echo '<td>'.$ride->getPoster60x80().'</td>';
-            echo '<td>'.$ride->getPrvk().'</td>';
+            echo "<tr id=tr$i href=?page=ride_card&id=$i>";
+            echo '<td>' . $i . '</td>';
+            echo '<td>' . $ride->getRideName() . '</td>';
+            echo '<td>' . $ride->getDuration() . '</td>';
+            echo '<td>' . $ride->getDemo() . '</td>';
+            echo '<td>' . $ride->getPoster60x80() . '</td>';
+            echo '<td>' . $ride->getPrvk() . '</td>';
 
             echo '<td>';
-            foreach($ride->getEffx() as $img){echo '<img src='.$img[0].'> ';}
+            foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . '> ';}
             echo '</td>';
 
-            echo '<td>'.$ride->getDescription().'</td>';
+            echo '<td>' . $ride->getDescription() . '</td>';
             echo '</tr>';
         }
         echo "</tbody></table>";
@@ -54,6 +57,7 @@ class DrawTable {
         echo '<div class="container">';
         echo '<div class="row">';
         echo '<div class="span4"> ';
+        //TODO: сделать сюда динамическую картинку, в зависимости от райда
         echo '<br><img src="img/preview/Virus_attack.jpg" class="img-rounded" width="300"></div>';
         echo '<div class="span8">';
         echo '<h2>#'.$id.' '.$ride->getRideName().'</h2>';
