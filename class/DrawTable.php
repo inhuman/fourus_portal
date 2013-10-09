@@ -34,7 +34,7 @@ class DrawTable {
             echo '<td>' . $ride->getPrvk() . '</td>';
 
             echo '<td>';
-            foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . '> ';}
+            foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title='.$img[1].'> ';}
             echo '</td>';
 
             echo '<td>' . $ride->getDescription() . '</td>';

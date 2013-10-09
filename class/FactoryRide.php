@@ -15,7 +15,7 @@ class FactoryRide {
         $ride = $stmt->fetchObject('Ride');
         $stmt->closeCursor();
 
-        $effxx = $dbh->prepare("SELECT e.ico FROM effects as e INNER JOIN RidesEffectsLinks as l ON (l.effx_id = e.id) WHERE l.ride_id = :id");
+        $effxx = $dbh->prepare("SELECT e.ico, e.name FROM effects as e INNER JOIN RidesEffectsLinks as l ON (l.effx_id = e.id) WHERE l.ride_id = :id");
         $effxx->bindValue(':id',$id);
         $effxx->execute();
         $ride->setEffx($effxx->fetchAll());
