@@ -22,6 +22,7 @@
  <?
    require_once __DIR__."/top.php";
    require_once __DIR__."/body.php";
+   require_once __DIR__."/bottom.php";
  ?>
 </div>
 
