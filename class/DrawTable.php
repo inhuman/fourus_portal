@@ -34,7 +34,7 @@ class DrawTable {
             echo '<td>' . $ride->getPrvk() . '</td>';
 
             echo '<td>';
-            foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title='.$img[1].'> ';}
+            foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title='.$img[1] . '> ';}
             echo '</td>';
 
             echo '<td>' . $ride->getDescription() . '</td>';
@@ -58,7 +58,7 @@ class DrawTable {
         echo '<b>Длительность:</b> '.$ride->getDuration();
         echo '<br><b>Динамика:</b> prv, prvk';
         echo '<br><b>Эффекты: </b>';
-        foreach($ride->getEffx() as $img){echo '<img src='.$img[0].'> ';}
+        foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title=' . $img[1] . '> ';}
 
         echo '<br><b>Ссылка на демо:</b><button class="btn btn-small" type="button">Копировать</button>';
         echo '<br><b>Ссылка на постер:</b><button class="btn btn-small" type="button">Копировать</button>';
