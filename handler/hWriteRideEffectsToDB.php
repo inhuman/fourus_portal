@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__."/../class/PDOConfig.php";
 
-
 $ride_id = $_POST['ride_id'];
 $effect = $_POST['effect'];
 

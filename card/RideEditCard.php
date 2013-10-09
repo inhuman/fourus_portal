@@ -26,11 +26,19 @@ echo '<div class="container">';
         echo '<button type="submit" class="btn btn-danger">Сбросить</button>';
         echo '</fieldset>';
         echo '</form>';
-
     echo '</div>';
 
     echo '<div class="span3"> ';
-      echo 'Второй столбец';
+        echo '<label><b>Добавить превью</b></label>';
+        echo '<form action="handler/hAddPreview.php" method="post">';
+        echo '<fieldset>';
+        echo '<form enctype="multipart/form-data" action="uploader.php" method="POST">';
+        echo '<input type="hidden" name="MAX_FILE_SIZE" value="300000" />';
+        echo '<input name="uploadedfile" type="file" /><br />';
+        echo "<input type='hidden' name='ride_id' value='{$id}'>";
+        echo '<button type="submit" class="btn btn-success">Сохранить</button>';
+        echo '</fieldset>';
+        echo '</form>';
     echo '</div>';
 
     echo '<div class="span3"> ';
