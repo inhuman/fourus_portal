@@ -8,7 +8,7 @@ echo '<div class="container">';
   echo '<div class="row">';
 
     echo '<div class="span3"> ';
-        echo '<form action="hWriteRideEffectsToDB.php">';
+        echo '<form action="handler/hWriteRideEffectsToDB.php">';
         echo '<fieldset>';
         echo '<label><b>Установить эффекты</b></label>';
         echo '<img src="img/wind.png"> <input type="checkbox"> Ветер';
