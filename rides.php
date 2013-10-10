@@ -1,4 +1,4 @@
 <?php
-require_once('class/DrawTable.php');
+require_once __DIR__.'/class/DrawTable.php';
 
 DrawTable::AllRideTable();

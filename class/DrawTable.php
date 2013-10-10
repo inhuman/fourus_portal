@@ -1,6 +1,7 @@
 <?php
 //require_once __DIR__."/ImageStat.php";
 require_once __DIR__."/FactoryRide.php";
+require_once __DIR__."/FactoryAttraction.php";
 
 class DrawTable {
 
@@ -77,6 +78,45 @@ class DrawTable {
         echo '</div>';
         echo '</div>';
     }
+
+   public static function AllAttractionTable()
+   {
+       echo '<table class="table table-bordered table-hover tbl_pointer">';
+       echo "<thead style='background:#000000; color:#777777'  ><tr>";
+       echo "<th>#</th>";
+       echo "<th>Город</th>";
+       echo "<th>iD аттракциона</th>";
+       echo "<th>Тип</th>";
+       echo "<th>Вместимость</th>";
+       echo "<th>Эффекты</th>";
+       echo "<th>Коментарий</th>";
+       echo "</tr></thead><tbody></b>";
+
+       $i=4;
+       echo "all ".FactoryAttraction::CountAll();
+
+       while(FactoryAttraction::CountAll() > $i)
+       {
+           $i++ ;
+           $attraction = FactoryAttraction::findOne($i);
+
+           echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
+           echo '<td>' . $i . '</td>';
+           echo '<td>' . $attraction->getTownId() . '</td>';
+           echo '<td>' . $attraction->getSerialId() . '</td>';
+           echo '<td>' . $attraction->getMobility() . '</td>';
+           echo '<td>' . $attraction->getCapacity() . '</td>';
+
+           echo '<td>';
+           foreach($attraction->getEffects() as $img){echo '<img src=' . $img[0] . ' title='.$img[1] . '> ';}
+           echo '</td>';
+
+           echo '<td>' . $attraction->getComment() . '</td>';
+           echo '</tr>';
+       }
+       echo "</tbody></table>";
+   }
+
 
     public function ImageStatTable()
     {

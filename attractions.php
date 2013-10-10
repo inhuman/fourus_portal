@@ -1,11 +1,4 @@
 <?php
-require_once('class/FactoryAttraction.php');
+require_once __DIR__.'/class/DrawTable.php';
 
-echo "тут будут атракционы";
-
-
-$attr = FactoryAttraction::findOne(7);
-
-echo '<br>serial: '.$attr->getSerialId();
-
-
+DrawTable::AllAttractionTable();

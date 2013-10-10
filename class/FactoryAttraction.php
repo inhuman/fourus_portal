@@ -7,6 +7,7 @@ class FactoryAttraction {
     static public function findOne($id)
     {
 
+        try{
         $dbh = new PDOConfig();
         $stmt = $dbh->prepare("SELECT serial_id, town_id, mobility, capacity, comment, user_id, modem FROM attraction WHERE id=:id");
         $stmt->bindValue(':id',$id);
@@ -20,6 +21,11 @@ class FactoryAttraction {
         $attraction->setEffects($effxx->fetchAll());
         $effxx->closeCursor();
         return $attraction;
+        }
+        catch(Exception $e) {
+            die("Oh noes! There's an error in the query!");
+            var_dump($attraction);
+        }
 
     }
 
