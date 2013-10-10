@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."/PDOConfig.php";
+//require_once __DIR__."/PDOConfig.php";
 class Ride
 {
 
