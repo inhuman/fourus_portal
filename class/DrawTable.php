@@ -56,6 +56,7 @@ class DrawTable {
         echo '<div class="span8">';
         echo '<h2>#'.$id.' '.$ride->getRideName().'</h2>';
         echo '<b>Длительность:</b> '.$ride->getDuration();
+        echo '<br><b>Имя файла: </b>'.$ride->getFileName();
         echo '<br><b>Динамика:</b> prv, prvk';
         echo '<br><b>Эффекты: </b>';
         foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title=' . $img[1] . '> ';}
