@@ -17,7 +17,7 @@ class FactoryAttraction {
         $effxx = $dbh->prepare("SELECT e.ico, e.name FROM effects as e INNER JOIN attraction_effects as l ON (l.effect_id = e.id) WHERE l.attr_id = :id");
         $effxx->bindValue(':id',$id);
         $effxx->execute();
-        $attraction->setEffx($effxx->fetchAll());
+        $attraction->setEffects($effxx->fetchAll());
         $effxx->closeCursor();
         return $attraction;
 
@@ -35,7 +35,3 @@ class FactoryAttraction {
     }
 
 }
-echo 'attraction';
-$attr = FactoryAttraction::findOne(7);
-var_dump($attr);
-echo 'serial: '.$attr->getSerialId;
