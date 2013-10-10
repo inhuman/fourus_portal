@@ -51,12 +51,21 @@ class DrawTable {
         echo '<div class="container">';
         echo '<div class="row">';
         echo '<div class="span4"> ';
-        //TODO: сделать сюда динамическую картинку, в зависимости от райда
-        echo '<br><img src="img/preview/Virus_attack.jpg" class="img-rounded" width="300"></div>';
+
+        $name = explode('.',$ride->getFileName());
+
+        if(file_exists('img/preview/'.$name[0].'_preview.png'))
+        {
+            echo "<br><img src='img/preview/$name[0]_preview.png' class='img-rounded' width='300' alt='img/preview/$name[0]_preview.png'>";
+        }
+        else{echo "<br><img src='img/preview/default_preview.png' class='img-rounded' width='300'>";}
+
+        echo '</div>';
         echo '<div class="span8">';
         echo '<h2>#'.$id.' '.$ride->getRideName().'</h2>';
         echo '<b>Длительность:</b> '.$ride->getDuration();
         echo '<br><b>Имя файла: </b>'.$ride->getFileName();
+        echo '<br>name: '.$name[0];
         echo '<br><b>Динамика:</b> prv, prvk';
         echo '<br><b>Эффекты: </b>';
         foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title=' . $img[1] . '> ';}
