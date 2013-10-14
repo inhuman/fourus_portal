@@ -19,7 +19,7 @@ class DrawTable {
         echo "<th>Постер</th>";
         echo "<th>Динамика</th>";
         echo "<th>Эффекты</th>";
-        echo " <th>Описание</th>";
+
         echo "</tr></thead><tbody></b>";
 
         $i=0;
@@ -40,7 +40,7 @@ class DrawTable {
             foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title='.$img[1] . '> ';}
             echo '</td>';
 
-            echo '<td>' . $ride->getDescription() . '</td>';
+
             echo '</tr>';
         }
         echo "</tbody></table>";
@@ -128,14 +128,17 @@ class DrawTable {
 
              echo '<div class="span8"> ';
                echo '<h2>#'.$id. " ".$townArr[0].'</h2>';
-               foreach($townHistoryArr as $i)
-               {
-                   echo '<br>' .' '. $i[0] .' '. $i[1];
+               if($townHistoryArr){
+                 echo '<br><b>История перемещений</b>';
+                 foreach($townHistoryArr as $i)
+                 {
+                     echo '<br>' .' '. $i[0] .' '. $i[1];
+                 }
                }
              echo '</div>';
-
              echo '<div class="span4"> ';
                echo '<h3 align="right">'.$attr->getSerialId().'</h3>';
+               echo '<label align="right">'.$attr->getComment().'</label>';
              echo '</div>';
 
           echo '</div>';
