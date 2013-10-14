@@ -22,6 +22,8 @@ class Attraction {
     public function getProjectors(){return $this->projectors;}
     public function getSerialId(){return $this->serial_id;}
     public function getTownHistory(){return $this->town_history;}
+    public function setTownHistory($town_history){$this->town_history = $town_history;}
+
     public function getTownId(){return $this->town_id;}
     public function getUserId(){return $this->user_id;}
     public function getTown(){return $this->town;}

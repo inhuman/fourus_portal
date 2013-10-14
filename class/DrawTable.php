@@ -121,12 +121,17 @@ class DrawTable {
    {
        $attr = FactoryAttraction::findOne($id);
        $townArr = $attr->getTown();
+       $townHistoryArr = $attr->getTownHistory();
 
        echo '<div class="container">';
           echo '<div class="row">';
 
              echo '<div class="span8"> ';
                echo '<h2>#'.$id. " ".$townArr[0].'</h2>';
+               foreach($townHistoryArr as $i)
+               {
+                   echo '<br>' .' '. $i[0] .' '. $i[1];
+               }
              echo '</div>';
 
              echo '<div class="span4"> ';

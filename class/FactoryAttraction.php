@@ -28,6 +28,12 @@ class FactoryAttraction {
         $attraction->setTown($town->fetch());
         $town->closeCursor();
 
+        $townHistory = $dbh->prepare("SELECT AttractionTownHistory.date, towns.name  FROM AttractionTownHistory INNER JOIN towns ON (AttractionTownHistory.town_id = towns.id) WHERE attr_id=:attr_id ORDER BY date DESC");
+        $townHistory->bindValue(':attr_id',$id);
+        $townHistory->execute();
+        $attraction->setTownHistory($townHistory->fetchAll());
+
+        $townHistory->closeCursor();
         return $attraction;
         }
         catch(Exception $e) {
