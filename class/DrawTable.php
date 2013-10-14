@@ -127,7 +127,12 @@ class DrawTable {
           echo '<div class="row">';
 
              echo '<div class="span8"> ';
-               echo '<h2>#'.$id. " ".$townArr[0].'</h2>';
+               if($attr->getModem() == 2)
+               {
+                   echo '<h2>#'.$id. " ".$townArr[0].' <img src="img/modem.png" width="20"></h2> ';
+               }
+               else{ echo '<h2>#'.$id. " ".$townArr[0].'</h2>';}
+
                if($townHistoryArr){
                  echo '<br><b>История перемещений</b>';
                  foreach($townHistoryArr as $i)
@@ -143,6 +148,8 @@ class DrawTable {
 
           echo '</div>';
        echo '</div>';
+
+
    }
 
     public function ImageStatTable()
