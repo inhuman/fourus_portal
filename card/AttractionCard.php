@@ -1,5 +1,6 @@
 <?php
+require_once __DIR__."/../class/DrawTable.php";
 
-$id = '1';
+$id = $_GET['id'];
 
-echo "Карточка аттракциона";
+echo "Карточка аттракциона №". $id;

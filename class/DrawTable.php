@@ -93,12 +93,12 @@ class DrawTable {
        echo "</tr></thead><tbody></b>";
 
 
-       echo "all ".FactoryAttraction::CountAll();
+       echo "Аттракционов в базе: ".FactoryAttraction::CountAll();
 
        foreach(FactoryAttraction::findAll() as $attraction)
        {
            $i = $attraction->getId();
-           echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
+           echo "<tr style='cursor: pointer;' id=tr$i href=?page=attr_card&id=$i>";
            echo '<td>' . $i . '</td>';
            echo '<td>' . $attraction->getTown() . '</td>';
            echo '<td>' . $attraction->getSerialId() . '</td>';
