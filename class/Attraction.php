@@ -7,7 +7,7 @@ class Attraction {
 
     private $serial_id, $town_id, $mobility, $capacity, $comment, $user_id, $modem;
     private $town_history, $projectors, $effects;
-
+    private $town;
 
     public function __construct($id)
     {
@@ -24,6 +24,11 @@ class Attraction {
     public function getTownHistory(){return $this->town_history;}
     public function getTownId(){return $this->town_id;}
     public function getUserId(){return $this->user_id;}
+    public function getTown(){return $this->town;}
+    public function setTown($town){ $this->town = $town;}
+    public function getId(){ return $this->id; }
+
+
 
     public function setEffects($effects){$this->effects = $effects;}
 }

@@ -92,17 +92,15 @@ class DrawTable {
        echo "<th>Коментарий</th>";
        echo "</tr></thead><tbody></b>";
 
-       $i=4;
+
        echo "all ".FactoryAttraction::CountAll();
 
-       while(FactoryAttraction::CountAll() > $i)
+       foreach(FactoryAttraction::findAll() as $attraction)
        {
-           $i++ ;
-           $attraction = FactoryAttraction::findOne($i);
-
+           $i = $attraction->getId();
            echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
            echo '<td>' . $i . '</td>';
-           echo '<td>' . $attraction->getTownId() . '</td>';
+           echo '<td>' . $attraction->getTown() . '</td>';
            echo '<td>' . $attraction->getSerialId() . '</td>';
            echo '<td>' . $attraction->getMobility() . '</td>';
            echo '<td>' . $attraction->getCapacity() . '</td>';

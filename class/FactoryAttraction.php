@@ -13,6 +13,7 @@ class FactoryAttraction {
         $stmt->bindValue(':id',$id);
         $stmt->execute();
         $attraction = $stmt->fetchObject('Attraction');
+        $attraction->id = $id;
         $stmt->closeCursor();
 
         $effxx = $dbh->prepare("SELECT e.ico, e.name FROM effects as e INNER JOIN attraction_effects as l ON (l.effect_id = e.id) WHERE l.attr_id = :id");
@@ -37,7 +38,22 @@ class FactoryAttraction {
         $row=$query->fetch();
         $members=$row['id'];
         return $members;
+    }
 
+    static public function findAll()
+    {
+        $dbh = new PDOConfig();
+        $query = $dbh->query("SELECT attraction.id, towns.name, attraction.serial_id, attraction.mobility, attraction.capacity, attraction.comment FROM attraction INNER JOIN towns ON ( attraction.town_id = towns.id ) ;");
+        $queryArr = $query->fetchAll();
+
+        foreach ($queryArr as $row)
+        {
+            $id = $row[0];
+            $ride[$id] = self::findOne($id);
+            $ride[$id]->SetTown($row[1]);
+
+        }
+        return $ride;
     }
 
 }

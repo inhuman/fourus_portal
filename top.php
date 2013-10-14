@@ -18,7 +18,7 @@
                        <li><a href="?page=validity"><i class="icon-calendar"></i> Сроки</a></li>
                     </ul>
                    </li>
-                <li ><a href="?page=attraction"><i class="icon-facetime-video"></i> Аттракицоны</a></li>
+                <li ><a href="?page=attraction"><i class="icon-facetime-video"></i> Аттракционы</a></li>
                 <li><a href="?page=rides"><i class="icon-film"></i> Райды</a></li>
                 <li><a href="?page=manuals"><i class="icon-book"></i> Инструкции</a></li>
 
