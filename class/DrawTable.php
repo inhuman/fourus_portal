@@ -5,6 +5,8 @@ require_once __DIR__."/FactoryAttraction.php";
 
 class DrawTable {
 
+   public $attraction;
+
    public static function AllRideTable()
     {
 
@@ -115,6 +117,25 @@ class DrawTable {
        echo "</tbody></table>";
    }
 
+   public static function AttrCardTable($id)
+   {
+       $attr = FactoryAttraction::findOne($id);
+       $townArr = $attr->getTown();
+
+       echo '<div class="container">';
+          echo '<div class="row">';
+
+             echo '<div class="span8"> ';
+               echo '<h2>#'.$id. " ".$townArr[0].'</h2>';
+             echo '</div>';
+
+             echo '<div class="span4"> ';
+               echo '<h3 align="right">'.$attr->getSerialId().'</h3>';
+             echo '</div>';
+
+          echo '</div>';
+       echo '</div>';
+   }
 
     public function ImageStatTable()
     {

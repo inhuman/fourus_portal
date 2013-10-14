@@ -21,6 +21,13 @@ class FactoryAttraction {
         $effxx->execute();
         $attraction->setEffects($effxx->fetchAll());
         $effxx->closeCursor();
+
+        $town = $dbh->prepare("SELECT name FROM towns WHERE id=:id");
+        $town->bindValue(':id',$attraction->getTownId());
+        $town->execute();
+        $attraction->setTown($town->fetch());
+        $town->closeCursor();
+
         return $attraction;
         }
         catch(Exception $e) {

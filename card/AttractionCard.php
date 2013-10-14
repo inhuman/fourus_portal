@@ -3,4 +3,4 @@ require_once __DIR__."/../class/DrawTable.php";
 
 $id = $_GET['id'];
 
-echo "Карточка аттракциона №". $id;
+DrawTable::AttrCardTable($id);
