@@ -152,6 +152,8 @@ class DrawTable {
 
    }
 
+
+
     public function ImageStatTable()
     {
        // TODO: написать  ImageStatTable()
