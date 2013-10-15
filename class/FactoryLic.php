@@ -18,11 +18,10 @@ class FactoryLic {
         $i=0;
         foreach($licArr as $licRow)
         {
-           echo '<br>'.$licRow[0].' '.$licRow[1];
            $lic[$i] = new License();
            $lic[$i]->setAttrId($id);
            $lic[$i]->setDate($licRow[0]);
-           $lic[$i]->setDate($licRow[0]);
+           $lic[$i]->setOfficialName($licRow[1]);
            $i++;
 
         }
@@ -33,4 +32,3 @@ class FactoryLic {
 
 }
 
-FactoryLic::findCurrent(37);

@@ -2,6 +2,7 @@
 //require_once __DIR__."/ImageStat.php";
 require_once __DIR__."/FactoryRide.php";
 require_once __DIR__."/FactoryAttraction.php";
+require_once __DIR__."/FactoryLic.php";
 
 class DrawTable {
 
@@ -140,6 +141,8 @@ class DrawTable {
                      echo '<br>' .' '. $i[0] .' '. $i[1];
                  }
                }
+
+
              echo '</div>';
              echo '<div class="span4"> ';
                echo '<h3 align="right">'.$attr->getSerialId().'</h3>';
@@ -148,6 +151,30 @@ class DrawTable {
 
           echo '</div>';
        echo '</div>';
+
+       echo '<div class="container">';
+         echo '<div class="row">';
+           echo '<div class="span5"> ';
+             $licArr = FactoryLic::findCurrent($id);
+             echo '<table class="table">';
+             echo "<thead ><tr>";
+             echo "<th>#</th>";
+             echo "<th>Название райда</th>";
+             echo "<th>Дата</th>";
+             echo "</tr></thead><tbody></b>";
+             $i=0;
+             foreach($licArr as $lic)
+             {
+                echo '<tr>';
+                echo '<td>' . ++$i . '</td>';
+                echo '<td>' . $lic->getOfficialName() . '</td>';
+                echo '<td>' . $lic->getDate() . '</td>';
+                echo '</tr>';
+             }
+           echo '</div>';
+         echo '</div>';
+       echo '</div>';
+
 
 
    }
