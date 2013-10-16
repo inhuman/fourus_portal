@@ -25,7 +25,8 @@ class FactoryAttraction {
         $town = $dbh->prepare("SELECT name FROM towns WHERE id=:id");
         $town->bindValue(':id',$attraction->getTownId());
         $town->execute();
-        $attraction->setTown($town->fetch());
+        $townArr = $town->fetch();
+        $attraction->setTown($townArr[0]);
         $town->closeCursor();
 
         $townHistory = $dbh->prepare("SELECT AttractionTownHistory.date, towns.name  FROM AttractionTownHistory INNER JOIN towns ON (AttractionTownHistory.town_id = towns.id) WHERE attr_id=:attr_id ORDER BY date DESC");

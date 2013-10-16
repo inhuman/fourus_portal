@@ -1,5 +1,5 @@
 <?php
-//require_once __DIR__."/ImageStat.php";
+require_once __DIR__."/FactoryPhotostat.php";
 require_once __DIR__."/FactoryRide.php";
 require_once __DIR__."/FactoryAttraction.php";
 require_once __DIR__."/FactoryLic.php";
@@ -121,7 +121,6 @@ class DrawTable {
    public static function AttrCardTable($id)
    {
        $attr = FactoryAttraction::findOne($id);
-       $townArr = $attr->getTown();
        $townHistoryArr = $attr->getTownHistory();
 
        echo '<div class="container">';
@@ -130,28 +129,25 @@ class DrawTable {
              echo '<div class="span8"> ';
                if($attr->getModem() == 2)
                {
-                   echo '<h2>#'.$id. " ".$townArr[0].' <img src="img/modem.png" width="20"></h2> ';
+                   echo '<h2>#'.$id. " ".$attr->getTown().' </h2><a href="?page=photostat_card&id='.$id.'"><img src="img/modem.png" width="20"></a> ';
                }
-               else{ echo '<h2>#'.$id. " ".$townArr[0].'</h2>';}
-
-               if($townHistoryArr){
-                 echo '<br><b>История перемещений</b>';
-                 foreach($townHistoryArr as $i)
-                 {
-                     echo '<br>' .' '. $i[0] .' '. $i[1];
-                 }
-               }
-
-
+               else{ echo '<h2>#'.$id. " ".$attr->getTown().'</h2>';}
              echo '</div>';
              echo '<div class="span4"> ';
                echo '<h3 align="right">'.$attr->getSerialId().'</h3>';
                echo '<label align="right">'.$attr->getComment().'</label>';
+             /*
+               if($townHistoryArr){
+                    echo '<br><b>История перемещений</b>';
+                    foreach($townHistoryArr as $i)
+                    {
+                       echo '<br>' .' '. $i[0] .' '. $i[1];
+                    }
+               }
+             */
              echo '</div>';
-
           echo '</div>';
        echo '</div>';
-
        echo '<div class="container">';
          echo '<div class="row">';
            echo '<div class="span5"> ';
@@ -174,16 +170,51 @@ class DrawTable {
            echo '</div>';
          echo '</div>';
        echo '</div>';
-
-
-
    }
 
-
-
-    public function ImageStatTable()
+   public static function PhotostatCard($id)
     {
-       // TODO: написать  ImageStatTable()
-    }
+        $attraction =  FactoryAttraction::findOne($id);
 
+        var_dump($attraction);
+        $file_names = FactoryPhotostat::findAllJpeg($id);
+
+        echo "<h2>'.$attraction->getSerialId().'</h2>";
+
+        echo '<div class="container">';
+        echo '<div class="row">';
+        echo '<div class="span8"> ';
+
+
+        echo '<table class="table table-bordered table-hover tbl_pointer">';
+        echo "<thead><tr>";
+        echo "<th>#</th>";
+        echo "<th>Название</th>";
+        echo "<th>Дата</th>";
+        echo "<th>Время</th>";
+        echo "</tr></thead><tbody></b>";
+
+        $i=0;
+        foreach($file_names as $file)
+        {
+            $i++;
+            echo '<tr id=tr$i >';
+            echo '<td>' . $i . '</td>';
+            echo '<td>' . $file->getRideName() . '</td>';
+            echo '<td>' . $file->getDate() . '</td>';
+            echo '<td>' . $file->getTime() . '</td>';
+            echo "</tr>";
+            $local_path = $file->getLocalPath();
+        }
+        echo "</tbody></table>";
+
+        echo '</div>';
+        echo '<div name="photostat" class="span4"> ';
+        echo '<input type="text" name="people" autofocus="autofocus" size="2"><br>';
+        echo "<img src='{$local_path}' height='864' width='352' align='middle' alt='{$local_path}' class='img-polaroid'>";
+
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
 }

@@ -12,6 +12,7 @@ switch($page){
 
     case ride_card: $page = 'card/RideCard.php';break;
     case attr_card: $page = 'card/AttractionCard.php';break;
+    case photostat_card: $page = 'card/PhotoStatCard.php';break;
 
 }
 require_once __DIR__."/".$page;
