@@ -6,5 +6,5 @@ DrawTable::PhotostatCard($id);
 ?>
 <script>
     $(document).ready(function(){
-        $("#photostat").tablesorter();});
+        $("#photostat").tablesorter( {sortList: [[0,1]]});});
 </script>
