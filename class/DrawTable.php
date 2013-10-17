@@ -179,55 +179,63 @@ class DrawTable {
 
 
         echo '<div class="container">';
-        echo '<div class="row">';
-        echo '<div class="span8"> ';
-        echo '<h2>#' . $id .  " " . $attraction->getTown() . '</h2>';
-        echo '</div>';
-        echo '<div class="span4"> ';
-        echo '<h3 align="right">' . $attraction->getSerialId() . '</h3>';
-        echo '</div>';
-        echo '</div>';
+            echo '<div class="row">';
+                echo '<div class="span8"> ';
+                     echo '<h2>#' . $id .  " " . $attraction->getTown() . '</h2>';
+                echo '</div>';
+                echo '<div class="span4"> ';
+                    echo '<h3 align="right">' . $attraction->getSerialId() . '</h3>';
+                echo '</div>';
+            echo '</div>';
         echo '</div>';
 
         echo '<div class="container">';
-        echo '<div class="row">';
-        echo '<div class="span8"> ';
-        echo '<table id="photostat" class="table table-bordered table-hover tbl_pointer table-condensed">';
-        echo "<thead><tr>";
-        echo "<th>#</th>";
-        echo "<th>Название</th>";
-        echo "<th>Дата</th>";
-        echo "<th>Время</th>";
-        echo "<th>Люди</th>";
-        echo "</tr></thead><tbody></b>";
+            echo '<div class="row">';
+                echo '<div class="span8"> ';
 
-        $i=0;
-        foreach($file_names as $file)
-        {
-            $i++;
-            $local_path = $file->getLocalPath();
-            echo '<tr id=tr'.$i.'  >';
-            echo '<td>' . $i . '</td>';
-            echo '<td><a href='.$local_path.' target="iframe_photostat">' . $file->getRideName() . '</a></td>';
-            echo '<td>' . $file->getDate() . '</td>';
-            echo '<td>' . $file->getTime() . '</td>';
-            echo '<td>' . $file->getCunt() . '</td>';
-            echo "</tr>";
-
-        }
-        echo "</tbody></table>";
-
-        echo '</div>';
-        echo '<div class="span4"> ';
-
-                echo "<input type='text' name='people' autofocus='autofocus' ><br>";
-
-        echo '<iframe seamless name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
+                     echo '<form class="form-horizontal">';
+                        echo '<fieldset>';
+                            echo '<div class="control-group">';
+                                //echo '<label class="control-label" for="reservation">Reservation dates:</label>';
+                                echo '<div class="controls">';
+                                    echo '<div class="input-prepend">';
+                                        echo '<span class="add-on"><i class="icon-calendar"></i></span><input type="text" name="reservation" id="reservation" />';
+                                    echo '</div>';
+                                echo '</div>';
+                            echo '</div>';
+                        echo '</fieldset>';
+                     echo '</form>';
 
 
+                    echo '<table id="photostat" class="table table-bordered table-hover tbl_pointer table-condensed">';
+                        echo "<thead><tr>";
+                        echo "<th>#</th>";
+                        echo "<th>Название</th>";
+                        echo "<th>Дата</th>";
+                        echo "<th>Время</th>";
+                        echo "<th>Люди</th>";
+                    echo "</tr></thead><tbody></b>";
 
-        echo '</div>';
-        echo '</div>';
+                    $i=0;
+                    foreach($file_names as $file)
+                    {
+                        $i++;
+                        $local_path = $file->getLocalPath();
+                        echo '<tr id=tr'.$i.'  >';
+                        echo '<td>' . $i . '</td>';
+                        echo '<td><a href='.$local_path.' target="iframe_photostat">' . $file->getRideName() . '</a></td>';
+                        echo '<td>' . $file->getDate() . '</td>';
+                        echo '<td>' . $file->getTime() . '</td>';
+                        echo '<td>' . $file->getCunt() . '</td>';
+                        echo "</tr>";
+                    }
+                    echo "</tbody></table>";
+                echo '</div>';
+                echo '<div class="span4"> ';
+                    echo "<input type='text' name='people' autofocus='autofocus' ><br>";
+                    echo '<iframe seamless name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
+                echo '</div>';
+            echo '</div>';
         echo '</div>';
     }
 }

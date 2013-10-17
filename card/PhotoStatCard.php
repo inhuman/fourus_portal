@@ -8,3 +8,8 @@ DrawTable::PhotostatCard($id);
     $(document).ready(function(){
         $("#photostat").tablesorter( {sortList: [[0,1]]});});
 </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input[name="reservation"]').daterangepicker();
+    });
+</script>
