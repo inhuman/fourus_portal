@@ -18,7 +18,6 @@ class FactoryPhotostat {
             if($jpegfile->getExt() == 'jpg')
             {
               $image[++$i] = $jpegfile;
-
             }
         }
         return $image;

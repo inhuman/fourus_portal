@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/own.css" />
     <script src="js/bootstrap.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="/js/tablesorter/jquery.tablesorter.js"></script>
 
 </head>
 <body>
@@ -20,7 +21,7 @@
  ?>
 </div>
 
-
+</body>
 
 
 

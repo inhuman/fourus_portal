@@ -192,12 +192,13 @@ class DrawTable {
         echo '<div class="container">';
         echo '<div class="row">';
         echo '<div class="span8"> ';
-        echo '<table class="table table-bordered table-hover tbl_pointer">';
+        echo '<table id="photostat" class="table table-bordered table-hover tbl_pointer table-condensed">';
         echo "<thead><tr>";
         echo "<th>#</th>";
         echo "<th>Название</th>";
         echo "<th>Дата</th>";
         echo "<th>Время</th>";
+        echo "<th>Люди</th>";
         echo "</tr></thead><tbody></b>";
 
         $i=0;
@@ -210,20 +211,28 @@ class DrawTable {
             echo '<td><a href='.$local_path.' target="iframe_photostat">' . $file->getRideName() . '</a></td>';
             echo '<td>' . $file->getDate() . '</td>';
             echo '<td>' . $file->getTime() . '</td>';
+            echo '<td>' . $file->getCunt() . '</td>';
             echo "</tr>";
 
         }
         echo "</tbody></table>";
 
         echo '</div>';
-        echo '<div name="photostat" class="span4"> ';
-                echo "<input type='text' name='people' autofocus='autofocus' ><br>";
-        echo '<iframe name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
+        echo '<div class="span4"> ';
 
-        //echo "<img src='{$local_path}' height='864' width='352' alt='{$local_path}' class='img-polaroid'>";
+                echo "<input type='text' name='people' autofocus='autofocus' ><br>";
+
+        echo '<iframe seamless name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
+
+
 
         echo '</div>';
         echo '</div>';
         echo '</div>';
     }
 }
+?>
+<script>
+    $(document).ready(function(){
+        $("#photostat").tablesorter();});
+</script>
