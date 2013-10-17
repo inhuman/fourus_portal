@@ -193,12 +193,13 @@ class DrawTable {
             echo '<div class="row">';
                 echo '<div class="span8"> ';
 
-                     echo '<form class="form-horizontal">';
+                     echo '<form class="form-horizontal form-inline" method="post" action="../portal/handler/DateRangeFilter.php">';
                         echo '<fieldset>';
                             echo '<div class="control-group">';
 //                                echo '<div class="controls">';
                                     echo '<div class="input-prepend">';
                                         echo '<span class="add-on"><i class="icon-calendar"></i></span><input type="text" name="reservation" id="reservation" />';
+                                        echo '<button type="submit" class="btn">Фильтр</button>';
                                     echo '</div>';
 //                                echo '</div>';
                             echo '</div>';
