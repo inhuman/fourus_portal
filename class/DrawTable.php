@@ -196,12 +196,11 @@ class DrawTable {
                      echo '<form class="form-horizontal">';
                         echo '<fieldset>';
                             echo '<div class="control-group">';
-                                //echo '<label class="control-label" for="reservation">Reservation dates:</label>';
-                                echo '<div class="controls">';
+//                                echo '<div class="controls">';
                                     echo '<div class="input-prepend">';
                                         echo '<span class="add-on"><i class="icon-calendar"></i></span><input type="text" name="reservation" id="reservation" />';
                                     echo '</div>';
-                                echo '</div>';
+//                                echo '</div>';
                             echo '</div>';
                         echo '</fieldset>';
                      echo '</form>';

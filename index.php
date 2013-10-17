@@ -6,6 +6,7 @@
     <title>Fourus portal</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="/js/tablesorter/jquery.tablesorter.js"></script>
+    <script src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/daterangepicker.js"></script>
     <script type="text/javascript" src="js/moment.js"></script>
 
@@ -16,7 +17,7 @@
 
 
 
-    <script src="js/bootstrap.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.dropdown-toggle').dropdown();
