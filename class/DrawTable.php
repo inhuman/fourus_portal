@@ -29,9 +29,9 @@ class DrawTable {
             $i++ ;
             $ride = FactoryRide::findRide($i);
 
-            echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
+            echo "<tr style='cursor: pointer;' id=tr$i >";
             echo '<td>' . $i . '</td>';
-            echo '<td>' . $ride->getRideName() . '</td>';
+            echo '<td><a href=?page=ride_card&id='.$i.'>' . $ride->getRideName() . '</a></td>';
             echo '<td>' . $ride->getDuration() . '</td>';
             echo '<td>' . $ride->getDemo() . '</td>';
             echo '<td>' . $ride->getPoster60x80() . '</td>';
@@ -101,9 +101,9 @@ class DrawTable {
        foreach(FactoryAttraction::findAll() as $attraction)
        {
            $i = $attraction->getId();
-           echo "<tr style='cursor: pointer;' id=tr$i href=?page=attr_card&id=$i>";
+           echo "<tr style='cursor: pointer;' id=tr$i >";
            echo '<td>' . $i . '</td>';
-           echo '<td>' . $attraction->getTown() . '</td>';
+           echo '<td><a href=?page=attr_card&id='.$i.'>' . $attraction->getTown() . '</a></td>';
            echo '<td>' . $attraction->getSerialId() . '</td>';
            echo '<td>' . $attraction->getMobility() . '</td>';
            echo '<td>' . $attraction->getCapacity() . '</td>';
@@ -174,18 +174,24 @@ class DrawTable {
 
    public static function PhotostatCard($id)
     {
-        $attraction =  FactoryAttraction::findOne($id);
-
-        var_dump($attraction);
+        $attraction = FactoryAttraction::findOne($id);
         $file_names = FactoryPhotostat::findAllJpeg($id);
 
-        echo "<h2>'.$attraction->getSerialId().'</h2>";
 
         echo '<div class="container">';
         echo '<div class="row">';
         echo '<div class="span8"> ';
+        echo '<h2>#' . $id .  " " . $attraction->getTown() . '</h2>';
+        echo '</div>';
+        echo '<div class="span4"> ';
+        echo '<h3 align="right">' . $attraction->getSerialId() . '</h3>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
 
-
+        echo '<div class="container">';
+        echo '<div class="row">';
+        echo '<div class="span8"> ';
         echo '<table class="table table-bordered table-hover tbl_pointer">';
         echo "<thead><tr>";
         echo "<th>#</th>";
@@ -198,20 +204,23 @@ class DrawTable {
         foreach($file_names as $file)
         {
             $i++;
-            echo '<tr id=tr$i >';
+            $local_path = $file->getLocalPath();
+            echo '<tr id=tr'.$i.'  >';
             echo '<td>' . $i . '</td>';
-            echo '<td>' . $file->getRideName() . '</td>';
+            echo '<td><a href='.$local_path.' target="iframe_photostat">' . $file->getRideName() . '</a></td>';
             echo '<td>' . $file->getDate() . '</td>';
             echo '<td>' . $file->getTime() . '</td>';
             echo "</tr>";
-            $local_path = $file->getLocalPath();
+
         }
         echo "</tbody></table>";
 
         echo '</div>';
         echo '<div name="photostat" class="span4"> ';
-        echo '<input type="text" name="people" autofocus="autofocus" size="2"><br>';
-        echo "<img src='{$local_path}' height='864' width='352' align='middle' alt='{$local_path}' class='img-polaroid'>";
+                echo "<input type='text' name='people' autofocus='autofocus' ><br>";
+        echo '<iframe name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
+
+        //echo "<img src='{$local_path}' height='864' width='352' alt='{$local_path}' class='img-polaroid'>";
 
         echo '</div>';
         echo '</div>';

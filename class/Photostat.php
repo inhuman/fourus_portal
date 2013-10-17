@@ -69,7 +69,7 @@ class Photostat
     private function ParseLocalPath()
     {
         $data_arr = explode('/FTP-shared',$this->full_path);
-        $this->local_path = $data_arr[1];
+        $this->local_path = '"'.$data_arr[1].'"';
 
     }
 
