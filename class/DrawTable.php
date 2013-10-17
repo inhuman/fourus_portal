@@ -231,8 +231,3 @@ class DrawTable {
         echo '</div>';
     }
 }
-?>
-<script>
-    $(document).ready(function(){
-        $("#photostat").tablesorter();});
-</script>
