@@ -77,8 +77,8 @@ class Photostat
     {
         return $this->cunt;
     }
-
-    /* public function setCunt($cunt)
+/*
+     public static function setCunt($path)
      {
          $path_parts = pathinfo($this->full_path);
          $dirname = $path_parts['dirname'];
@@ -87,7 +87,19 @@ class Photostat
          $oldfilename = $this->file_name;
          $this->file_name = $dirname.'/'.$filename.'_'.$cunt.'.'.$ext;
          rename($oldfilename,$this->file_name);
-     }*/
+     }
+*/
+     public static function setCunt($path,$cunt)
+     {
+         $pathParts = pathinfo($path);
+         $filename = $pathParts['filename'];
+         $ext = $pathParts['extension'];
+         $dirname = $pathParts['dirname'];
+         $oldFileName = $filename . ' . ' . $ext;
+         $newFilName = $filename . ' _ ' . $cunt . ' . ' . $ext;
+         rename($oldFileName,$newFilName);
+     }
+
 
     public function getFileName(){return $this->file_name;}
     public function getExt(){return $this->ext;}

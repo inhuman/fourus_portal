@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/daterangepicker.js"></script>
     <script type="text/javascript" src="js/moment.js"></script>
 
+    <script type="text/javascript" src="js/test.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="css/daterangepicker-bs2.css" />

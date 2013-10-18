@@ -202,7 +202,7 @@ class DrawTable {
                         echo '<fieldset>';
                             echo '<div class="control-group">';
                                     echo '<div class="input-prepend">';
-                                        echo '<span class="add-on"><i class="icon-calendar"></i></span><input type="text" placeholder="Выберите диапазон" name="reservation" id="reservation" />';
+                                        echo "<span class='add-on'><i class='icon-calendar'></i></span><input type='text' placeholder='Выберите диапазон' name='reservation' id='reservation' value='$dateFrom - $dateTo'/>";
                                         echo "<input type='hidden' name='id' value='$id'>";
                                         echo '<button type="submit" class="btn">Фильтр</button>';
                                     echo '</div>';
@@ -234,8 +234,14 @@ class DrawTable {
                     echo "</tbody></table>";
                 echo '</div>';
                 echo '<div class="span4"> ';
-                    echo "<input type='text' name='people' autofocus='autofocus' ><br>";
+                 //   echo "<input type='text' name='people' autofocus='autofocus'  ><br>";
+
+                echo ' <form onsubmit="counter(sdf)">';
+
+                echo "<input type='text' >";
+
                     echo '<iframe seamless name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
+        echo '</form>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';
