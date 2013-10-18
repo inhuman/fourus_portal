@@ -175,7 +175,12 @@ class DrawTable {
    public static function PhotostatCard($id)
     {
         $attraction = FactoryAttraction::findOne($id);
-        $file_names = FactoryPhotostat::findAllJpeg($id);
+
+
+        $dateTo = $_GET['dateTo'];
+        $dateFrom = $_GET['dateFrom'];
+        $file_names = FactoryPhotostat::findAllJpegDateRange($id, $dateFrom, $dateTo);
+        $local_path = '/portal/img/preview/default_preview.png';
 
 
         echo '<div class="container">';
@@ -196,17 +201,14 @@ class DrawTable {
                      echo '<form class="form-horizontal form-inline" method="post" action="../portal/handler/DateRangeFilter.php">';
                         echo '<fieldset>';
                             echo '<div class="control-group">';
-//                                echo '<div class="controls">';
                                     echo '<div class="input-prepend">';
-                                        echo '<span class="add-on"><i class="icon-calendar"></i></span><input type="text" name="reservation" id="reservation" />';
+                                        echo '<span class="add-on"><i class="icon-calendar"></i></span><input type="text" placeholder="Выберите диапазон" name="reservation" id="reservation" />';
+                                        echo "<input type='hidden' name='id' value='$id'>";
                                         echo '<button type="submit" class="btn">Фильтр</button>';
                                     echo '</div>';
-//                                echo '</div>';
                             echo '</div>';
                         echo '</fieldset>';
                      echo '</form>';
-
-
                     echo '<table id="photostat" class="table table-bordered table-hover tbl_pointer table-condensed">';
                         echo "<thead><tr>";
                         echo "<th>#</th>";

@@ -24,7 +24,7 @@
         this.showWeekNumbers = false;
         this.timePicker = false;
         this.timePickerIncrement = 30;
-        this.timePicker12Hour = true;
+        this.timePicker12Hour = false;
         this.ranges = {};
         this.opens = 'right';
 

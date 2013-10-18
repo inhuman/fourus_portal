@@ -20,6 +20,25 @@ class FactoryPhotostat {
               $image[++$i] = $jpegfile;
             }
         }
-        return $image;
+        return $image; // return array with files img objects
+    }
+
+    public static function findAllJpegDateRange($id,$dateFrom, $dateTo)
+    {
+       $jpegs = self::findAllJpeg($id);
+
+       $i=0;
+       foreach($jpegs as $jpeg)
+       {
+           if($jpeg->getDate() > $dateFrom)
+           {
+               if($jpeg->getDate() < $dateTo)
+               {
+                   $image[++$i] = $jpeg;
+
+               }
+           }
+       }
+       return $image;
     }
 }
