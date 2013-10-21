@@ -179,9 +179,11 @@ class DrawTable {
 
         $dateTo = $_GET['dateTo'];
         $dateFrom = $_GET['dateFrom'];
+        $imgTempId = $_GET['imgTempId'];
+        echo 'img temp id = '.$imgTempId;
         $file_names = FactoryPhotostat::findAllJpegDateRange($id, $dateFrom, $dateTo);
         $local_path = '/portal/img/preview/default_preview.png';
-
+        $thisPage = $_SERVER['REQUEST_URI'];
 
         echo '<div class="container">';
             echo '<div class="row">';
@@ -225,7 +227,8 @@ class DrawTable {
                         $local_path = $file->getLocalPath();
                         echo '<tr id=tr'.$i.'  >';
                         echo '<td>' . $i . '</td>';
-                        echo '<td><a href='.$local_path.' target="iframe_photostat">' . $file->getRideName() . '</a></td>';
+                      // 111  echo '<td><a href='.$local_path.' target="iframe_photostat">' . $file->getRideName() . '</a></td>';
+                        echo '<td><a href=' . $thisPage . '&imgTempId='.$i.' >' . $file->getRideName() . '</a></td>';
                         echo '<td>' . $file->getDate() . '</td>';
                         echo '<td>' . $file->getTime() . '</td>';
                         echo '<td>' . $file->getCunt() . '</td>';
@@ -240,7 +243,7 @@ class DrawTable {
 
                 echo "<input type='text' >";
 
-                    echo '<iframe seamless name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
+                   //111echo '<iframe seamless name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
         echo '</form>';
                 echo '</div>';
             echo '</div>';

@@ -70,4 +70,13 @@ class FactoryAttraction {
         return $ride;
     }
 
+    static public function getLocalPath($id)
+    {
+       $attr = new Attraction($id);
+       $link = $attr->getSerialId() . ' - ' . $attr->getTown();
+       return $link;
+
+
+    }
+
 }
