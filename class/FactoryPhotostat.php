@@ -2,6 +2,7 @@
 require_once __DIR__."/FactoryAttraction.php";
 require_once __DIR__."/scanFileNameRecursivly.php";
 require_once __DIR__."/Photostat.php";
+require_once __DIR__."/PDOConfig.php";
 
 class FactoryPhotostat {
 
@@ -40,5 +41,15 @@ class FactoryPhotostat {
            }
        }
        return $image;
+    }
+
+    public static function addTempRecordToDB($localPath)
+    {
+       $dbh = new PDOConfig();
+       $stmt = $dbh->prepare('INSERT INTO photostatTemp (localPath) VALUES (:localPath)');
+       $stmt->bindValue(':localPath',$localPath);
+       $stmt->execute();
+
+
     }
 }
