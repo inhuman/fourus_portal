@@ -182,8 +182,9 @@ class DrawTable {
         $imgTempId = $_GET['imgTempId'];
         echo 'img temp id = '.$imgTempId;
         $file_names = FactoryPhotostat::findAllJpegDateRange($id, $dateFrom, $dateTo);
-        $local_path = '/portal/img/preview/default_preview.png';
-        $thisPage = $_SERVER['REQUEST_URI'];
+
+        $thisPage = "?page=photostat_card&id=$id&dateFrom=$dateFrom&dateTo=$dateTo&imgTempId=";
+        $imgLocalPath = FactoryPhotostat::getTempRecordFromDB($imgTempId);
 
         echo '<div class="container">';
             echo '<div class="row">';
@@ -224,11 +225,11 @@ class DrawTable {
                     foreach($file_names as $file)
                     {
                         $i++;
-                        $local_path = $file->getLocalPath();
+
                         echo '<tr id=tr'.$i.'  >';
                         echo '<td>' . $i . '</td>';
-                      // 111  echo '<td><a href='.$local_path.' target="iframe_photostat">' . $file->getRideName() . '</a></td>';
-                        echo '<td><a href=' . $thisPage . '&imgTempId='.$i.' >' . $file->getRideName() . '</a></td>';
+
+                        echo '<td><a href=' . $thisPage . $i .' >' . $file->getRideName() . '</a></td>';
                         echo '<td>' . $file->getDate() . '</td>';
                         echo '<td>' . $file->getTime() . '</td>';
                         echo '<td>' . $file->getCunt() . '</td>';
@@ -237,14 +238,13 @@ class DrawTable {
                     echo "</tbody></table>";
                 echo '</div>';
                 echo '<div class="span4"> ';
-                 //   echo "<input type='text' name='people' autofocus='autofocus'  ><br>";
 
-                echo ' <form onsubmit="counter(sdf)">';
 
-                echo "<input type='text' >";
+                echo ' <form method="post" action="../handler/setCunt.php">';
+                  echo "<input type='text' name='people' autofocus='autofocus'>";
+                echo '</form>';
 
-                   //111echo '<iframe seamless name="iframe_photostat" src='.$local_path.' height="864" width="352" ></iframe>';
-        echo '</form>';
+                echo "<img src=$imgLocalPath[0]  height='864' width='352'>";
                 echo '</div>';
             echo '</div>';
         echo '</div>';
