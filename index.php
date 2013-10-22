@@ -16,7 +16,14 @@
     <link rel="stylesheet" type="text/css" href="css/daterangepicker-bs2.css" />
     <link rel="stylesheet" type="text/css" href="css/own.css" />
 
-
+    <script>
+        $(document).ready(function(){
+            $('table tr').click(function(){
+                window.location = $(this).attr('href');
+                return false;
+            });
+        });
+    </script>
 
 
     <script type="text/javascript">

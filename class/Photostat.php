@@ -80,6 +80,8 @@ class Photostat
 /*
      public static function setCunt($path)
      {
+         $img = new Photostat($path);
+
          $path_parts = pathinfo($this->full_path);
          $dirname = $path_parts['dirname'];
          $filename = $path_parts['filename'];
@@ -95,9 +97,14 @@ class Photostat
          $filename = $pathParts['filename'];
          $ext = $pathParts['extension'];
          $dirname = $pathParts['dirname'];
-         $oldFileName = $filename . ' . ' . $ext;
-         $newFilName = $filename . ' _ ' . $cunt . ' . ' . $ext;
+         $oldFileName = $dirname.'/'.$filename . '.' . $ext;
+         chown($oldFileName,'www-data');
+         $newFilName = $dirname.'/'.$filename . '_' . $cunt . '.' . $ext;
          rename($oldFileName,$newFilName);
+         //var_dump(rename($oldFileName,$newFilName));
+         //echo '<br>oldFileName '.$oldFileName;
+         //echo '<br>newFilName'.$newFilName;
+         //echo var_dump(error_get_last());
      }
 
 

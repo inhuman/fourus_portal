@@ -66,6 +66,6 @@ class FactoryPhotostat {
         $stmt->bindValue(':id',$id);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result;
+        return $result[0];
     }
 }

@@ -174,17 +174,17 @@ class DrawTable {
 
    public static function PhotostatCard($id)
     {
-        $attraction = FactoryAttraction::findOne($id);
-
 
         $dateTo = $_GET['dateTo'];
         $dateFrom = $_GET['dateFrom'];
         $imgTempId = $_GET['imgTempId'];
-        echo 'img temp id = '.$imgTempId;
+
+        $attraction = FactoryAttraction::findOne($id);
         $file_names = FactoryPhotostat::findAllJpegDateRange($id, $dateFrom, $dateTo);
+        $imgLocalPath = FactoryPhotostat::getTempRecordFromDB($imgTempId);
 
         $thisPage = "?page=photostat_card&id=$id&dateFrom=$dateFrom&dateTo=$dateTo&imgTempId=";
-        $imgLocalPath = FactoryPhotostat::getTempRecordFromDB($imgTempId);
+
 
         echo '<div class="container">';
             echo '<div class="row">';
@@ -225,11 +225,17 @@ class DrawTable {
                     foreach($file_names as $file)
                     {
                         $i++;
+                        if ($i==$imgTempId)
+                        {
+                           echo '<tr class="warning" id=tr'.$i.' href=' . $thisPage . $i .' >';
+                        }
+                        else
+                        {
+                           echo '<tr id=tr'.$i.' href=' . $thisPage . $i .' >';
+                        }
 
-                        echo '<tr id=tr'.$i.'  >';
                         echo '<td>' . $i . '</td>';
-
-                        echo '<td><a href=' . $thisPage . $i .' >' . $file->getRideName() . '</a></td>';
+                        echo '<td>' . $file->getRideName() . '</td>';
                         echo '<td>' . $file->getDate() . '</td>';
                         echo '<td>' . $file->getTime() . '</td>';
                         echo '<td>' . $file->getCunt() . '</td>';
@@ -240,11 +246,15 @@ class DrawTable {
                 echo '<div class="span4"> ';
 
 
-                echo ' <form method="post" action="../handler/setCunt.php">';
+                echo ' <form method="post" action="../portal/handler/setCunt.php">';
                   echo "<input type='text' name='people' autofocus='autofocus'>";
+                  echo  ' <b>#'.$imgTempId.'</b>';
+                  echo "<img src=$imgLocalPath class='img-polaroid' height='864' width='352'>";
+                  echo "<input type='hidden' name='thisPage' value='$thisPage'>";
+                  echo "<input type='hidden' name='imgTempId' value='$imgTempId'>";
                 echo '</form>';
 
-                echo "<img src=$imgLocalPath[0]  height='864' width='352'>";
+
                 echo '</div>';
             echo '</div>';
         echo '</div>';
