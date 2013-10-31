@@ -174,7 +174,6 @@ class DrawTable {
 
    public static function PhotostatCard($id)
     {
-
         $dateTo = $_GET['dateTo'];
         $dateFrom = $_GET['dateFrom'];
         $imgTempId = $_GET['imgTempId'];
