@@ -97,15 +97,42 @@ class Photostat
          $filename = $pathParts['filename'];
          $ext = $pathParts['extension'];
          $dirname = $pathParts['dirname'];
+
          $oldFileName = $dirname.'/'.$filename . '.' . $ext;
-         chown($oldFileName,'www-data');
-         $newFilName = $dirname.'/'.$filename . '_' . $cunt . '.' . $ext;
+
+         if(Photostat::checkFileName($oldFileName))
+         {
+             chown($oldFileName,'www-data');
+             $newFilName = $dirname.'/'.$filename . '_' . $cunt . '.' . $ext;
+         }
+         else
+         {
+             $newFilName = Photostat::renameBadNamedFile($oldFileName,$cunt);
+         }
          rename($oldFileName,$newFilName);
+
          //var_dump(rename($oldFileName,$newFilName));
          //echo '<br>oldFileName '.$oldFileName;
          //echo '<br>newFilName'.$newFilName;
          //echo var_dump(error_get_last());
      }
+
+
+     public static function checkFileName($filename)
+     {
+        $filenameArr = explode('_',$filename);
+        if($filenameArr[4]){return false;}
+        else{return true;}
+     }
+
+    public static function renameBadNamedFile($filename,$cunt)
+    {
+        $filenameArr = explode('_',$filename);
+        $newFilename = $filenameArr[0].$filenameArr[1].$filenameArr[2].'_'.$cunt.'.jpg';
+        chown($filename,'www-data');
+        rename($filename,$newFilename);
+        return $newFilename;
+    }
 
 
     public function getFileName(){return $this->file_name;}

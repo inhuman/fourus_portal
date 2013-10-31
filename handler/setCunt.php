@@ -2,15 +2,9 @@
 require_once __DIR__."/"."../class/Photostat.php";
 require_once __DIR__."/"."../class/FactoryPhotostat.php";
 
-
 $page = $_POST['thisPage'];
 $imgTempId = $_POST['imgTempId'];
 $cunt = $_POST['people'];
-
-
-
-
-
 
 $localPathRaw = FactoryPhotostat::getTempRecordFromDB($imgTempId);
 $localPathArr = explode('"',$localPathRaw);

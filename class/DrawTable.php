@@ -29,9 +29,9 @@ class DrawTable {
             $i++ ;
             $ride = FactoryRide::findRide($i);
 
-            echo "<tr style='cursor: pointer;' id=tr$i >";
+            echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
             echo '<td>' . $i . '</td>';
-            echo '<td><a href=?page=ride_card&id='.$i.'>' . $ride->getRideName() . '</a></td>';
+            echo '<td>' . $ride->getRideName() . '</a></td>';
             echo '<td>' . $ride->getDuration() . '</td>';
             echo '<td>' . $ride->getDemo() . '</td>';
             echo '<td>' . $ride->getPoster60x80() . '</td>';
@@ -101,9 +101,9 @@ class DrawTable {
        foreach(FactoryAttraction::findAll() as $attraction)
        {
            $i = $attraction->getId();
-           echo "<tr style='cursor: pointer;' id=tr$i >";
+           echo "<tr style='cursor: pointer;' id=tr$i href=?page=attr_card&id=$i>";
            echo '<td>' . $i . '</td>';
-           echo '<td><a href=?page=attr_card&id='.$i.'>' . $attraction->getTown() . '</a></td>';
+           echo '<td>' . $attraction->getTown()     . '</td>';
            echo '<td>' . $attraction->getSerialId() . '</td>';
            echo '<td>' . $attraction->getMobility() . '</td>';
            echo '<td>' . $attraction->getCapacity() . '</td>';
