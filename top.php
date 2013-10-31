@@ -12,7 +12,7 @@
                    </li>
                 <li ><a href="?page=attraction"><i class="icon-facetime-video"></i> Аттракционы</a></li>
                 <li><a href="?page=rides"><i class="icon-film"></i> Райды</a></li>
-                <li><a href="?page=manuals"><i class="icon-book"></i> Инструкции</a></li>
+                <li><a href="/portal/wiki/doku.php"><i class="icon-book"></i> Инструкции</a></li>
                 <li class="dropdown" id="settingsmenu">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-wrench"></i> Настройки<b class="caret"></b></a>
                     <ul class="dropdown-menu">
