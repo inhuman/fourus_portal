@@ -32,7 +32,7 @@ echo '<div class="container">';
         echo '<label><b>Добавить превью</b></label>';
         echo '<form action="handler/hAddPreview.php" method="post" enctype="multipart/form-data">';
         echo '<input type="hidden" name="MAX_FILE_SIZE" value="300000" />';
-        echo '<input name="uploadedfile" type="file" /><br />';
+        echo '<input name="file" type="file" /><br />';
         echo "<input type='hidden' name='ride_id' value='{$id}'>";
         echo '<button type="submit" class="btn btn-success">Сохранить</button>';
 
