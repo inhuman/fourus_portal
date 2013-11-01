@@ -191,14 +191,12 @@ class DrawTable {
 
         if(file_exists($online_status_path))
         {
-          $lastSync =  '      Sync - '.date("[H:i:s][d F Y]", filectime($online_status_path));
+          $lastSync =  '      Sync - '.date("[H:i:s][d F Y]", filemtime($online_status_path));
         }
         else
         {
             $lastSync = ' no sync';
         }
-        var_dump($online_status_path);
-
 
         echo '<div class="container">';
             echo '<div class="row">';
