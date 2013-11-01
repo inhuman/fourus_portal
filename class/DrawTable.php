@@ -15,6 +15,7 @@ class DrawTable {
         echo "<thead style='background:#000000; color:#777777'  ><tr>";
         echo "<th>#</th>";
         echo "<th>Название</th>";
+        echo "<th>Имя файла</th>";
         echo "<th>Время</th>";
         echo "<th>Демо</th>";
         echo "<th>Постер</th>";
@@ -32,6 +33,7 @@ class DrawTable {
             echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
             echo '<td>' . $i . '</td>';
             echo '<td>' . $ride->getRideName() . '</a></td>';
+            echo '<td>' . $ride->getFileName() . '</a></td>';
             echo '<td>' . $ride->getDuration() . '</td>';
             echo '<td>' . $ride->getDemo() . '</td>';
             echo '<td>' . $ride->getPoster60x80() . '</td>';
@@ -185,6 +187,7 @@ class DrawTable {
         $thisPage = "?page=photostat_card&id=$id&dateFrom=$dateFrom&dateTo=$dateTo&imgTempId=";
 
         $online_status_path =  '/var/www/img/stat/'.$attraction->getSerialId().' - '.$attraction->getTown() .'/status.online';
+        $lastSync='';
 
         if(file_exists($online_status_path))
         {
@@ -194,7 +197,7 @@ class DrawTable {
         {
             $lastSync = ' no sync';
         }
-
+        var_dump($online_status_path);
 
 
         echo '<div class="container">';
@@ -220,7 +223,7 @@ class DrawTable {
                                         echo "<input type='hidden' name='id' value='$id'>";
                                         echo '<button type="submit" class="btn">Фильтр</button>';
                                     echo '</div>';
-        echo $lastSync;
+                                    echo $lastSync;
                             echo '</div>';
                         echo '</fieldset>';
                      echo '</form>';
