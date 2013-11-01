@@ -7,10 +7,12 @@ class FactoryLic {
     {
         $dbh = new PDOConfig();
         $stmt = $dbh->prepare("SELECT lic.date, Rides.official_name
-                  FROM attraction
-                  INNER JOIN lic ON ( attraction.id = lic.attr_id )
-                  INNER JOIN Rides ON ( Rides.id = lic.film_id )
-                  WHERE attraction.id =:id;") ;
+                  FROM Rides
+                  INNER JOIN lic ON ( Rides.id = lic.film_id )
+                  WHERE (lic.attr_id = :id AND lic.date !=  '0000-00-00')
+                  GROUP BY official_name
+                  ORDER BY lic.date
+                  LIMIT 30;") ;
         $stmt->bindValue(':id',$id);
         $stmt->execute();
         $licArr = $stmt->fetchAll();
