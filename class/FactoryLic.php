@@ -17,6 +17,7 @@ class FactoryLic {
         $stmt->execute();
         $licArr = $stmt->fetchAll();
 
+
         $i=0;
         foreach($licArr as $licRow)
         {
