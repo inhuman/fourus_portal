@@ -184,6 +184,18 @@ class DrawTable {
 
         $thisPage = "?page=photostat_card&id=$id&dateFrom=$dateFrom&dateTo=$dateTo&imgTempId=";
 
+        $online_status_path =  '/var/www/img/stat/'.$attraction->getSerialId().' - '.$attraction->getTown() .'/status.online';
+
+        if(file_exists($online_status_path))
+        {
+          $lastSync =  '      Sync - '.date("[H:i:s][d F Y]", filectime($online_status_path));
+        }
+        else
+        {
+            $lastSync = ' no sync';
+        }
+
+
 
         echo '<div class="container">';
             echo '<div class="row">';
@@ -208,6 +220,7 @@ class DrawTable {
                                         echo "<input type='hidden' name='id' value='$id'>";
                                         echo '<button type="submit" class="btn">Фильтр</button>';
                                     echo '</div>';
+        echo $lastSync;
                             echo '</div>';
                         echo '</fieldset>';
                      echo '</form>';
