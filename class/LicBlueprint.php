@@ -3,7 +3,7 @@ require_once __DIR__."/PDOConfig.php";
 
 class LicBlueprint {
 
-    public $id;
+    public $id, $status;
 
     private  $attrId, $rideId, $dateTo, $volume, $licOnly, $createDate;
 
@@ -20,15 +20,25 @@ class LicBlueprint {
 
       $this->addLicBlueprintToDB();
 
+      $this->status = '';
     }
 
 
     private function addLicBlueprintToDB()
     {
         $dbh = new PDOConfig();
+        $stmt = $dbh->prepare("INSERT INTO LicBlueprint (id, attr_id, ride_id, createDate, dateTo, volume, licOnly)
+                               VALUES (:id, :attr_id, :ride_id, :createDate, :dateTo, :volume, :licOnly)");
+        $stmt->bindValue(':id',$this->id);
+        $stmt->bindValue(':attr_id',$this->getAttrId());
+        $stmt->bindValue(':ride_id',$this->getRideId());
+        $stmt->bindValue(':createDate',$this->getCreateDate());
+        $stmt->bindValue(':dateTo',$this->getDateTo());
+        $stmt->bindValue(':licOnly',$this->getLicOnly());
+        $stmt->bindValue(':volume',$this->getVolume());
 
-
-
+        $stmt->execute();
+        $stmt->closeCursor();
     }
 
 
