@@ -31,8 +31,36 @@
             $('.dropdown-toggle').dropdown();
         });
     </script>
+
+
+
+    <script>
+        $(document).ready(function(){
+            var item = $('#back-to-page-top');
+            var link = $('a:first', item);
+            item.mouseenter(function(){
+                item.addClass('page-top-link-hover');
+            });
+            item.mouseleave(function(){
+                item.removeClass('page-top-link-hover');
+            });
+            item.click(function(){
+                $(document).scrollTop(0);
+            });
+            link.click(function(){
+                item.click();
+                return false;
+            });
+        });
+    </script>
+
 </head>
 <body>
+<div id="back-to-page-top">
+    <a href="#page_top">^ top</a>
+</div>
+
+<a name="page_top"></a>
 
 <div class="container">
 
