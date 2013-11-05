@@ -4,9 +4,9 @@ require_once __DIR__."/PDOConfig.php";
 
 class FactoryLicBlueprint extends LicBlueprint {
 
-    public function __construct($attrId, $rideId, $dateTo, $createDate, $volume, $licOnly)
+    public function __construct($attrId, $rideId, $dateTo, $volume, $licOnly)
     {
-        parent::__construct($attrId, $rideId, $dateTo, $createDate, $volume, $licOnly);
+        parent::__construct($attrId, $rideId, $dateTo, $volume, $licOnly);
         $this->addLicBlueprintToQueue();
     }
 
@@ -36,4 +36,4 @@ class FactoryLicBlueprint extends LicBlueprint {
 }
 
 
-$ew = new FactoryLicBlueprint(114,4,'2013-11-05','2013-12-30',80,1);
+$ew = new FactoryLicBlueprint(114,4,'2013-12-30',80,1);

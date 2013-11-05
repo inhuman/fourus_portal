@@ -7,13 +7,13 @@ class LicBlueprint {
 
     private  $id, $attrId, $rideId, $dateTo, $volume, $licOnly, $createDate;
 
-    public function __construct($attrId, $rideId, $createDate, $dateTo, $volume, $licOnly)
+    public function __construct($attrId, $rideId, $dateTo, $volume, $licOnly)
     {
 
       $this->status = 'added';
       $this->setAttrId($attrId);
       $this->setRideId($rideId);
-      $this->setCreateDate($createDate);
+      $this->setCreateDate(date('Y-m-d'));
       $this->setDateTo($dateTo);
       $this->setLicOnly($licOnly);
       $this->setVolume($volume);
