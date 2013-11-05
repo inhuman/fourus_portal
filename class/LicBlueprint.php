@@ -3,41 +3,41 @@ require_once __DIR__."/PDOConfig.php";
 
 class LicBlueprint {
 
-    public $id, $status;
+    public $status;
 
-    private  $attrId, $rideId, $dateTo, $volume, $licOnly, $createDate;
+    private  $id, $attrId, $rideId, $dateTo, $volume, $licOnly, $createDate;
 
-
-    public function __construct($id,$attrId, $rideId, $dateTo, $volume, $licOnly, $createDate)
+    public function __construct($attrId, $rideId, $createDate, $dateTo, $volume, $licOnly)
     {
 
+      $this->status = 'added';
       $this->setAttrId($attrId);
       $this->setRideId($rideId);
+      $this->setCreateDate($createDate);
       $this->setDateTo($dateTo);
       $this->setLicOnly($licOnly);
       $this->setVolume($volume);
-      $this->setCreateDate($createDate);
 
       $this->addLicBlueprintToDB();
-
-      $this->status = '';
     }
-
 
     private function addLicBlueprintToDB()
     {
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare("INSERT INTO LicBlueprint (id, attr_id, ride_id, createDate, dateTo, volume, licOnly)
-                               VALUES (:id, :attr_id, :ride_id, :createDate, :dateTo, :volume, :licOnly)");
-        $stmt->bindValue(':id',$this->id);
+        $stmt = $dbh->prepare("INSERT INTO LicBlueprint (attr_id, ride_id, createDate, dateTo, volume, licOnly, status)
+                                              VALUES (:attr_id, :ride_id, :createDate, :dateTo, :volume, :licOnly, :status)");
         $stmt->bindValue(':attr_id',$this->getAttrId());
         $stmt->bindValue(':ride_id',$this->getRideId());
         $stmt->bindValue(':createDate',$this->getCreateDate());
         $stmt->bindValue(':dateTo',$this->getDateTo());
         $stmt->bindValue(':licOnly',$this->getLicOnly());
         $stmt->bindValue(':volume',$this->getVolume());
+        $stmt->bindValue(':status',$this->status);
 
         $stmt->execute();
+
+        $this->id = $dbh->lastInsertId();
+
         $stmt->closeCursor();
     }
 
@@ -60,6 +60,6 @@ class LicBlueprint {
     private function setCreateDate($createDate){$this->createDate = $createDate;}
     public function getCreateDate(){return $this->createDate;}
 
-
+    public function getId(){return $this->id;}
 
 }
