@@ -1,9 +1,11 @@
 <?php
 require_once __DIR__."/PDOConfig.php";
 require_once __DIR__."/License.php";
+require_once __DIR__."/FactoryRide.php";
+require_once __DIR__."/FactoryAttraction.php";
 class FactoryLic {
 
-    public static function findCurrent($id)
+    public static function findOne($id)
     {
         $dbh = new PDOConfig();
         $stmt = $dbh->prepare("SELECT lic.date, Rides.official_name
@@ -25,7 +27,6 @@ class FactoryLic {
            $lic[$i]->setDate($licRow[0]);
            $lic[$i]->setOfficialName($licRow[1]);
            $i++;
-
         }
 
         $stmt->closeCursor();

@@ -153,7 +153,7 @@ class DrawTable {
        echo '<div class="container">';
          echo '<div class="row">';
            echo '<div class="span5"> ';
-             $licArr = FactoryLic::findCurrent($id);
+             $licArr = FactoryLic::findOne($id);
              echo '<table class="table">';
              echo "<thead ><tr>";
              echo "<th>#</th>";

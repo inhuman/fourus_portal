@@ -13,6 +13,4 @@ class License {
     public function setOfficialName($official_name){$this->official_name = $official_name;}
     public function setAttrId($attr_id){$this->attr_id = $attr_id;}
 
-
-
 }
