@@ -332,7 +332,7 @@ class DrawTable {
                   echo "<input type='date' name='inputLicDate[$i]' id='inputLicDate[$i]' >";
                   echo "<input class='input-mini' type='number' value='80' name='volume[$i]' id='volume[$i]' min='1' max='100' />";
 
-                  echo "<input type='checkbox' name='LicOnly[$i]' id='LicOnly[$i]' value='1'> License only";
+                  echo "<input type='checkbox' checked='checked' name='LicOnly[$i]' id='LicOnly[$i]' value='1'> License only";
                echo "</div>";
              echo "</div>";
            }
