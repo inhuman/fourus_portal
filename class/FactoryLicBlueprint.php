@@ -39,17 +39,13 @@ class FactoryLicBlueprint extends LicBlueprint {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
 
-        $ride->
-
-        var_dump($ride);
-        var_dump($attraction);
-        $string1 = "name=$ride->getRideName";
-        $string2 = "path=$ride->getFileName";
+        $string1 = "name=".$ride->getRideName();
+        $string2 = "path=".$ride->getFileName();
 
         $dateArr = explode('-',$this->getDateTo());
         $string3 = "date=$dateArr[2]{RIGHT}$dateArr[1]{RIGHT}$dateArr[0]";
 
-        $string4 = "id=$attraction->getSerialId()";
+        $string4 = "id=".$attraction->getSerialId();
 
         if($this->getLicOnly() == true){$string5 = "lic=''";}
         else{$string5 = "lic='{SPACE}'";}
@@ -71,4 +67,4 @@ class FactoryLicBlueprint extends LicBlueprint {
 }
 
 
-$ew = new FactoryLicBlueprint(114,9,'2013-12-30',80,1);
+$ew = new FactoryLicBlueprint(114,9,'2013-12-30',80,0);
