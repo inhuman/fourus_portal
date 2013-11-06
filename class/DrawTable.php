@@ -272,4 +272,56 @@ class DrawTable {
             echo '</div>';
         echo '</div>';
     }
+
+   public static function LicCreateCard()
+   {
+       echo "<form class='form-horizontal'>";
+         echo "<div class='control-group'>";
+           echo "<label class='control-label' for='inputAttrID'>Attraction ID</label>";
+             echo "<div class='controls'>";
+               echo "<select id='inputAttrID'>";
+                 echo '<option value="none">none</option>';
+                 foreach(FactoryAttraction::findAll() as $attraction)
+                 {
+                   echo '<option value='.$attraction->getId().'>'.$attraction->getSerialId().'</option>' ;
+                 }
+               echo "</select>";
+               echo "<select id='inputTownName'>";
+                 echo '<option value="none">none</option>';
+                 foreach(FactoryAttraction::findAll() as $attraction)
+                 {
+                   echo '<option value='.$attraction->getId().'>'.$attraction->getTown().'</option>' ;
+                 }
+               echo "</select>";
+               echo "  Town Name";
+             echo "</div>";
+           echo "</div>";
+           $i=0;
+           while($i < 20)
+           {
+             $i++;
+             echo "<div class='control-group'>";
+               echo "<label class='control-label' for='inputLic$i'>License $i</label>";
+               echo "<div class='controls'>";
+                  echo "<select id='inputLic$i'>";
+                    echo '<option value="none">none</option>';
+                    $ii=0;
+                    while (FactoryRide::CountAllRides() > $ii)
+                    {
+                      $ii++ ;
+                      $ride = FactoryRide::findRide($ii);
+                      echo '<option value='.$ride->getId().'>'.$ride->getRideName().'</option>' ;
+                    }
+                  echo "</select>";
+                  echo "<input type='date' id='inputLicDate$i' placeholder='License $i Date'>";
+                  echo "<input type='checkbox' id='LicOnly$i'> License only";
+               echo "</div>";
+             echo "</div>";
+           }
+           echo "<button type='submit' class='btn btn-block btn-primary'>Создать лицензии</button>";
+
+         echo "</div>";
+       echo "</form>";
+
+   }
 }

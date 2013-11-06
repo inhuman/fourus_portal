@@ -26,8 +26,6 @@ class Ride
     public function getRideName(){return $this->official_name;}
     public function getEffx(){return $this->effx;}
     public function setEffx($effx){$this->effx = $effx;}
-
-
-
+    public function getId(){return $this->id;}
 
 }
