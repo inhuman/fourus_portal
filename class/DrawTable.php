@@ -134,6 +134,7 @@ class DrawTable {
                    echo '<h2>#'.$id. " ".$attr->getTown().' </h2><a href="?page=photostat_card&id='.$id.'"><img src="img/modem.png" width="20"></a> ';
                }
                else{ echo '<h2>#'.$id. " ".$attr->getTown().'</h2>';}
+             echo "<a href='?page=create_lic&attr_id=$id'>сделать лицензии</a>";
              echo '</div>';
              echo '<div class="span4"> ';
                echo '<h3 align="right">'.$attr->getSerialId().'</h3>';
@@ -150,6 +151,7 @@ class DrawTable {
              echo '</div>';
           echo '</div>';
        echo '</div>';
+
        echo '<div class="container">';
          echo '<div class="row">';
            echo '<div class="span5"> ';
@@ -275,11 +277,19 @@ class DrawTable {
 
    public static function LicCreateCard()
    {
+       $attr_id = $_GET['attr_id'];
        echo "<form class='form-horizontal'>";
          echo "<div class='control-group'>";
            echo "<label class='control-label' for='inputAttrID'>Attraction ID</label>";
              echo "<div class='controls'>";
                echo "<select id='inputAttrID'>";
+                  if($attr_id)
+                  {
+                    $attraction = FactoryAttraction::findOne($attr_id);
+                    echo '<option value='.$attraction->getId().'>'.$attraction->getSerialId().'</option>';
+                  }
+                  else{echo '<option value="none">none</option>';}
+
                  echo '<option value="none">none</option>';
                  foreach(FactoryAttraction::findAll() as $attraction)
                  {
@@ -287,7 +297,13 @@ class DrawTable {
                  }
                echo "</select>";
                echo "<select id='inputTownName'>";
-                 echo '<option value="none">none</option>';
+                 if($attr_id)
+                 {
+                     $attraction = FactoryAttraction::findOne($attr_id);
+                     echo '<option value='.$attraction->getId().'>'.$attraction->getTown().'</option>';
+                 }
+                 else{echo '<option value="none">none</option>';}
+
                  foreach(FactoryAttraction::findAll() as $attraction)
                  {
                    echo '<option value='.$attraction->getId().'>'.$attraction->getTown().'</option>' ;
