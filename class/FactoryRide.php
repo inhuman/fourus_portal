@@ -20,6 +20,8 @@ class FactoryRide {
         $effxx->execute();
         $ride->setEffx($effxx->fetchAll());
         $effxx->closeCursor();
+
+        $ride->id = $id;
         return $ride;
 
     }

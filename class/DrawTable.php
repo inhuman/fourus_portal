@@ -278,11 +278,11 @@ class DrawTable {
    public static function LicCreateCard()
    {
        $attr_id = $_GET['attr_id'];
-       echo "<form class='form-horizontal'>";
+       echo "<form class='form-horizontal' method='post' action='/portal/handler/hCreateBluePrints.php'>";
          echo "<div class='control-group'>";
            echo "<label class='control-label' for='inputAttrID'>Attraction ID</label>";
              echo "<div class='controls'>";
-               echo "<select id='inputAttrID'>";
+               echo "<select name='inputAttrID' id='inputAttrID'>";
                   if($attr_id)
                   {
                     $attraction = FactoryAttraction::findOne($attr_id);
@@ -317,9 +317,9 @@ class DrawTable {
            {
              $i++;
              echo "<div class='control-group'>";
-               echo "<label class='control-label' for='inputLic$i'>License $i</label>";
+               echo "<label class='control-label' for='inputLic[$i]'>License $i</label>";
                echo "<div class='controls'>";
-                  echo "<select id='inputLic$i'>";
+                  echo "<select name='inputLic[$i]' id='inputLic[$i]'>";
                     echo '<option value="none">none</option>';
                     $ii=0;
                     while (FactoryRide::CountAllRides() > $ii)
@@ -329,8 +329,10 @@ class DrawTable {
                       echo '<option value='.$ride->getId().'>'.$ride->getRideName().'</option>' ;
                     }
                   echo "</select>";
-                  echo "<input type='date' id='inputLicDate$i' placeholder='License $i Date'>";
-                  echo "<input type='checkbox' id='LicOnly$i'> License only";
+                  echo "<input type='date' name='inputLicDate[$i]' id='inputLicDate[$i]' >";
+                  echo "<input class='input-mini' type='number' value='80' name='volume[$i]' id='volume[$i]' min='1' max='100' />";
+
+                  echo "<input type='checkbox' name='LicOnly[$i]' id='LicOnly[$i]' value='1'> License only";
                echo "</div>";
              echo "</div>";
            }
