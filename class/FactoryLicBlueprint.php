@@ -4,14 +4,18 @@ require_once __DIR__."/PDOConfig.php";
 require_once __DIR__."/FactoryRide.php";
 require_once __DIR__."/FactoryAttraction.php";
 
+
 class FactoryLicBlueprint extends LicBlueprint {
 
     public function __construct($attrId, $rideId, $dateTo, $volume, $licOnly)
     {
         parent::__construct($attrId, $rideId, $dateTo, $volume, $licOnly);
         $this->addLicBlueprintToQueue();
-        $this->createAutoLicIniWmv();
-        $this->createAutoLicIniPrvk();
+
+        $this->createBlueprintWmv();
+        $this->createBlueprintPrvk();
+
+
     }
 
     private function addLicBlueprintToQueue()
@@ -22,20 +26,11 @@ class FactoryLicBlueprint extends LicBlueprint {
         $stmt->execute();
         $stmt->closeCursor();
 
-        $this->changeLicBlueprintStatus('in queue');
     }
 
-    private function changeLicBlueprintStatus($status)
-    {
-        $dbh = new PDOConfig();
-        $stmt = $dbh->prepare('SET NAMES utf8; UPDATE LicBlueprint SET status=:status WHERE id=:id');
-        $stmt->bindValue(':status',$status);
-        $stmt->bindValue(':id',$this->getId());
-        $stmt->execute();
-        $stmt->closeCursor();
-    }
 
-    private function  createAutoLicIniWmv()
+
+    private function  createBlueprintWmv()
     {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
@@ -54,6 +49,8 @@ class FactoryLicBlueprint extends LicBlueprint {
         $vol = 100 - $this->getVolume();
         $string6 = "volume={DOWN $vol}";
 
+        $string7 = 'blueprint id='.$this->getId();
+
         echo "<br>[Licence blueprint]";
         echo "<br>".$string1;
         echo "<br>".$string2;
@@ -61,9 +58,17 @@ class FactoryLicBlueprint extends LicBlueprint {
         echo "<br>".$string4;
         echo "<br>".$string5;
         echo "<br>".$string6;
+        echo "<br>".$string7;
+
+
+        $dataToWrite = $string1.'\n'.$string2.'\n'.$string3.'\n'.$string4.'\n'.$string5.'\n'.$string6.'\n'.$string7;
+        $fileName = 'blueprint['.$this->getId().']._wmv';
+
+        $this->writeBlueprint($fileName,$dataToWrite);
+
     }
 
-    private function  createAutoLicIniPrvk()
+    private function  createBlueprintPrvk()
     {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
@@ -83,6 +88,8 @@ class FactoryLicBlueprint extends LicBlueprint {
         $vol = 100 - $this->getVolume();
         $string6 = "volume={DOWN $vol}";
 
+        $string7 = 'blueprint id='.$this->getId();
+
         echo "<br>[Licence blueprint]";
         echo "<br>".$string1;
         echo "<br>".$string2;
@@ -90,9 +97,19 @@ class FactoryLicBlueprint extends LicBlueprint {
         echo "<br>".$string4;
         echo "<br>".$string5;
         echo "<br>".$string6;
+        echo "<br>".$string7;
+
+        $dataToWrite = $string1.'\n'.$string2.'\n'.$string3.'\n'.$string4.'\n'.$string5.'\n'.$string6.'\n'.$string7;
+        $fileName = 'blueprint['.$this->getId().']._prvk';
+
+        $this->writeBlueprint($fileName,$dataToWrite);
     }
 
 
+    private function writeBlueprint($fileName,$dataToWrite)
+    {
+        file_put_contents('../licences/blueprints/'.$fileName,$dataToWrite);
+    }
 
 }
 

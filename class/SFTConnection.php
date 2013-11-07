@@ -70,14 +70,4 @@ class SFTPConnection
     }
 }
 
-try
-{
-    $sftp = new SFTPConnection("192.168.0.211", 22);
-    $sftp->login("id", "id1@");
-    $sftp->receiveFile("/log/log.txt", "/var/www/portal/class/testtest");
-}
-catch (Exception $e)
-{
-    echo $e->getMessage() . "\n";
-}
 
