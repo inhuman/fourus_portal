@@ -1,16 +1,17 @@
 <?php
-//require_once __DIR__."/PDOConfig.php";
+
 class Ride
 {
 
     public $id;
 
-    private $official_name, $file_name, $duration, $description, $effx;
+    private $official_name, $file_name, $prvk_name, $duration, $description, $effx;
     private $banner_big, $banner_medium, $banner_small, $file_size_mb, $dynamic_prv, $dynamic_prvk, $demo_1080p ;
 
     public function  __construct($id)
     {
        $this->id = $id;
+
     }
 
     public function getDemo(){return $this->demo_1080p;}
@@ -27,5 +28,9 @@ class Ride
     public function getEffx(){return $this->effx;}
     public function setEffx($effx){$this->effx = $effx;}
     public function getId(){return $this->id;}
+    public function setPrvkName($prvk_name){$this->prvk_name = $prvk_name;}
+    public function getPrvkName(){return $this->prvk_name;}
+
+
 
 }

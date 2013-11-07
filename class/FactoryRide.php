@@ -22,6 +22,12 @@ class FactoryRide {
         $effxx->closeCursor();
 
         $ride->id = $id;
+
+        $prvkNameArr = explode('.',$ride->getFileName());
+        $prvkName = $prvkNameArr[0].'.prvk';
+
+        $ride->setPrvkName($prvkName);
+
         return $ride;
 
     }

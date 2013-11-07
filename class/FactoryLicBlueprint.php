@@ -10,7 +10,8 @@ class FactoryLicBlueprint extends LicBlueprint {
     {
         parent::__construct($attrId, $rideId, $dateTo, $volume, $licOnly);
         $this->addLicBlueprintToQueue();
-        $this->createAutoLicIni();
+        $this->createAutoLicIniWmv();
+        $this->createAutoLicIniPrvk();
     }
 
     private function addLicBlueprintToQueue()
@@ -34,13 +35,42 @@ class FactoryLicBlueprint extends LicBlueprint {
         $stmt->closeCursor();
     }
 
-    private function  createAutoLicIni()
+    private function  createAutoLicIniWmv()
     {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
 
         $string1 = "name=\"".$ride->getRideName().'"';
         $string2 = "path=\"M:\\wmv\\".$ride->getFileName().'"';
+
+        $dateArr = explode('-',$this->getDateTo());
+        $string3 = "date=\"$dateArr[2]{RIGHT}$dateArr[1]{RIGHT}$dateArr[0]\"";
+
+        $string4 = "id=\"".$attraction->getSerialId().'"';
+
+        if($this->getLicOnly() == true){$string5 = "lic=\"\"";}
+        else{$string5 = "lic=\"{SPACE}\"";}
+
+        $vol = 100 - $this->getVolume();
+        $string6 = "volume={DOWN $vol}";
+
+        echo "<br>[Licence blueprint]";
+        echo "<br>".$string1;
+        echo "<br>".$string2;
+        echo "<br>".$string3;
+        echo "<br>".$string4;
+        echo "<br>".$string5;
+        echo "<br>".$string6;
+    }
+
+    private function  createAutoLicIniPrvk()
+    {
+        $ride        = FactoryRide::findRide($this->getRideId());
+        $attraction  = FactoryAttraction::findOne($this->getAttrId());
+
+
+        $string1 = "name=\"".$ride->getRideName().'"';
+        $string2 = "path=\"M:\\dynamic\\".$ride->getPrvkName().'"';
 
         $dateArr = explode('-',$this->getDateTo());
         $string3 = "date=\"$dateArr[2]{RIGHT}$dateArr[1]{RIGHT}$dateArr[0]\"";
