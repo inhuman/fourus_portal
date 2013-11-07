@@ -28,28 +28,26 @@ class FactoryLicBlueprint extends LicBlueprint {
 
     }
 
-
-
     private function  createBlueprintWmv()
     {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
 
-        $string1 = "name=\"".$ride->getRideName().'"';
-        $string2 = "path=\"M:\\wmv\\".$ride->getFileName().'"';
+        $string1     = "name=\"".$ride->getRideName().'"';
+        $string2     = "path=\"M:\\wmv\\".$ride->getFileName().'"';
 
-        $dateArr = explode('-',$this->getDateTo());
-        $string3 = "date=\"$dateArr[2]{RIGHT}$dateArr[1]{RIGHT}$dateArr[0]\"";
+        $dateArr     = explode('-',$this->getDateTo());
+        $string3     = "date=\"$dateArr[2]{RIGHT}$dateArr[1]{RIGHT}$dateArr[0]\"";
 
-        $string4 = "id=\"".$attraction->getSerialId().'"';
+        $string4     = "id=\"".$attraction->getSerialId().'"';
 
         if($this->getLicOnly() == true){$string5 = "lic=\"\"";}
         else{$string5 = "lic=\"{SPACE}\"";}
 
-        $vol = 100 - $this->getVolume();
-        $string6 = "volume={DOWN $vol}";
+        $vol         = 100 - $this->getVolume();
+        $string6     = "volume={DOWN $vol}";
 
-        $string7 = 'blueprint id='.$this->getId();
+        $string7     = 'blueprint id='.$this->getId();
 
         echo "<br>[Licence blueprint]";
         echo "<br>".$string1;
@@ -61,7 +59,7 @@ class FactoryLicBlueprint extends LicBlueprint {
         echo "<br>".$string7;
 
 
-        $dataToWrite = $string1.'\n'.$string2.'\n'.$string3.'\n'.$string4.'\n'.$string5.'\n'.$string6.'\n'.$string7;
+        $dataToWrite = '[Licence blueprint]\n'.$string1.'\n'.$string2.'\n'.$string3.'\n'.$string4.'\n'.$string5.'\n'.$string6.'\n'.$string7;
         $fileName = 'blueprint['.$this->getId().']._wmv';
 
         $this->writeBlueprint($fileName,$dataToWrite);
@@ -73,22 +71,21 @@ class FactoryLicBlueprint extends LicBlueprint {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
 
+        $string1     = "name=\"".$ride->getRideName().'"';
+        $string2     = "path=\"M:\\dynamic\\".$ride->getPrvkName().'"';
 
-        $string1 = "name=\"".$ride->getRideName().'"';
-        $string2 = "path=\"M:\\dynamic\\".$ride->getPrvkName().'"';
+        $dateArr     = explode('-',$this->getDateTo());
+        $string3     = "date=\"$dateArr[2]{RIGHT}$dateArr[1]{RIGHT}$dateArr[0]\"";
 
-        $dateArr = explode('-',$this->getDateTo());
-        $string3 = "date=\"$dateArr[2]{RIGHT}$dateArr[1]{RIGHT}$dateArr[0]\"";
-
-        $string4 = "id=\"".$attraction->getSerialId().'"';
+        $string4     = "id=\"".$attraction->getSerialId().'"';
 
         if($this->getLicOnly() == true){$string5 = "lic=\"\"";}
         else{$string5 = "lic=\"{SPACE}\"";}
 
-        $vol = 100 - $this->getVolume();
-        $string6 = "volume={DOWN $vol}";
+        $vol         = 100 - $this->getVolume();
+        $string6     = "volume={DOWN $vol}";
 
-        $string7 = 'blueprint id='.$this->getId();
+        $string7     = 'blueprint id='.$this->getId();
 
         echo "<br>[Licence blueprint]";
         echo "<br>".$string1;
@@ -99,12 +96,11 @@ class FactoryLicBlueprint extends LicBlueprint {
         echo "<br>".$string6;
         echo "<br>".$string7;
 
-        $dataToWrite = $string1.'\n'.$string2.'\n'.$string3.'\n'.$string4.'\n'.$string5.'\n'.$string6.'\n'.$string7;
+        $dataToWrite = '[Licence blueprint]\n'.$string1.'\n'.$string2.'\n'.$string3.'\n'.$string4.'\n'.$string5.'\n'.$string6.'\n'.$string7;
         $fileName = 'blueprint['.$this->getId().']._prvk';
 
         $this->writeBlueprint($fileName,$dataToWrite);
     }
-
 
     private function writeBlueprint($fileName,$dataToWrite)
     {
