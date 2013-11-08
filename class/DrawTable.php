@@ -3,6 +3,8 @@ require_once __DIR__."/FactoryPhotostat.php";
 require_once __DIR__."/FactoryRide.php";
 require_once __DIR__."/FactoryAttraction.php";
 require_once __DIR__."/FactoryLic.php";
+require_once __DIR__."/../app/LicCreator/TaskManager.php";
+
 
 class DrawTable {
 
@@ -343,8 +345,11 @@ class DrawTable {
 
    }
 
-   public static function HomeCard()
+   public static function LicQueueCard()
    {
+
+       $r = new TaskManager();
+
        echo '<table class="table table-bordered table-hover tbl_pointer">';
        echo "<thead style='background:#000000; color:#777777'  ><tr>";
        echo "<th>#</th>";
@@ -354,14 +359,12 @@ class DrawTable {
        echo "<th>Только лицензия?</th>";
        echo "<th>Статус</th>";
        echo "<th>Расположение</th>";
-
-
        echo "</tr></thead><tbody></b>";
-/*
-       $i=0;
-       while (FactoryRide::CountAllRides() > $i)
+
+
+       foreach($r->getLicBlueprintsArr() as $LicBlueprint)
        {
-           $i++ ;
+
            $ride = FactoryRide::findRide($i);
 
            echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
@@ -379,7 +382,9 @@ class DrawTable {
 
 
            echo '</tr>';
-       } */
+       }
+
+
        echo "</tbody></table>";
    }
 }

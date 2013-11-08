@@ -14,14 +14,12 @@ class FactoryLicBlueprint extends LicBlueprint {
 
         $this->createBlueprintWmv();
         $this->createBlueprintPrvk();
-
-
     }
 
     private function addLicBlueprintToQueue()
     {
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare('SET NAMES utf8; INSERT INTO LicCreationQueue (licblueprint_id) VALUES (:licblueprint_id)');
+        $stmt = $dbh->prepare('SET NAMES utf8; INSERT INTO LicCreationQueue (licblueprint_id) VALUES (:licblueprint_id);');
         $stmt->bindValue(':licblueprint_id',$this->getId());
         $stmt->execute();
         $stmt->closeCursor();

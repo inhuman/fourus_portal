@@ -1,16 +1,18 @@
 <?php
 require_once __DIR__."/../../class/FactoryLicBlueprint.php";
-
 require_once __DIR__."/../../class/Net/SFTP.php";
 
+require_once __DIR__."/../../class/PDOConfig.php";
 
 class TaskManager{
 
+    private  $licBlueprintsArr;
 
     public function __construct()
     {
         $this->sendBlueprintsFromQueue();
         $this->getCoreStatus();
+        $this->getDBDataQueueLicBlueprints();
     }
 
     private function sendBlueprint($blueprintId)
@@ -58,7 +60,9 @@ class TaskManager{
             exit('Login Failed');
         }
         // outputs the contents of filename.remote to the screen
-        echo $sftp->get('/status/status.pid');
+
+        echo '<br>Core '.$sftp->get('/status/status.pid').'<br>';
+
         // copies filename.remote to filename.local from the SFTP server
         //$sftp->get('filename.remote', 'filename.local');
 
@@ -76,6 +80,38 @@ class TaskManager{
         return $idArr;
 
     }
+
+    private function getDBDataQueueLicBlueprints()
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, createDate, dateTo, licOnly, status, location FROM LicBlueprint;');
+        $stmt->execute();
+        $this->setLicBlueprintsArr($stmt->fetchAll());
+        $stmt->closeCursor();
+    }
+
+    // -
+    private function getDBDataQueueLicBlueprintsUP()
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, createDate, dateTo, licOnly, status, location FROM LicBlueprint WHERE id=:id;');
+
+       // foreach
+       // $stmt->bindValue(':id',);
+        $stmt->execute();
+        $this->setLicBlueprintsArr($stmt->fetchAll());
+
+
+
+        $stmt->closeCursor();
+
+    }
+
+
+
+    public function getLicBlueprintsArr(){return $this->licBlueprintsArr;}
+    public function setLicBlueprintsArr($licBlueprintsArr){$this->licBlueprintsArr = $licBlueprintsArr;}
+
+
 }
 
-$r = new TaskManager();
