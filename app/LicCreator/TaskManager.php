@@ -7,14 +7,10 @@ require_once __DIR__."/../../class/Net/SFTP.php";
 class TaskManager{
 
 
-
     public function __construct()
     {
         $this->sendBlueprintsFromQueue();
-
         $this->getCoreStatus();
-
-
     }
 
     private function sendBlueprint($blueprintId)
@@ -34,7 +30,6 @@ class TaskManager{
         $sftp->put($remote_file_prvk, $local_file_prvk);
 
         $this->changeLicBlueprintStatus('in queue',$blueprintId);
-
     }
 
     private function sendBlueprintsFromQueue()
@@ -79,7 +74,6 @@ class TaskManager{
 
         $stmt->closeCursor();
         return $idArr;
-
     }
 }
 

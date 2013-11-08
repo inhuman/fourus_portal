@@ -13,5 +13,8 @@ switch($page){
     case attr_card:     $page = 'card/AttractionCard.php';  break;
     case photostat_card:$page = 'card/PhotoStatCard.php';   break;
 
+    default:             $page = 'home.php';                break;
+
+
 }
 require_once __DIR__."/".$page;
