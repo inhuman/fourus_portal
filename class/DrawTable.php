@@ -342,4 +342,44 @@ class DrawTable {
        echo "</form>";
 
    }
+
+   public static function HomeCard()
+   {
+       echo '<table class="table table-bordered table-hover tbl_pointer">';
+       echo "<thead style='background:#000000; color:#777777'  ><tr>";
+       echo "<th>#</th>";
+       echo "<th>Город</th>";
+       echo "<th>Имя райда</th>";
+       echo "<th>Дата</th>";
+       echo "<th>Только лицензия?</th>";
+       echo "<th>Статус</th>";
+       echo "<th>Расположение</th>";
+
+
+       echo "</tr></thead><tbody></b>";
+/*
+       $i=0;
+       while (FactoryRide::CountAllRides() > $i)
+       {
+           $i++ ;
+           $ride = FactoryRide::findRide($i);
+
+           echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
+           echo '<td>' . $i . '</td>';
+           echo '<td>' . $ride->getRideName() . '</a></td>';
+           echo '<td>' . $ride->getFileName() . '</a></td>';
+           echo '<td>' . $ride->getDuration() . '</td>';
+           echo '<td>' . $ride->getDemo() . '</td>';
+           echo '<td>' . $ride->getPoster60x80() . '</td>';
+
+
+           echo '<td>';
+           foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title='.$img[1] . '> ';}
+           echo '</td>';
+
+
+           echo '</tr>';
+       } */
+       echo "</tbody></table>";
+   }
 }
