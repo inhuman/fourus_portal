@@ -365,20 +365,18 @@ class DrawTable {
        foreach($r->getLicBlueprintsArr() as $LicBlueprint)
        {
 
-           $ride = FactoryRide::findRide($i);
+           $ride = FactoryRide::findRide($LicBlueprint[2]);
+           $attr = FactoryAttraction::findOne($LicBlueprint[1]);
 
-           echo "<tr style='cursor: pointer;' id=tr$i href=?page=ride_card&id=$i>";
-           echo '<td>' . $i . '</td>';
-           echo '<td>' . $ride->getRideName() . '</a></td>';
-           echo '<td>' . $ride->getFileName() . '</a></td>';
-           echo '<td>' . $ride->getDuration() . '</td>';
-           echo '<td>' . $ride->getDemo() . '</td>';
-           echo '<td>' . $ride->getPoster60x80() . '</td>';
+           echo "<tr>";
+           echo '<td>' . $LicBlueprint[0] . '</td>';
+           echo '<td>' . $attr->getTown() . '</td>';
+           echo '<td>' . $ride->getRideName() . '</td>';
+           echo '<td>' . $LicBlueprint[4] . '</td>';
+           echo '<td>' . $LicBlueprint[5] . '</td>';
+           echo '<td>' . $LicBlueprint[6] . '</td>';
 
 
-           echo '<td>';
-           foreach($ride->getEffx() as $img){echo '<img src=' . $img[0] . ' title='.$img[1] . '> ';}
-           echo '</td>';
 
 
            echo '</tr>';

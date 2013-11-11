@@ -57,7 +57,7 @@ class TaskManager{
 
         $sftp = new Net_SFTP('192.168.0.211');
         if (!$sftp->login('id', 'id1@')) {
-            exit('Login Failed');
+            exit('<br>Core status: transport failed (can not login)');
         }
         // outputs the contents of filename.remote to the screen
 
@@ -89,24 +89,6 @@ class TaskManager{
         $this->setLicBlueprintsArr($stmt->fetchAll());
         $stmt->closeCursor();
     }
-
-    // -
-    private function getDBDataQueueLicBlueprintsUP()
-    {
-        $dbh = new PDOConfig();
-        $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, createDate, dateTo, licOnly, status, location FROM LicBlueprint WHERE id=:id;');
-
-       // foreach
-       // $stmt->bindValue(':id',);
-        $stmt->execute();
-        $this->setLicBlueprintsArr($stmt->fetchAll());
-
-
-
-        $stmt->closeCursor();
-
-    }
-
 
 
     public function getLicBlueprintsArr(){return $this->licBlueprintsArr;}
