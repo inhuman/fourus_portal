@@ -19,6 +19,8 @@ class Mailer {
 
 
         $filename = "/data/city/test/test.txt";
+        $filename2 = "/data/city/test/test2.txt";
+
         $attachment = chunk_split(base64_encode(file_get_contents($filename)));
 
         $boundary =md5(date('r', time()));
@@ -52,7 +54,8 @@ class Mailer {
 
     public function XMail( $from, $to, $subj, $text, $filename)
     {
-        $f         = fopen($filename,"rb");
+        $filename2 = "/data/city/test/test2.txt";
+
         $un        = strtoupper(uniqid(time()));
         $head      = "From: $from\n";
         $head     .= "To: $to\n";
@@ -62,6 +65,8 @@ class Mailer {
         $head     .= "Mime-Version: 1.0\n";
         $head     .= "Content-Type:multipart/mixed;";
         $head     .= "boundary=\"----------".$un."\"\n\n";
+
+        $f         = fopen($filename,"rb");
         $zag       = "------------".$un."\nContent-Type:text/html;\n";
         $zag      .= "Content-Transfer-Encoding: 8bit\n\n$text\n\n";
         $zag      .= "------------".$un."\n";
@@ -72,11 +77,25 @@ class Mailer {
         $zag      .= "filename=\"".basename($filename)."\"\n\n";
         $zag      .= chunk_split(base64_encode(fread($f,filesize($filename))))."\n";
 
+        $f2        = fopen($filename2,"rb");
+        $zag      .= "------------".$un."\n";
+        $zag      .= "Content-Type: application/octet-stream;";
+        $zag      .= "name=\"".basename($filename2)."\"\n";
+        $zag      .= "Content-Transfer-Encoding:base64\n";
+        $zag      .= "Content-Disposition:attachment;";
+        $zag      .= "filename=\"".basename($filename2)."\"\n\n";
+        $zag      .= chunk_split(base64_encode(fread($f2,filesize($filename2))))."\n";
+
         if (!@mail("$to", "$subj", $zag, $head))
             return 0;
         else
             return 1;
+
     }
+
+
+
+
 
 }
 
