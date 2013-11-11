@@ -54,8 +54,11 @@ class TaskManager{
 
     private function getCoreStatus()
     {
+        $CoreAddress = '192.168.0.211';
 
-        $sftp = new Net_SFTP('192.168.0.211');
+        echo $this->pingDomain($CoreAddress);
+
+        $sftp = new Net_SFTP($CoreAddress);
         if (!$sftp->login('id', 'id1@')) {
             exit('<br>Core status: transport failed (can not login)');
         }
@@ -91,7 +94,20 @@ class TaskManager{
     }
 
 
-    public function getLicBlueprintsArr(){return $this->licBlueprintsArr;}
+    private function pingDomain($host)
+    {
+        $port = 22;
+        $waitTimeoutInSeconds = 1;
+        if($fp = fsockopen($host,$port,$errCode,$errStr,$waitTimeoutInSeconds)){
+            echo '<br>Core online';
+        } else {
+            echo '<br>Core offline';
+        }
+        fclose($fp);
+    }
+
+
+        public function getLicBlueprintsArr(){return $this->licBlueprintsArr;}
     public function setLicBlueprintsArr($licBlueprintsArr){$this->licBlueprintsArr = $licBlueprintsArr;}
 
 
