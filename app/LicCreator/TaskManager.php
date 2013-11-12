@@ -64,8 +64,10 @@ class TaskManager{
         }
         // outputs the contents of filename.remote to the screen
 
-        echo '<br>Core '.$sftp->get('/status/status.pid').'<br>';
+        echo '<br>Core status: '.$sftp->get('/status/status.pid').'<br>';
 
+        $blueprintId = explode('#',$sftp->get('/status/status.pid'));
+        $this->changeLicBlueprintStatus('in progress',$blueprintId[1]);
         // copies filename.remote to filename.local from the SFTP server
         //$sftp->get('filename.remote', 'filename.local');
 
