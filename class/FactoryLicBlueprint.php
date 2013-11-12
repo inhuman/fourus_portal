@@ -43,9 +43,9 @@ class FactoryLicBlueprint extends LicBlueprint {
         else{$string5 = "lic=\"{SPACE}\"";}
 
         $vol         = 100 - $this->getVolume();
-        $string6     = "volume={DOWN $vol}";
+        $string6     = "volume=\"{DOWN $vol}\"";
 
-        $string7     = 'blueprint id='.$this->getId();
+        $string7     = 'blueprint id=\"'.$this->getId().'\"';
 
         echo "<br>[Licence blueprint]";
         echo "<br>".$string1;
@@ -57,7 +57,7 @@ class FactoryLicBlueprint extends LicBlueprint {
         echo "<br>".$string7;
 
 
-        $dataToWrite = '[Licence blueprint]\n'.$string1.'\n'.$string2.'\n'.$string3.'\n'.$string4.'\n'.$string5.'\n'.$string6.'\n'.$string7;
+        $dataToWrite = "[LicenseBlueprint]\n".$string1."\n".$string2."\n".$string3."\n".$string4."\n".$string5."\n".$string6."\n".$string7;
         $fileName = 'blueprint['.$this->getId().']._wmv';
 
         $this->writeBlueprint($fileName,$dataToWrite);
@@ -68,6 +68,8 @@ class FactoryLicBlueprint extends LicBlueprint {
     {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
+
+
 
         $string1     = "name=\"".$ride->getRideName().'"';
         $string2     = "path=\"M:\\dynamic\\".$ride->getPrvkName().'"';
@@ -81,9 +83,9 @@ class FactoryLicBlueprint extends LicBlueprint {
         else{$string5 = "lic=\"{SPACE}\"";}
 
         $vol         = 100 - $this->getVolume();
-        $string6     = "volume={DOWN $vol}";
+        $string6     = "volume=\"{DOWN $vol}\"";
 
-        $string7     = 'blueprint id='.$this->getId();
+        $string7     = 'blueprint id='.$this->getId().'';
 
         echo "<br>[Licence blueprint]";
         echo "<br>".$string1;
@@ -94,7 +96,7 @@ class FactoryLicBlueprint extends LicBlueprint {
         echo "<br>".$string6;
         echo "<br>".$string7;
 
-        $dataToWrite = '[Licence blueprint]\n'.$string1.'\n'.$string2.'\n'.$string3.'\n'.$string4.'\n'.$string5.'\n'.$string6.'\n'.$string7;
+        $dataToWrite = "[LicenseBlueprint]\n".$string1."\n".$string2."\n".$string3."\n".$string4."\n".$string5."\n".$string6."\n".$string7;
         $fileName = 'blueprint['.$this->getId().']._prvk';
 
         $this->writeBlueprint($fileName,$dataToWrite);
@@ -102,6 +104,7 @@ class FactoryLicBlueprint extends LicBlueprint {
 
     private function writeBlueprint($fileName,$dataToWrite)
     {
+        //$dataToWrite = mb_convert_encoding($dataToWrite,'UTF-8');
         file_put_contents('../licences/blueprints/'.$fileName,$dataToWrite);
     }
 
