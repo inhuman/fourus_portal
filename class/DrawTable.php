@@ -348,7 +348,7 @@ class DrawTable {
    public static function LicQueueCard()
    {
 
-       $r = new TaskManager();
+       //$r = new TaskManager();
 
        echo '<table class="table table-bordered table-hover tbl_pointer">';
        echo "<thead style='background:#000000; color:#777777'  ><tr>";
@@ -362,7 +362,7 @@ class DrawTable {
        echo "</tr></thead><tbody></b>";
 
 
-       foreach($r->getLicBlueprintsArr() as $LicBlueprint)
+       foreach(TaskManager::getDBDataQueueLicBlueprints() as $LicBlueprint)
        {
 
            $ride = FactoryRide::findRide($LicBlueprint[2]);

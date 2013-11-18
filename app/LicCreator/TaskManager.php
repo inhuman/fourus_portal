@@ -6,15 +6,68 @@ require_once __DIR__."/../../class/PDOConfig.php";
 
 class TaskManager{
 
-    private  $licBlueprintsArr;
 
     public function __construct()
     {
         //$this->sendBlueprintsFromQueue();
-        //$this->getCoreStatus();
-        //$this->getDBDataQueueLicBlueprints();
+
 
         $this->CoreServer();
+    }
+
+    private function CoreServer()
+    {
+        $ServerAddress = '127.0.0.1';
+        $ServerPort = 1024;
+        $Socket = socket_create_listen($ServerPort);
+
+        socket_getsockname($Socket, $ServerAddress, $ServerPort);
+
+        print "Server Listening on $ServerAddress:$ServerPort\n";
+
+        while(true)
+        {
+            $Client = socket_accept($Socket);
+            $buffer=socket_read($Client, 512);
+
+            $bufferArr = explode('#',$buffer);
+
+            $CoreStatus = $bufferArr[0];
+            $blueprintId = $bufferArr[1];
+
+
+            switch($CoreStatus)
+            {
+                case "done ":
+                    echo "Core status: blueprint #$blueprintId done.\n";
+                    $this->changeLicBlueprintStatus('done',$blueprintId);
+                    break;
+
+                case "in progress ":
+                    echo "Core status: blueprint #$blueprintId in progress.\n";
+                    $this->changeLicBlueprintStatus('in progress',$blueprintId);
+                    break;
+
+                case "ready ":        echo "Core status: ready.\n";                                 break;
+
+                case "failed ":       echo "Core status: blueprint #$blueprintId failed.";          break;
+
+                case "create":
+                    echo "Created task.";
+                    $this->sendBlueprintsFromQueue();
+                    break;
+
+                default:
+                    echo "Core status: unknown.";
+                    var_dump($buffer);
+
+                    break;
+
+
+            }
+
+        }
+        socket_close($Socket);
     }
 
     private function sendBlueprint($blueprintId)
@@ -36,6 +89,19 @@ class TaskManager{
         $this->changeLicBlueprintStatus('in queue',$blueprintId);
     }
 
+    private function getQueueFromDB()
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare("SELECT id FROM  LicBlueprint WHERE  status = 'added'; ");
+
+        $stmt->execute();
+        $idArr = $stmt->fetchAll();
+
+        $stmt->closeCursor();
+        return $idArr;
+
+    }
+
     private function sendBlueprintsFromQueue()
     {
         foreach($this->getQueueFromDB() as $blueprintId)
@@ -54,7 +120,7 @@ class TaskManager{
         $stmt->closeCursor();
     }
 
-    private function getCoreStatus()
+   /* private function getCoreStatus()
     {
         $CoreAddress = '192.168.0.211';
 
@@ -73,28 +139,18 @@ class TaskManager{
         // copies filename.remote to filename.local from the SFTP server
         //$sftp->get('filename.remote', 'filename.local');
 
-    }
+    }*/
 
-    private function getQueueFromDB()
-    {
-        $dbh = new PDOConfig();
-        $stmt = $dbh->prepare("SELECT id FROM  LicBlueprint WHERE  status = 'added'; ");
 
-        $stmt->execute();
-        $idArr = $stmt->fetchAll();
 
-        $stmt->closeCursor();
-        return $idArr;
-
-    }
-
-    private function getDBDataQueueLicBlueprints()
+    static public function getDBDataQueueLicBlueprints()
     {
         $dbh = new PDOConfig();
         $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, createDate, dateTo, licOnly, status, location FROM LicBlueprint;');
         $stmt->execute();
-        $this->setLicBlueprintsArr($stmt->fetchAll());
+        $LicBlueprintsArr = $stmt->fetchAll();
         $stmt->closeCursor();
+        return $LicBlueprintsArr;
     }
 
 
@@ -110,45 +166,7 @@ class TaskManager{
         fclose($fp);
     }
 
-    private function CoreServer()
-    {
-        $ServerAddress = '127.0.0.1';
-        $ServerPort = 1024;
-        $Socket = socket_create_listen($ServerPort);
 
-        socket_getsockname($Socket, $ServerAddress, $ServerPort);
-
-        print "Server Listening on $ServerAddress:$ServerPort\n";
-
-        while(true)
-        {
-          $Client = socket_accept($Socket);
-          $buffer=socket_read($Client, 512);
-
-          $bufferArr = explode('#',$buffer);
-
-          $CoreStatus = $bufferArr[0];
-          $BlueprintID = $bufferArr[1];
-
-
-          switch($CoreStatus)
-          {
-                    case "done ":         echo "Core status: blueprint #$BlueprintID done.\n";          break;
-                    case "in progress ":  echo "Core status: blueprint #$BlueprintID in progress.\n";   break;
-                    case "ready ":        echo "Core status: ready.\n";                                 break;
-                    case "failed ":       echo "Core status: blueprint #$BlueprintID failed.";          break;
-
-
-
-
-          }
-
-        }
-        socket_close($Socket);
-    }
-
-    public function getLicBlueprintsArr(){return $this->licBlueprintsArr;}
-    public function setLicBlueprintsArr($licBlueprintsArr){$this->licBlueprintsArr = $licBlueprintsArr;}
 
 
 }
