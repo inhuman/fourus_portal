@@ -45,7 +45,7 @@ class FactoryLicBlueprint extends LicBlueprint {
         $vol         = 100 - $this->getVolume();
         $string6     = "volume=\"{DOWN $vol}\"";
 
-        $string7     = 'blueprint id=\"'.$this->getId().'\"';
+        $string7     = 'blueprint id='.$this->getId().'';
 
         echo "<br>[Licence blueprint]";
         echo "<br>".$string1;

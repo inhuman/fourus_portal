@@ -41,6 +41,8 @@ class TaskManager{
                 case "done ":
                     echo "Core status: blueprint #$blueprintId done.\n";
                     $this->changeLicBlueprintStatus('done',$blueprintId);
+
+
                     break;
 
                 case "in progress ":
@@ -58,7 +60,7 @@ class TaskManager{
                     break;
 
                 default:
-                    echo "Core status: unknown.";
+                    echo "Core status: unknown. Buffer: ";
                     var_dump($buffer);
 
                     break;
@@ -107,6 +109,15 @@ class TaskManager{
         foreach($this->getQueueFromDB() as $blueprintId)
         {
             $this->sendBlueprint($blueprintId[0]);
+
+            //$blueprintId = 248 ;
+
+            $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+            socket_connect($sock, '192.168.0.211', 1024);
+            $msg = "create ".$blueprintId[0]." prvk  ";
+            socket_send($sock,$msg,strlen($msg),MSG_OOB);
+            socket_close($sock);
+
         }
     }
 
