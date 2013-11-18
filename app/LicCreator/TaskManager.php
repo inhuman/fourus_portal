@@ -10,9 +10,11 @@ class TaskManager{
 
     public function __construct()
     {
-        $this->sendBlueprintsFromQueue();
-        $this->getCoreStatus();
-        $this->getDBDataQueueLicBlueprints();
+        //$this->sendBlueprintsFromQueue();
+        //$this->getCoreStatus();
+        //$this->getDBDataQueueLicBlueprints();
+
+        $this->CoreServer();
     }
 
     private function sendBlueprint($blueprintId)
@@ -108,8 +110,44 @@ class TaskManager{
         fclose($fp);
     }
 
+    private function CoreServer()
+    {
+        $ServerAddress = '127.0.0.1';
+        $ServerPort = 1024;
+        $Socket = socket_create_listen($ServerPort);
 
-        public function getLicBlueprintsArr(){return $this->licBlueprintsArr;}
+        socket_getsockname($Socket, $ServerAddress, $ServerPort);
+
+        print "Server Listening on $ServerAddress:$ServerPort\n";
+
+        while(true)
+        {
+          $Client = socket_accept($Socket);
+          $buffer=socket_read($Client, 512);
+
+          $bufferArr = explode('#',$buffer);
+
+          $CoreStatus = $bufferArr[0];
+          $BlueprintID = $bufferArr[1];
+
+
+          switch($CoreStatus)
+          {
+                    case "done ":         echo "Core status: blueprint #$BlueprintID done.\n";          break;
+                    case "in progress ":  echo "Core status: blueprint #$BlueprintID in progress.\n";   break;
+                    case "ready ":        echo "Core status: ready.\n";                                 break;
+                    case "failed ":       echo "Core status: blueprint #$BlueprintID failed.";          break;
+
+
+
+
+          }
+
+        }
+        socket_close($Socket);
+    }
+
+    public function getLicBlueprintsArr(){return $this->licBlueprintsArr;}
     public function setLicBlueprintsArr($licBlueprintsArr){$this->licBlueprintsArr = $licBlueprintsArr;}
 
 
