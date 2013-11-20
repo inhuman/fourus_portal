@@ -104,13 +104,11 @@ class TaskManager{
 
     }
 
-    private function sendBlueprintsFromQueue()
+    private function sendBlueprintsFromQueue() // TODO: тут должен указываться тип блупринта wmv, prv, prvk
     {
         foreach($this->getQueueFromDB() as $blueprintId)
         {
             $this->sendBlueprint($blueprintId[0]);
-
-            //$blueprintId = 248 ;
 
             $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
             socket_connect($sock, '192.168.0.211', 1024);
