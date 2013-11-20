@@ -6,7 +6,8 @@
                    <li class="dropdown" id="licmenu">
                      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-list"></i> Лицензии<b class="caret"></b></a>
                      <ul class="dropdown-menu">
-                       <li><a href="?page=create_lic"><i class="icon-file"></i>Создать</a></li>
+                       <li><a href="?page=create_lic"><i class="icon-file"></i>Создать лицензии</a></li>
+                       <li><a href="?page=create_content_txt"><i class="icon-file"></i>Создать content.txt</a></li>
                        <li><a href="?page=validity"><i class="icon-calendar"></i> Сроки</a></li>
                     </ul>
                    </li>

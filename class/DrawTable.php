@@ -385,4 +385,41 @@ class DrawTable {
 
        echo "</tbody></table>";
    }
+
+   public static function ContentTxtCreateCard()
+   {
+       $linkEnable = $_GET['link'];
+       if($linkEnable == 'yes'){$link = '<a href="/portal/temp/content.txt">content.txt</a>';}
+       else {$link='';}
+
+       echo "Создание content.txt <b>(заставка и тест проекторов уже включены!)</b> ".$link;
+       echo "<form class='form-horizontal' method='post' action='/portal/handler/hCreateContentTxt.php'>";
+
+       $i=0;
+       while($i < 20)
+       {
+           $i++;
+           echo "<div class='control-group'>";
+           echo "<label class='control-label' for='inputLic[$i]'>Ride #$i</label>";
+           echo "<div class='controls'>";
+           echo "<select name='inputRide[$i]' id='inputRide[$i]'>";
+           echo '<option value="none">none</option>';
+           $ii=0;
+           while (FactoryRide::CountAllRides() > $ii)
+           {
+               $ii++ ;
+               $ride = FactoryRide::findRide($ii);
+               echo '<option value='.$ride->getId().'>'.$ride->getRideName().'</option>' ;
+           }
+           echo "</select>";
+           echo "<input class='input-mini' type='number' value='80' name='volume[$i]' id='volume[$i]' min='1' max='100' />";
+
+
+           echo "</div>";
+           echo "</div>";
+       }
+       echo "<button type='submit' class='btn btn-block btn-primary'>Создать content.txt</button>";
+
+       echo "</form>";
+   }
 }
