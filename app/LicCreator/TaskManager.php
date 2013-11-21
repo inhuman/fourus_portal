@@ -50,13 +50,21 @@ class TaskManager{
                     $this->changeLicBlueprintStatus('in progress',$blueprintId);
                     break;
 
-                case "ready ":        echo "Core status: ready.\n";                                 break;
+                case "ready":        echo "Core status: ready.\n";                                 break;
 
                 case "failed ":       echo "Core status: blueprint #$blueprintId failed.";          break;
 
                 case "create":
                     echo "Created task.";
                     $this->sendBlueprintsFromQueue();
+                    break;
+
+                case "getcorestatus":
+                    $this->getCoreStatus();
+                    break;
+
+                case "busy":
+                    echo "Core is busy.";
                     break;
 
                 default:
@@ -110,6 +118,10 @@ class TaskManager{
         {
             $this->sendBlueprint($blueprintId[0]);
 
+
+
+
+
             $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
             socket_connect($sock, '192.168.0.211', 1024);
             $msg = "create ".$blueprintId[0]." prvk  ";
@@ -129,26 +141,17 @@ class TaskManager{
         $stmt->closeCursor();
     }
 
-   /* private function getCoreStatus()
+    private function getCoreStatus()
     {
-        $CoreAddress = '192.168.0.211';
 
-        echo $this->pingDomain($CoreAddress);
 
-        $sftp = new Net_SFTP($CoreAddress);
-        if (!$sftp->login('id', 'id1@')) {
-            exit('<br>Core status: transport failed (can not login)');
-        }
-        // outputs the contents of filename.remote to the screen
+        $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+        socket_connect($sock, '192.168.0.211', 1024);
+        $msg = "getstatus ";
+        socket_send($sock,$msg,strlen($msg),MSG_OOB);
+        socket_close($sock);
 
-        echo '<br>Core status: '.$sftp->get('/status/status.pid').'<br>';
-
-        $blueprintId = explode('#',$sftp->get('/status/status.pid'));
-        $this->changeLicBlueprintStatus('in progress',$blueprintId[1]);
-        // copies filename.remote to filename.local from the SFTP server
-        //$sftp->get('filename.remote', 'filename.local');
-
-    }*/
+    }
 
 
 
