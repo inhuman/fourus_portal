@@ -171,6 +171,8 @@ class DrawTable {
 
                  echo '<div class="span4"> ';
                      $attr = FactoryAttraction::findOne($id);
+                        var_dump($attr);
+
                      echo '<h2>#'.$id. " ".$attr->getTown().' </h2></a>' ;
                  echo '</div>';
 
