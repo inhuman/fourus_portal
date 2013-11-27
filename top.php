@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-                <a class="brand" href="/portal/">Studio XD</a>
+                <a class="brand" href="/portal/">XD</a>
                    <li class="dropdown" id="licmenu">
                      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-list"></i> Лицензии<b class="caret"></b></a>
                      <ul class="dropdown-menu">

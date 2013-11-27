@@ -99,8 +99,8 @@ class DrawTable {
        echo "<th>Коментарий</th>";
        echo "</tr></thead><tbody></b>";
 
-
-       echo "Аттракционов в базе: ".FactoryAttraction::CountAll();
+       echo '<a href="?page=attr_edit&attrId=new" class="btn btn-inverse btn-mini" title="Добавить" type="button"><h7>+</h7></a>';
+       echo " Аттракционов в базе: ".FactoryAttraction::CountAll();
 
        foreach(FactoryAttraction::findAll() as $attraction)
        {
@@ -127,21 +127,10 @@ class DrawTable {
        $attr = FactoryAttraction::findOne($id);
        $townHistoryArr = $attr->getTownHistory();
 
-       echo '<div class="container">';
-          echo '<div class="row">';
+       self::AttrActionPanel($id);
 
-             echo '<div class="span8"> ';
-               if($attr->getModem() == 2)
-               {
-                   echo '<h2>#'.$id. " ".$attr->getTown().' </h2><a href="?page=photostat_card&id='.$id.'"><img src="img/modem.png" width="20"></a> ';
-               }
-               else{ echo '<h2>#'.$id. " ".$attr->getTown().'</h2>';}
-             echo "<a href='?page=create_lic&attr_id=$id'>сделать лицензии</a>";
-             echo '</div>';
-             echo '<div class="span4"> ';
-               echo '<h3 align="right">'.$attr->getSerialId().'</h3>';
-               echo '<label align="right">'.$attr->getComment().'</label>';
-             /*
+       // echo '<label align="right">'.$attr->getComment().'</label>';
+       /*
                if($townHistoryArr){
                     echo '<br><b>История перемещений</b>';
                     foreach($townHistoryArr as $i)
@@ -150,9 +139,6 @@ class DrawTable {
                     }
                }
              */
-             echo '</div>';
-          echo '</div>';
-       echo '</div>';
 
        echo '<div class="container">';
          echo '<div class="row">';
@@ -176,6 +162,48 @@ class DrawTable {
            echo '</div>';
          echo '</div>';
        echo '</div>';
+   }
+
+   public static function AttrActionPanel($id)
+   {
+       echo '<div class="container">';
+            echo '<div class="row">';
+
+                 echo '<div class="span4"> ';
+                     $attr = FactoryAttraction::findOne($id);
+                     echo '<h2>#'.$id. " ".$attr->getTown().' </h2></a>' ;
+                 echo '</div>';
+
+                 echo '<div class="span4"> ';
+                    echo "<div class='btn-group'>";
+                        echo "<br>";
+                        echo ' <a href="?page=attr_card&id='.$id.'" class="btn btn-info btn-mini" title="Сводная информация"><i class="icon-home"></i></a>';
+
+                        echo "<a href='?page=create_lic&attr_id=$id' class='btn btn-info btn-mini' title='Cделать лицензии' ><b>Cоздать лицензии</b></a>";
+                        echo '<a href="?page=attr_edit&attrId='.$id.'" class="btn btn-inverse btn-mini" title="Редактировать комплектацию" ><b>Редактировать</b></a>';
+
+                        if($attr->getModem() == 2){
+                            echo '<a href="?page=photostat_card&id='.$id.'" class="btn btn-success btn-mini" title="Фотостатистика"><img src="img/modem.png" width="18"><b>Статистика</b></a> ';
+                        }
+                        else{echo '<a class="btn btn-success btn-mini disabled" title="Фотостатистика"><img src="img/modem.png" width="18">Фотостатистика</a> ';}
+                    echo "</div>";
+                echo '</div>';
+
+                echo '<div class="span4"> ';
+                   echo '<h3 align="right">' . $attr->getSerialId() . '</h3>';
+                echo '</div>';
+
+
+            echo '</div>';
+       echo '</div>';
+
+   }
+
+   public static function AttractionEditCardTable($attrId)
+   {
+       self::AttrActionPanel($attrId);
+
+
    }
 
    public static function PhotostatCard($id)
@@ -202,16 +230,7 @@ class DrawTable {
             $lastSync = ' no sync';
         }
 
-        echo '<div class="container">';
-            echo '<div class="row">';
-                echo '<div class="span8"> ';
-                     echo '<h2>#' . $id .  " " . $attraction->getTown() . '</h2>';
-                echo '</div>';
-                echo '<div class="span4"> ';
-                    echo '<h3 align="right">' . $attraction->getSerialId() . '</h3>';
-                echo '</div>';
-            echo '</div>';
-        echo '</div>';
+        self::AttrActionPanel($id);
 
         echo '<div class="container">';
             echo '<div class="row">';
@@ -280,6 +299,7 @@ class DrawTable {
    public static function LicCreateCard()
    {
        $attr_id = $_GET['attr_id'];
+       self::AttrActionPanel($attr_id);
        echo "<form class='form-horizontal' method='post' action='/portal/handler/hCreateBluePrints.php'>";
          echo "<div class='control-group'>";
            echo "<label class='control-label' for='inputAttrID'>Attraction ID</label>";

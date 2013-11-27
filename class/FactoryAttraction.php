@@ -75,8 +75,14 @@ class FactoryAttraction {
        $attr = new Attraction($id);
        $link = $attr->getSerialId() . ' - ' . $attr->getTown();
        return $link;
-
-
     }
 
+    static public function getLastId()
+    {
+        $dbh = new PDOConfig();
+        $query = $dbh->query("SELECT id FROM attraction ORDER BY id DESC LIMIT 1;");
+        $queryArr = $query->fetch();
+        $lastId = $queryArr[0];
+        return $lastId;
+    }
 }
