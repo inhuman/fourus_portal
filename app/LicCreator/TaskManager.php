@@ -9,12 +9,11 @@ class TaskManager{
 
     public function __construct()
     {
-        //$this->sendBlueprintsFromQueue();
+        $this->sendBlueprintsFromQueue();
 
 
-        $this->CoreServer();
     }
-
+/*
     private function CoreServer()
     {
         $ServerAddress = '127.0.0.1';
@@ -65,6 +64,8 @@ class TaskManager{
 
                 case "busy":
                     echo "Core is busy.";
+                    sleep (10);
+
                     break;
 
                 default:
@@ -79,6 +80,7 @@ class TaskManager{
         }
         socket_close($Socket);
     }
+*/
 
     private function sendBlueprint($blueprintId)
     {
@@ -116,17 +118,25 @@ class TaskManager{
     {
         foreach($this->getQueueFromDB() as $blueprintId)
         {
-            $this->sendBlueprint($blueprintId[0]);
 
 
 
 
 
-            $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-            socket_connect($sock, '192.168.0.211', 1024);
-            $msg = "create ".$blueprintId[0]." prvk  ";
-            socket_send($sock,$msg,strlen($msg),MSG_OOB);
-            socket_close($sock);
+            do
+                {
+                    sleep(1);
+                    $this->sendBlueprint($blueprintId[0]);
+                    $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+                    socket_connect($sock, '192.168.0.211', 1024);
+                    $msg = "create ".$blueprintId[0]." prvk  ";
+                    socket_send($sock,$msg,strlen($msg),MSG_OOB);
+                    socket_close($sock);
+                }
+                while($this->getCoreStatus() != 'ready');
+
+
+
 
         }
     }
@@ -143,14 +153,12 @@ class TaskManager{
 
     private function getCoreStatus()
     {
-
-
-        $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        socket_connect($sock, '192.168.0.211', 1024);
-        $msg = "getstatus ";
-        socket_send($sock,$msg,strlen($msg),MSG_OOB);
-        socket_close($sock);
-
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare("SELECT Status FROM Transport WHERE Subject='Core'");
+        $stmt->execute();
+        $status = $stmt->fetch();
+        $stmt->closeCursor();
+        return $status[0];
     }
 
 

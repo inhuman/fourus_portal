@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-                <a class="brand" href="/portal/">Fourus</a>
+                <a class="brand" href="/portal/">Studio XD</a>
                    <li class="dropdown" id="licmenu">
                      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-list"></i> Лицензии<b class="caret"></b></a>
                      <ul class="dropdown-menu">
@@ -17,8 +17,8 @@
                 <li class="dropdown" id="settingsmenu">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-wrench"></i> Настройки<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="?page=ride_card">Карточка райда</a></li>
-                        <li><a href="?page=attr_card">Карточка аттракциона</a></li>
+                        <li><a href="?page=ride_card">Factory Liciense</a></li>
+
                     </ul>
                 </li>
             </ul>

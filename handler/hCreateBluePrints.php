@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__."/../class/FactoryLicBlueprint.php";
+require_once __DIR__."/../app/LicCreator/TaskManager.php";
 
 echo 'Blueprint creator';
 
@@ -26,13 +27,15 @@ while($i < 20)
 }
 
 
-
+/*
 $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 socket_connect($sock, '127.0.0.1', 1024);
-//$msg = "create#1";
-$msg = "getcorestatus#1";
+$msg = "create#1";
+//$msg = "getcorestatus#1";
 socket_send($sock,$msg,strlen($msg),MSG_OOB);
 socket_close($sock);
+*/
 
+$r = new TaskManager();
 
 header('Location: /portal');

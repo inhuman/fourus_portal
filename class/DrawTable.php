@@ -90,9 +90,9 @@ class DrawTable {
    {
        echo '<table class="table table-bordered table-hover tbl_pointer">';
        echo "<thead style='background:#000000; color:#777777'  ><tr>";
-       echo "<th>#</th>";
+       echo "<th>Factory iD #</th>";
        echo "<th>Город</th>";
-       echo "<th>iD аттракциона</th>";
+       echo "<th>serial iD аттракциона</th>";
        echo "<th>Тип</th>";
        echo "<th>Вместимость</th>";
        echo "<th>Эффекты</th>";
