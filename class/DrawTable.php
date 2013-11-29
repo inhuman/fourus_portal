@@ -353,8 +353,24 @@ class DrawTable {
         //TODO: динамический модуль: модель мотора, тип вилки, тип опоры, тип датчиков, длина рычага, длина тяги,
 
 
-        echo '<div class="control-group">';
-        echo '<div class="controls">';
+        $dynamicModuleArr = array(
+            array("MotorModel","Модель мотора"),
+            array("PlugType","Тип вилки"),
+            array("BearingType","Тип опоры"),
+            array("SensorType","Тип датчиков"),
+            array("ArmLenght","Длина рычага"),
+            array("LinkageLenght","Длина тяги"));
+
+        foreach($dynamicModuleArr as $hardware)
+        {
+            echo '<div class="control-group">';
+            echo '<label class="control-label" for="inputDynamicModule'.$hardware[0].'">'.$hardware[1].'</label>';
+            echo '<div class="controls">';
+            echo '<input id="inputDynamicModule'.$hardware[0].'" name="inputDynamicModule'.$hardware[0].'">';
+            echo '</div>';
+            echo '</div>';
+
+        }
 
 
         echo '<button type="submit" class="btn btn-primary">Создать комплектацию</button>';

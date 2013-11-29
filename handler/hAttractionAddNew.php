@@ -28,6 +28,16 @@ $TerminalCamera         = $_POST['inputTerminalCamera'];
 
 $Comment                = $_POST['inputComment'];
 
+
+$DynamicModuleMotorModel    = $_POST['inputDynamicModuleMotorModel'];
+$DynamicModulePlugType      = $_POST['inputDynamicModuleModulePlugType'];
+$DynamicModuleBearingType   = $_POST['inputDynamicModuleBearingType'];
+$DynamicModuleSensorType    = $_POST['inputDynamicModuleSensorType'];
+$DynamicModuleArmLenght     = $_POST['inputDynamicModuleArmLenght'];
+$DynamicModuleLinkageLenght = $_POST['inputDynamicModuleLinkageLenght'];
+
+
+
 {
 echo '<br>$PlayerCase '.$PlayerCase  ;
 echo '<br>$PlayerMotherboard '.$PlayerMotherboard  ;
@@ -55,4 +65,12 @@ echo '<br>$TerminalVideoCapture '.$TerminalVideoCapture  ;
 echo '<br>$TerminalCamera '.$TerminalCamera  ;
 echo '<br>';
 echo '<br>$Comment '.$Comment  ;
+echo "<br>";
+echo '<br>$DynamicModuleMotorModel '.$DynamicModuleMotorModel ;
+echo '<br>$DynamicModulePlugType '.$DynamicModulePlugType ;
+echo '<br>$DynamicModuleBearingType '.$DynamicModuleBearingType ;
+echo '<br>$DynamicModuleSensorType '.$DynamicModuleSensorType ;
+echo '<br>$DynamicModuleArmLenght '.$DynamicModuleArmLenght ;
+echo '<br>$DynamicModuleLinkageLenght '.$DynamicModuleLinkageLenght ;
+
 }
