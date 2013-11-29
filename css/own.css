@@ -27,3 +27,12 @@ table.tbl_pointer tr {
 #back-to-page-top.page-top-link-hover {
     opacity: .8;
 }
+
+.f-left {
+    float: left;
+}
+
+.clear {
+    float: none;
+    clear: both;
+}

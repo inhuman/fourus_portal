@@ -171,7 +171,7 @@ class DrawTable {
 
                  echo '<div class="span4"> ';
                      $attr = FactoryAttraction::findOne($id);
-                        var_dump($attr);
+
 
                      echo '<h2>#'.$id. " ".$attr->getTown().' </h2></a>' ;
                  echo '</div>';
@@ -187,7 +187,7 @@ class DrawTable {
                         if($attr->getModem() == 2){
                             echo '<a href="?page=photostat_card&id='.$id.'" class="btn btn-success btn-mini" title="Фотостатистика"><img src="img/modem.png" width="18"><b>Статистика</b></a> ';
                         }
-                        else{echo '<a class="btn btn-success btn-mini disabled" title="Фотостатистика"><img src="img/modem.png" width="18">Фотостатистика</a> ';}
+                        else{echo '<a class="btn btn-success btn-mini disabled" title="Фотостатистика"><img src="img/modem.png" width="18">Контроль</a> ';}
                     echo "</div>";
                 echo '</div>';
 
@@ -207,6 +207,163 @@ class DrawTable {
 
 
    }
+
+    public static function AttractionAddNewCardTable()
+    {
+        $newId = FactoryAttraction::getLastId() + 1;
+        echo "<h2>Добавление новой комплектации - Factory iD #$newId</h2>";
+        echo "<h3>Основная информация</h3>";
+
+        echo '<form class="form-horizontal" method="post" action="/portal/handler/hAttractionAddNew.php">';
+            echo '<div class="control-group">';
+                echo '<label class="control-label" for="inputAttrSerialId">Serial iD аттракциона</label>';
+                echo '<div class="controls">';
+                    echo '<input type="text" id="inputAttrSerialId" placeholder="Serial iD аттракциона">';
+                echo '</div>';
+            echo '</div>';
+
+            echo '<div class="control-group">';
+                echo '<label class="control-label" for="inputTownName">Город</label>';
+                echo '<div class="controls">';
+                    echo '<input type="text" id="inputTownName" name="inputTownName" placeholder="Город">';
+                echo '</div>';
+            echo '</div>';
+
+
+             echo '<div class="control-group">';
+                echo '<label class="control-label" for="inputType">Тип</label>';
+                echo '<div class="controls">';
+                    echo '<select id="inputType" name="inputType">';
+                        echo '<option value="0"></option>';
+                        echo '<option value="mobile">Мобильный</option>';
+                        echo '<option value="stationary">Стационарный</option>';
+                        echo '<option value="stationaryTurned">Стационарный поворотка</option>';
+                    echo '</select>';
+                echo '</div>';
+             echo '</div>';
+
+
+
+             echo "<h3>Комплектация</h3>";
+
+             echo "<h4>Player</h4>";
+
+             $playerHardwareArr = array(
+                 array("Case","Корпус"),
+                 array("Motherboard","Материнская плата"),
+                 array("PowerUnit","Блок питания"),
+                 array("CPU","Процессор"),
+                 array("CoolingSystem","Система охлаждения"),
+                 array("RAM","Оперативная память"),
+                 array("HDD","Жесткий диск"),
+                 array("MOXA","МОХА"),
+                 array("PCICOM","PCI-COM controller"),
+                 array("licController","Контроллер лицензий"),
+                 array("Projector1","Проектор 1"),
+                 array("Projector2","Проектор 2"),
+                 array("VideoCard","Видеокарта"),
+                 array("EffectBlock","Блок эффектов"));
+
+             $terminalHardwareArr = array(
+                 array("Case","Корпус"),
+                 array("Motherboard","Материнская плата"),
+                 array("PowerUnit","Блок питания"),
+                 array("CPU","Процессор"),
+                 array("CoolingSystem","Система охлаждения"),
+                 array("RAM","Оперативная память"),
+                 array("HDD","Жесткий диск"),
+                 array("VideoCapture","Видеозахват"),
+                 array("Camera","Камера"));
+
+
+             foreach($playerHardwareArr as $hardware)
+             {
+                 echo '<div class="control-group">';
+                 echo '<label class="control-label" for="inputPlayer'.$hardware[0].'">'.$hardware[1].'</label>';
+                 echo '<div class="controls">';
+                 echo '<input id="inputPlayer'.$hardware[0].'" name="inputPlayer'.$hardware[0].'">';
+                 echo '</div>';
+                 echo '</div>';
+             }
+
+             echo '<div class="control-group">';
+                echo '<div class="controls">';
+                    echo '<label class="checkbox" ><img src="../portal/img/lighting.png" /><input type="checkbox" id="lighting" name="lighting"> Молния</label>';
+                    echo '<label class="checkbox"><img src="../portal/img/water.png"  /><input type="checkbox" name="water"> Брызги</label>';
+                    echo '<label class="checkbox"><img src="../portal/img/vibro.png" /><input type="checkbox" name="vibro"> Вибрация</label>';
+                    echo '<label class="checkbox"><img src="../portal/img/snow.png" /><input type="checkbox" name="snow"> Снег</label>';
+                    echo '<label class="checkbox"><img src="../portal/img/wind.png" /><input type="checkbox" name="wind"> Ветер</label>';
+                    echo '<label class="checkbox"><img src="../portal/img/boobles.png" /><input type="checkbox" name="bubbles"> Пузыри</label>';
+                    echo '<label class="checkbox"><img src="../portal/img/mouse.png" /><input type="checkbox" name="rats"> Мышиные хвосты</label>';
+                echo '</div>';
+             echo '</div>';
+
+
+         echo "<h4>Terminal</h4>";
+        foreach($terminalHardwareArr as $hardware)
+        {
+            echo '<div class="control-group">';
+            echo '<label class="control-label" for="inputTerminal'.$hardware[0].'">'.$hardware[1].'</label>';
+            echo '<div class="controls">';
+            echo '<input id="inputTerminal'.$hardware[0].'" name="inputTerminal'.$hardware[0].'">';
+            echo '</div>';
+            echo '</div>';
+
+        }
+
+        echo '<div class="control-group">';
+        echo '<label class="control-label" for="inputComment">Коментарий</label>';
+        echo '<div class="controls">';
+        echo '<textarea rows="3"  id="inputComment" name="inputComment"></textarea>';
+        echo '</div>';
+        echo '</div>';
+
+
+
+        echo "<h3>Динамический модуль</h3>";
+
+
+        echo '<div class="control-group">';
+        echo '<label class="control-label" for="inputCapacity">Вместимость</label>';
+        echo '<div class="controls">';
+        echo '<select id="inputCapacity" name="inputCapacity">';
+        echo '<option value="0"></option>';
+        echo '<option value="3">3</option>';
+        echo '<option value="5">5</option>';
+        echo '<option value="6">6</option>';
+        echo '<option value="7">7</option>';
+        echo '</select>';
+        echo '</div>';
+        echo '</div>';
+
+
+        echo '<div class="control-group">';
+        echo '<label class="control-label" for="inputPlatformType">Тип платформы</label>';
+        echo '<div class="controls">';
+        echo '<select id="inputPlatformType" name="inputPlatformType">';
+        echo '<option value="0"></option>';
+        echo '<option value="hydraulic">Гидравлическая</option>';
+        echo '<option value="electric2">Электрическая 2 мотора</option>';
+        echo '<option value="electric3">Электрическая 3 мотора</option>';
+        echo '</select>';
+        echo '</div>';
+        echo '</div>';
+
+
+        //TODO: динамический модуль: модель мотора, тип вилки, тип опоры, тип датчиков, длина рычага, длина тяги,
+
+
+        echo '<div class="control-group">';
+        echo '<div class="controls">';
+
+
+        echo '<button type="submit" class="btn btn-primary">Создать комплектацию</button>';
+        echo '</div>';
+        echo '</div>';
+        echo '</form>';
+
+
+    }
 
    public static function PhotostatCard($id)
     {

@@ -9,10 +9,14 @@ $attrId=$_GET['attrId'];
 
 if ($attrId == "new")
 {
-    $attrId = FactoryAttraction::getLastId() + 1;
+    DrawTable::AttractionAddNewCardTable();
 }
-echo $attrId;
+else
+{
+    DrawTable::AttractionEditCardTable($attrId);
+}
 
-DrawTable::AttractionEditCardTable($attrId);
+
+
 
 
