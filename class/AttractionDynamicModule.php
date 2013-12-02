@@ -1,19 +1,28 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: iD
- * Date: 29.11.13
- * Time: 15:17
- * To change this template use File | Settings | File Templates.
- */
-
 class AttractionDynamicModule {
 
-$DynamicModuleMotorModel
-$DynamicModulePlugType
-$DynamicModuleBearingType
-$DynamicModuleSensorType
-$DynamicModuleArmLenght
-$DynamicModuleLinkageLenght
+     private $DynamicModuleMotorModel, $DynamicModulePlugType, $DynamicModuleBearingType, $DynamicModuleSensorType,
+             $DynamicModuleArmLenght, $DynamicModuleLinkageLenght;
+
+    public function setDynamicModuleArmLenght($DynamicModuleArmLenght){$this->DynamicModuleArmLenght = $DynamicModuleArmLenght;}
+    public function getDynamicModuleArmLenght(){return $this->DynamicModuleArmLenght;}
+
+    public function setDynamicModuleBearingType($DynamicModuleBearingType){$this->DynamicModuleBearingType = $DynamicModuleBearingType;}
+    public function getDynamicModuleBearingType(){return $this->DynamicModuleBearingType;}
+
+    public function setDynamicModuleLinkageLenght($DynamicModuleLinkageLenght){$this->DynamicModuleLinkageLenght = $DynamicModuleLinkageLenght;}
+    public function getDynamicModuleLinkageLenght(){return $this->DynamicModuleLinkageLenght;}
+
+    public function setDynamicModuleMotorModel($DynamicModuleMotorModel){$this->DynamicModuleMotorModel = $DynamicModuleMotorModel;}
+    public function getDynamicModuleMotorModel(){return $this->DynamicModuleMotorModel;}
+
+    public function setDynamicModulePlugType($DynamicModulePlugType){$this->DynamicModulePlugType = $DynamicModulePlugType;}
+    public function getDynamicModulePlugType(){return $this->DynamicModulePlugType;}
+
+    public function setDynamicModuleSensorType($DynamicModuleSensorType){$this->DynamicModuleSensorType = $DynamicModuleSensorType;}
+    public function getDynamicModuleSensorType(){return $this->DynamicModuleSensorType;}
+
+
+
 
 }
