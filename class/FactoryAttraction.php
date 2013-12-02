@@ -85,4 +85,63 @@ class FactoryAttraction {
         $lastId = $queryArr[0];
         return $lastId;
     }
+
+    static public function AddAttractionToDB($TownName,$serialID,$mobility)
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare('INSERT INTO towns (name) VALUES (:name);');
+        $stmt->bindValue(':name',$TownName);
+        $stmt->execute();
+        $TownID  = $dbh->lastInsertId();
+
+        $stmt = $dbh->prepare('INSERT INTO attraction (serial_id, mobility, town_id) VALUES (:serial_id, :mobility, :town_id);');
+        $stmt->bindValue(':serial_id',$serialID);
+        $stmt->bindValue(':mobility',$mobility);
+        $stmt->bindValue(':town_id',$TownID);
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
+    protected function AddAttractionPlayerToDB($PlayerCase, $PlayerMotherboard, $PlayerPowerUnit, $PlayerCPU, $PlayerCoolingSystem, $PlayerRAM,
+                                               $PlayerHDD, $PlayerMOXA, $PlayerPCICOM, $PlayerlicController, $PlayerProjector1, $PlayerProjector2,
+                                               $PlayerVideoCard, $PlayerEffectBlock)
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare('INSERT INTO AttractionPlayer (PlayerCase, PlayerMotherboard, PlayerPowerUnit, PlayerCPU,
+                                           PlayerCoolingSystem, PlayerRAM, PlayerHDD, PlayerMOXA, PlayerPCICOM,
+                                           PlayerlicController, PlayerProjector1, PlayerProjector2, PlayerVideoCard,
+                                           PlayerEffectBlock)
+                                VALUES (:PlayerCase, :PlayerMotherboard, :PlayerPowerUnit, :PlayerCPU, :PlayerCoolingSystem,
+                                        :PlayerRAM, :PlayerHDD, :PlayerMOXA, :PlayerPCICOM, :PlayerlicController, :PlayerProjector1,
+                                        :PlayerProjector2, :PlayerVideoCard, :PlayerEffectBlock);');
+
+        $stmt->bindValue(':PlayerCase',$PlayerCase);
+        $stmt->bindValue(':PlayerMotherboard',$PlayerMotherboard);
+        $stmt->bindValue(':PlayerPowerUnit',$PlayerPowerUnit);
+        $stmt->bindValue(':PlayerCPU',$PlayerCPU);
+        $stmt->bindValue(':PlayerCoolingSystem',$PlayerCoolingSystem);
+        $stmt->bindValue(':PlayerRAM',$PlayerRAM);
+        $stmt->bindValue(':PlayerHDD',$PlayerHDD);
+        $stmt->bindValue(':PlayerMOXA',$PlayerMOXA);
+        $stmt->bindValue(':PlayerPCICOM',$PlayerPCICOM);
+        $stmt->bindValue(':PlayerlicController',$PlayerlicController);
+        $stmt->bindValue(':PlayerProjector1',$PlayerProjector1);
+        $stmt->bindValue(':PlayerProjector2',$PlayerProjector2);
+        $stmt->bindValue(':PlayerVideoCard',$PlayerVideoCard);
+        $stmt->bindValue(':PlayerEffectBlock',$PlayerEffectBlock);
+
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
+
+    protected function AddAttractionTerminalToDB()
+    {
+
+    }
+
+    protected function AddAttractionDynamicModuleToDB()
+    {
+
+    }
+
 }
+

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/../class/PDOConfig.php';
 echo "Add new attr handler";
 
 $PlayerCase             = $_POST['inputPlayerCase'];
@@ -28,7 +29,6 @@ $TerminalCamera         = $_POST['inputTerminalCamera'];
 
 $Comment                = $_POST['inputComment'];
 
-
 $DynamicModuleMotorModel    = $_POST['inputDynamicModuleMotorModel'];
 $DynamicModulePlugType      = $_POST['inputDynamicModuleModulePlugType'];
 $DynamicModuleBearingType   = $_POST['inputDynamicModuleBearingType'];
@@ -38,6 +38,8 @@ $DynamicModuleLinkageLenght = $_POST['inputDynamicModuleLinkageLenght'];
 
 
 
+
+if(1==1)
 {
 echo '<br>$PlayerCase '.$PlayerCase  ;
 echo '<br>$PlayerMotherboard '.$PlayerMotherboard  ;
