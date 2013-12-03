@@ -86,22 +86,33 @@ class FactoryAttraction {
         return $lastId;
     }
 
-    static public function AddAttractionToDB($TownName,$serialID,$mobility)
+    static public function AddAttractionToDB($AttractionTownName,$AttractionSerialID,$AttractionMobility, $AttractionPlayerID, $AttractionTerminalID, $AttractionDynamicModuleID)
     {
         $dbh = new PDOConfig();
         $stmt = $dbh->prepare('INSERT INTO towns (name) VALUES (:name);');
-        $stmt->bindValue(':name',$TownName);
+        $stmt->bindValue(':name',$AttractionTownName);
         $stmt->execute();
         $TownID  = $dbh->lastInsertId();
 
-        $stmt = $dbh->prepare('INSERT INTO attraction (serial_id, mobility, town_id) VALUES (:serial_id, :mobility, :town_id);');
-        $stmt->bindValue(':serial_id',$serialID);
-        $stmt->bindValue(':mobility',$mobility);
-        $stmt->bindValue(':town_id',$TownID);
+        $stmt = $dbh->prepare('INSERT INTO attraction (serial_id, mobility, town_id, AttractionPlayerID, AttractionTerminalID, AttractionDynamicModuleID)
+                               VALUES (:serial_id, :mobility, :town_id, :AttractionPlayerID, :AttractionTerminalID, :AttractionDynamicModuleID);');
+
+        $stmt->bindValue(':serial_id',$AttractionSerialID);
+        $stmt->bindValue(':mobility',$AttractionMobility);
+        $stmt->bindValue(':town_id', $TownID);
+        $stmt->bindValue(':AttractionPlayerID',$AttractionPlayerID);
+        $stmt->bindValue(':AttractionTerminalID',$AttractionTerminalID);
+        $stmt->bindValue(':AttractionDynamicModuleID',$AttractionDynamicModuleID);
+
+
         $stmt->execute();
+        var_dump($stmt);
         $stmt->closeCursor();
+
+
+
     }
-    protected function AddAttractionPlayerToDB($PlayerCase, $PlayerMotherboard, $PlayerPowerUnit, $PlayerCPU, $PlayerCoolingSystem, $PlayerRAM,
+    static public function AddAttractionPlayerToDB($PlayerCase, $PlayerMotherboard, $PlayerPowerUnit, $PlayerCPU, $PlayerCoolingSystem, $PlayerRAM,
                                                $PlayerHDD, $PlayerMOXA, $PlayerPCICOM, $PlayerlicController, $PlayerProjector1, $PlayerProjector2,
                                                $PlayerVideoCard, $PlayerEffectBlock)
     {
@@ -130,16 +141,56 @@ class FactoryAttraction {
         $stmt->bindValue(':PlayerEffectBlock',$PlayerEffectBlock);
 
         $stmt->execute();
+        $AttractionPlayerID = $dbh->lastInsertId();
+
         $stmt->closeCursor();
+        return $AttractionPlayerID;
     }
 
-    protected function AddAttractionTerminalToDB()
+    static public function AddAttractionTerminalToDB($TerminalCase, $TerminalMotherboard, $TerminalPowerUnit, $TerminalCPU,
+                                                 $TerminalCoolingSystem, $TerminalRAM, $TerminalHDD, $TerminalVideoCapture, $TerminalCamera)
     {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare('INSERT INTO AttractionTerminal (TerminalCase, TerminalMotherboard, TerminalPowerUnit, TerminalCPU,
+                                                 TerminalCoolingSystem, TerminalRAM, TerminalHDD, TerminalVideoCapture, TerminalCamera)
+                               VALUES (:TerminalCase, :TerminalMotherboard, :TerminalPowerUnit, :TerminalCPU,
+                                                 :TerminalCoolingSystem, :TerminalRAM, :TerminalHDD, :TerminalVideoCapture, :TerminalCamera);');
+        $stmt->bindValue(':TerminalCase',$TerminalCase);
+        $stmt->bindValue(':TerminalMotherboard',$TerminalMotherboard);
+        $stmt->bindValue(':TerminalPowerUnit',$TerminalPowerUnit);
+        $stmt->bindValue(':TerminalCPU',$TerminalCPU);
+        $stmt->bindValue(':TerminalCoolingSystem',$TerminalCoolingSystem);
+        $stmt->bindValue(':TerminalRAM',$TerminalRAM);
+        $stmt->bindValue(':TerminalHDD',$TerminalHDD);
+        $stmt->bindValue(':TerminalVideoCapture',$TerminalVideoCapture);
+        $stmt->bindValue(':TerminalCamera',$TerminalCamera);
 
+        $stmt->execute();
+
+        $AttractionTerminalID = $dbh->lastInsertId();
+        $stmt->closeCursor();
+        return $AttractionTerminalID;
     }
 
-    protected function AddAttractionDynamicModuleToDB()
+    static public function AddAttractionDynamicModuleToDB($DynamicModuleMotorModel, $DynamicModulePlugType, $DynamicModuleBearingType, $DynamicModuleSensorType,
+                                                      $DynamicModuleArmLenght, $DynamicModuleLinkageLenght)
     {
+
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare('INSERT INTO DynamicModuleMotorModel, DynamicModulePlugType, DynamicModuleBearingType, DynamicModuleSensorType,
+                                           DynamicModuleArmLenght, DynamicModuleLinkageLenght)
+                                VALUES (:DynamicModuleMotorModel, :DynamicModulePlugType, :DynamicModuleBearingType, :DynamicModuleSensorType,
+                                           :DynamicModuleArmLenght, :DynamicModuleLinkageLenght);');
+        $stmt->bindValue(':DynamicModuleMotorModel',$DynamicModuleMotorModel);
+        $stmt->bindValue(':DynamicModulePlugType',$DynamicModulePlugType);
+        $stmt->bindValue(':DynamicModuleBearingType',$DynamicModuleBearingType);
+        $stmt->bindValue(':DynamicModuleSensorType',$DynamicModuleSensorType);
+        $stmt->bindValue(':DynamicModuleArmLenght',$DynamicModuleArmLenght);
+        $stmt->bindValue(':DynamicModuleLinkageLenght',$DynamicModuleLinkageLenght);
+        $stmt->execute();
+        $AttractionDynamicModuleID =  $dbh->lastInsertId();
+        $stmt->closeCursor();
+        return $AttractionDynamicModuleID;
 
     }
 

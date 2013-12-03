@@ -162,6 +162,19 @@ class DrawTable {
            echo '</div>';
          echo '</div>';
        echo '</div>';
+
+       echo '<div class="container">';
+       echo '<div class="row">';
+       echo '<div class="span4"> ';
+       echo '<table class="table">';
+       echo "<thead ><tr>";
+       echo "<th>Название</th>";
+       echo "<th>Модель</th>";
+
+       echo "</tr></thead><tbody></b>";
+       echo '</div>';
+       echo '</div>';
+       echo '</div>';
    }
 
    public static function AttrActionPanel($id)
@@ -242,7 +255,12 @@ class DrawTable {
                 echo '</div>';
              echo '</div>';
 
-
+        echo '<div class="control-group">';
+        echo '<label class="control-label" for="inputComment">Коментарий</label>';
+        echo '<div class="controls">';
+        echo '<textarea rows="3"  id="inputComment" name="inputComment"></textarea>';
+        echo '</div>';
+        echo '</div>';
 
              echo "<h3>Комплектация</h3>";
 
@@ -311,12 +329,7 @@ class DrawTable {
 
         }
 
-        echo '<div class="control-group">';
-        echo '<label class="control-label" for="inputComment">Коментарий</label>';
-        echo '<div class="controls">';
-        echo '<textarea rows="3"  id="inputComment" name="inputComment"></textarea>';
-        echo '</div>';
-        echo '</div>';
+
 
 
 

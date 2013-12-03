@@ -1,6 +1,13 @@
 <?php
 require_once __DIR__.'/../class/PDOConfig.php';
+require_once __DIR__.'/../class/FactoryAttraction.php';
 echo "Add new attr handler";
+
+$AttractionTownName     = $_POST['inputTownName'];
+$AttractionSerialID     = $_POST['inputAttrSerialId'];
+$AttractionMobility     = $_POST['inputType'];
+$AttractionComment      = $_POST['inputComment'];
+
 
 $PlayerCase             = $_POST['inputPlayerCase'];
 $PlayerMotherboard      = $_POST['inputPlayerMotherboard'];
@@ -27,7 +34,7 @@ $TerminalHDD            = $_POST['inputTerminalHDD'];
 $TerminalVideoCapture   = $_POST['inputTerminalVideoCapture'];
 $TerminalCamera         = $_POST['inputTerminalCamera'];
 
-$Comment                = $_POST['inputComment'];
+
 
 $DynamicModuleMotorModel    = $_POST['inputDynamicModuleMotorModel'];
 $DynamicModulePlugType      = $_POST['inputDynamicModuleModulePlugType'];
@@ -36,9 +43,17 @@ $DynamicModuleSensorType    = $_POST['inputDynamicModuleSensorType'];
 $DynamicModuleArmLenght     = $_POST['inputDynamicModuleArmLenght'];
 $DynamicModuleLinkageLenght = $_POST['inputDynamicModuleLinkageLenght'];
 
+$AttractionPlayerID = FactoryAttraction::AddAttractionPlayerToDB($PlayerCase, $PlayerMotherboard, $PlayerPowerUnit,
+                      $PlayerCPU, $PlayerCoolingSystem, $PlayerRAM, $PlayerHDD, $PlayerMOXA, $PlayerPCICOM,
+                      $PlayerlicController, $PlayerProjector1, $PlayerProjector2, $PlayerVideoCard, $PlayerEffectBlock);
 
+$AttractionTerminalID = FactoryAttraction::AddAttractionTerminalToDB($TerminalCase, $TerminalMotherboard, $TerminalPowerUnit,
+                        $TerminalCPU, $TerminalCoolingSystem, $TerminalRAM, $TerminalHDD, $TerminalVideoCapture, $TerminalCamera);
 
-
+$AttractionDynamicModuleID = FactoryAttraction::AddAttractionDynamicModuleToDB($DynamicModuleMotorModel, $DynamicModulePlugType,
+                            $DynamicModuleBearingType, $DynamicModuleSensorType, $DynamicModuleArmLenght, $DynamicModuleLinkageLenght);
+echo "<br>vardump";
+FactoryAttraction::AddAttractionToDB($AttractionTownName,$AttractionSerialID,$AttractionMobility, $AttractionPlayerID, $AttractionTerminalID, $AttractionDynamicModuleID);
 if(1==1)
 {
 echo '<br>$PlayerCase '.$PlayerCase  ;
@@ -66,7 +81,7 @@ echo '<br>$TerminalHDD '.$TerminalHDD  ;
 echo '<br>$TerminalVideoCapture '.$TerminalVideoCapture  ;
 echo '<br>$TerminalCamera '.$TerminalCamera  ;
 echo '<br>';
-echo '<br>$Comment '.$Comment  ;
+echo '<br>$Comment '.$AttractionComment ;
 echo "<br>";
 echo '<br>$DynamicModuleMotorModel '.$DynamicModuleMotorModel ;
 echo '<br>$DynamicModulePlugType '.$DynamicModulePlugType ;
@@ -76,3 +91,7 @@ echo '<br>$DynamicModuleArmLenght '.$DynamicModuleArmLenght ;
 echo '<br>$DynamicModuleLinkageLenght '.$DynamicModuleLinkageLenght ;
 
 }
+
+
+
+header('Location: /portal/?page=attraction');
