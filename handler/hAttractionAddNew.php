@@ -54,7 +54,7 @@ $AttractionDynamicModuleID = FactoryAttraction::AddAttractionDynamicModuleToDB($
                             $DynamicModuleBearingType, $DynamicModuleSensorType, $DynamicModuleArmLenght, $DynamicModuleLinkageLenght);
 echo "<br>vardump";
 
-//FactoryAttraction::AddAttractionToDB($AttractionTownName,$AttractionSerialID,$AttractionMobility, $AttractionPlayerID, $AttractionTerminalID, $AttractionDynamicModuleID);
+FactoryAttraction::AddAttractionToDB($AttractionTownName,$AttractionSerialID,$AttractionMobility, $AttractionPlayerID, $AttractionTerminalID, $AttractionDynamicModuleID);
 if(1==1)
 {
 echo '<br>$PlayerCase '                     .$PlayerCase  ;
