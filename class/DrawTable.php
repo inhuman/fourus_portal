@@ -142,7 +142,9 @@ class DrawTable {
 
        echo '<div class="container">';
          echo '<div class="row">';
-           echo '<div class="span5"> ';
+       echo '<div class="span3"> ';
+       echo '</div>';
+           echo '<div class="span6"> ';
              $licArr = FactoryLic::findOne($id);
              echo '<table class="table">';
              echo "<thead ><tr>";
@@ -161,17 +163,24 @@ class DrawTable {
              }
            echo '</div>';
          echo '</div>';
+       echo '<div class="span3"> ';
        echo '</div>';
+       echo '</div>';
+
 
        echo '<div class="container">';
        echo '<div class="row">';
-       echo '<div class="span4"> ';
+       echo '<div class="span3"> ';
+       echo '</div>';
+       echo '<div class="span6"> ';
        echo '<table class="table">';
        echo "<thead ><tr>";
        echo "<th>Название</th>";
        echo "<th>Модель</th>";
 
        echo "</tr></thead><tbody></b>";
+       echo '<div class="span3"> ';
+       echo '</div>';
        echo '</div>';
        echo '</div>';
        echo '</div>';

@@ -50,8 +50,8 @@ $AttractionPlayerID = FactoryAttraction::AddAttractionPlayerToDB($PlayerCase, $P
 $AttractionTerminalID = FactoryAttraction::AddAttractionTerminalToDB($TerminalCase, $TerminalMotherboard, $TerminalPowerUnit,
                         $TerminalCPU, $TerminalCoolingSystem, $TerminalRAM, $TerminalHDD, $TerminalVideoCapture, $TerminalCamera);
 
-$AttractionDynamicModuleID = 1 ; //= FactoryAttraction::AddAttractionDynamicModuleToDB($DynamicModuleMotorModel, $DynamicModulePlugType,
-                             // $DynamicModuleBearingType, $DynamicModuleSensorType, $DynamicModuleArmLenght, $DynamicModuleLinkageLenght);
+$AttractionDynamicModuleID =  FactoryAttraction::AddAttractionDynamicModuleToDB($DynamicModuleMotorModel, $DynamicModulePlugType,
+                              $DynamicModuleBearingType, $DynamicModuleSensorType, $DynamicModuleArmLenght, $DynamicModuleLinkageLenght);
 echo "<br>vardump";
 
 FactoryAttraction::AddAttractionToDB($AttractionTownName,$AttractionSerialID,$AttractionMobility, $AttractionPlayerID, $AttractionTerminalID, $AttractionDynamicModuleID);
@@ -95,4 +95,4 @@ echo '<br>$DynamicModuleLinkageLenght '     .$DynamicModuleLinkageLenght ;
 
 
 
-//header('Location: /portal/?page=attraction');
+header('Location: /portal/?page=attraction');

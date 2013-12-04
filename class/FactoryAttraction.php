@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__."/PDOConfig.php";
 require_once __DIR__."/Attraction.php";
-
+require_once  __DIR__."/AttractionPlayer.php";
+require_once  __DIR__."/AttractionTerminal.php";
+require_once  __DIR__."/AttractionDynamicModule.php";
 class FactoryAttraction {
 
     static public function findOne($id)
@@ -9,7 +11,7 @@ class FactoryAttraction {
 
         try{
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare("SELECT serial_id, town_id, mobility, capacity, comment, user_id, modem FROM attraction WHERE id=:id");
+        $stmt = $dbh->prepare("SELECT serial_id, town_id, mobility, capacity, comment, user_id, modem, AttractionPlayerID, AttractionTerminalID, AttractionDynamicModuleID  FROM attraction WHERE id=:id");
         $stmt->bindValue(':id',$id);
         $stmt->execute();
         $attraction = $stmt->fetchObject('Attraction');
@@ -41,6 +43,85 @@ class FactoryAttraction {
             die("Oh noes! There's an error in the query!");
             var_dump($attraction);
         }
+
+    }
+
+    static public function findPlayer($id)
+    {
+        try{
+            $dbh = new PDOConfig();
+            $stmt = $dbh->prepare("SELECT PlayerCase, PlayerMotherboard, PlayerPowerUnit, PlayerCPU, PlayerCoolingSystem, PlayerRAM,
+                                    PlayerHDD, PlayerMOXA, PlayerPCICOM, PlayerlicController, PlayerProjector1, PlayerProjector2, PlayerVideoCard, PlayerEffectBlock
+                                    FROM AttractionPlayer WHERE PlayerID=:id;");
+            $stmt->bindValue(':id',$id);
+            $stmt->execute();
+            $attractionPlayer = $stmt->fetchObject('AttractionPlayer');
+           // $attractionPlayer->id = $id;
+            $stmt->closeCursor();
+            return $attractionPlayer;
+        }
+        catch(Exception $e) {
+            die("Oh noes! There's an error in the query!");
+            var_dump($attractionPlayer);
+        }
+    }
+
+    static public function findTerminal($id)
+    {
+        try{
+            $dbh = new PDOConfig();
+            $stmt = $dbh->prepare("SELECT TerminalCase, TerminalMotherboard, TerminalPowerUnit, TerminalCPU,  TerminalCoolingSystem,
+                                    TerminalRAM, TerminalHDD, TerminalVideoCapture, TerminalCamera
+                                    FROM AttractionTerminal WHERE TerminalID=:id;");
+            $stmt->bindValue(':id',$id);
+            $stmt->execute();
+            $attractionTerminal = $stmt->fetchObject('AttractionTerminal');
+           //$attractionTerminal->id = $id;
+            $stmt->closeCursor();
+            //var_dump($attractionTerminal);
+            return $attractionTerminal;
+        }
+        catch(Exception $e) {
+            die("Oh noes! There's an error in the query!");
+            var_dump($attractionTerminal);
+        }
+
+    }
+
+    static public function findDynamicModule($id)
+    {
+        try{
+            $dbh = new PDOConfig();
+            $stmt = $dbh->prepare("SELECT DynamicModuleMotorModel, DynamicModulePlugType, DynamicModuleBearingType, DynamicModuleSensorType,
+                                           DynamicModuleArmLenght, DynamicModuleLinkageLenght
+                                    FROM AttractionDynamicModule WHERE DynamicModuleID=:id;");
+            $stmt->bindValue(':id',$id);
+            $stmt->execute();
+            $attractionDynamicModule = $stmt->fetchObject('AttractionDynamicModule');
+            //$attractionTerminal->id = $id;
+            $stmt->closeCursor();
+            //var_dump($attractionDynamicModule);
+            return $attractionDynamicModule;
+        }
+        catch(Exception $e) {
+            die("Oh noes! There's an error in the query!");
+            var_dump($attractionDynamicModule);
+        }
+
+    }
+
+    static public function findAttractionFullComplect($FactoryID)
+    {
+        $Attraction                 = self::findOne($FactoryID);
+        $AttractionPlayer           = self::findPlayer($Attraction->AttractionPlayerID);
+        $AttractionTerminal         = self::findTerminal($Attraction->AttractionTerminalID);
+        $AttractionDynamicModule    = self::findDynamicModule($Attraction->AttractionDynamicModuleID);
+        $FullComplect[1]            = $Attraction;
+        $FullComplect[2]            = $AttractionPlayer;
+        $FullComplect[3]            = $AttractionTerminal;
+        $FullComplect[4]            = $AttractionDynamicModule;
+
+        return $FullComplect;
 
     }
 
@@ -112,6 +193,7 @@ class FactoryAttraction {
 
 
     }
+
     static public function AddAttractionPlayerToDB($PlayerCase, $PlayerMotherboard, $PlayerPowerUnit, $PlayerCPU, $PlayerCoolingSystem, $PlayerRAM,
                                                $PlayerHDD, $PlayerMOXA, $PlayerPCICOM, $PlayerlicController, $PlayerProjector1, $PlayerProjector2,
                                                $PlayerVideoCard, $PlayerEffectBlock)

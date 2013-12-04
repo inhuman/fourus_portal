@@ -2,12 +2,32 @@
 require_once __DIR__.'/FactoryAttraction.php';
 
 
+echo "--- Test ---";
+echo '<br>Player:';
+$attractionPlayer = FactoryAttraction::findPlayer(1);
+echo '<br>case: '.$attractionPlayer->getPlayerCPU().'<br>';
+echo '<br>vardump: ';
+var_dump($attractionPlayer);
 
 
-$AttractionPlayerID = FactoryAttraction::AddAttractionPlayerToDB('case', '', '', '', '', '', '', '', '', '', '', '', '', '');
+echo '<br>Terminal:';
+$attractionTerminal = FactoryAttraction::findTerminal(1);
+echo '<br>case: '.$attractionTerminal->getTerminalCPU()."<br>";
+echo '<br>vardump: ';
+var_dump($attractionTerminal);
 
-$AttractionTerminalID = FactoryAttraction::AddAttractionTerminalToDB('case', '', '', '', '', '', '', '', '');
 
-$AttractionDynamicModuleID = FactoryAttraction::AddAttractionDynamicModuleToDB('sfvsdfgsd', '', '', '', '', '');
+echo '<br>DynamicModule:';
+$attractionDynamicModule = FactoryAttraction::findDynamicModule(1);
+var_dump($attractionDynamicModule);
+echo '<br>case: '.$attractionDynamicModule->getDynamicModuleMotorModel()."<br>";
+echo '<br>vardump: ';
 
-FactoryAttraction::AddAttractionToDB('test','11111','',$AttractionPlayerID,$AttractionTerminalID,$AttractionDynamicModuleID);
+
+echo '<br>AttractionFullComplect:';
+$FullComplect = FactoryAttraction::findAttractionFullComplect(117);
+var_dump($FullComplect);
+echo '<br>AttractionPlayerID: '.$FullComplect[1]->AttractionPlayerID."<br>";
+echo '<br>vardump: ';
+
+
