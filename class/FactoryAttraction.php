@@ -142,7 +142,7 @@ class FactoryAttraction {
 
         $stmt->execute();
         $AttractionPlayerID = $dbh->lastInsertId();
-
+        var_dump($stmt);
         $stmt->closeCursor();
         return $AttractionPlayerID;
     }
@@ -177,7 +177,7 @@ class FactoryAttraction {
     {
 
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare('INSERT INTO DynamicModuleMotorModel, DynamicModulePlugType, DynamicModuleBearingType, DynamicModuleSensorType,
+        $stmt = $dbh->prepare('INSERT INTO AttractionDynamicModule (DynamicModuleMotorModel, DynamicModulePlugType, DynamicModuleBearingType, DynamicModuleSensorType,
                                            DynamicModuleArmLenght, DynamicModuleLinkageLenght)
                                 VALUES (:DynamicModuleMotorModel, :DynamicModulePlugType, :DynamicModuleBearingType, :DynamicModuleSensorType,
                                            :DynamicModuleArmLenght, :DynamicModuleLinkageLenght);');
