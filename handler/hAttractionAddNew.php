@@ -37,7 +37,7 @@ $TerminalCamera         = $_POST['inputTerminalCamera'];
 
 
 $DynamicModuleMotorModel    = $_POST['inputDynamicModuleMotorModel'];
-$DynamicModulePlugType      = $_POST['inputDynamicModuleModulePlugType'];
+$DynamicModulePlugType      = $_POST['inputDynamicModulePlugType'];
 $DynamicModuleBearingType   = $_POST['inputDynamicModuleBearingType'];
 $DynamicModuleSensorType    = $_POST['inputDynamicModuleSensorType'];
 $DynamicModuleArmLenght     = $_POST['inputDynamicModuleArmLenght'];
@@ -50,11 +50,12 @@ $AttractionPlayerID = FactoryAttraction::AddAttractionPlayerToDB($PlayerCase, $P
 $AttractionTerminalID = FactoryAttraction::AddAttractionTerminalToDB($TerminalCase, $TerminalMotherboard, $TerminalPowerUnit,
                         $TerminalCPU, $TerminalCoolingSystem, $TerminalRAM, $TerminalHDD, $TerminalVideoCapture, $TerminalCamera);
 
-$AttractionDynamicModuleID = FactoryAttraction::AddAttractionDynamicModuleToDB($DynamicModuleMotorModel, $DynamicModulePlugType,
-                            $DynamicModuleBearingType, $DynamicModuleSensorType, $DynamicModuleArmLenght, $DynamicModuleLinkageLenght);
+$AttractionDynamicModuleID = 1 ; //= FactoryAttraction::AddAttractionDynamicModuleToDB($DynamicModuleMotorModel, $DynamicModulePlugType,
+                             // $DynamicModuleBearingType, $DynamicModuleSensorType, $DynamicModuleArmLenght, $DynamicModuleLinkageLenght);
 echo "<br>vardump";
 
 FactoryAttraction::AddAttractionToDB($AttractionTownName,$AttractionSerialID,$AttractionMobility, $AttractionPlayerID, $AttractionTerminalID, $AttractionDynamicModuleID);
+/*
 if(1==1)
 {
 echo '<br>$PlayerCase '                     .$PlayerCase  ;
@@ -90,8 +91,7 @@ echo '<br>$DynamicModuleBearingType '       .$DynamicModuleBearingType ;
 echo '<br>$DynamicModuleSensorType '        .$DynamicModuleSensorType ;
 echo '<br>$DynamicModuleArmLenght '         .$DynamicModuleArmLenght ;
 echo '<br>$DynamicModuleLinkageLenght '     .$DynamicModuleLinkageLenght ;
-
-}
+*/
 
 
 

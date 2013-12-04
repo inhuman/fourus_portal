@@ -231,7 +231,7 @@ class DrawTable {
             echo '<div class="control-group">';
                 echo '<label class="control-label" for="inputAttrSerialId">Serial iD аттракциона</label>';
                 echo '<div class="controls">';
-                    echo '<input type="text" id="inputAttrSerialId" placeholder="Serial iD аттракциона">';
+                    echo '<input type="text" id="inputAttrSerialId" name="inputAttrSerialId" placeholder="Serial iD аттракциона">';
                 echo '</div>';
             echo '</div>';
 
