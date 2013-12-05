@@ -125,6 +125,7 @@ class DrawTable {
    public static function AttrCardTable($id)
    {
        $attr = FactoryAttraction::findOne($id);
+       $FullComplect = FactoryAttraction::findAttractionFullComplect($id);
        $townHistoryArr = $attr->getTownHistory();
 
        self::AttrActionPanel($id);
@@ -175,10 +176,93 @@ class DrawTable {
        echo '<div class="span6"> ';
        echo '<table class="table">';
        echo "<thead ><tr>";
-       echo "<th>Название</th>";
-       echo "<th>Модель</th>";
-
+       echo "<th>Player</th>";
+       echo "<th> </th>";
        echo "</tr></thead><tbody></b>";
+
+       $playerHardwareArr = array(
+           array("Case","Корпус"),
+           array("Motherboard","Материнская плата"),
+           array("PowerUnit","Блок питания"),
+           array("CPU","Процессор"),
+           array("CoolingSystem","Система охлаждения"),
+           array("RAM","Оперативная память"),
+           array("HDD","Жесткий диск"),
+           array("MOXA","МОХА"),
+           array("PCICOM","PCI-COM controller"),
+           array("licController","Контроллер лицензий"),
+           array("Projector1","Проектор 1"),
+           array("Projector2","Проектор 2"),
+           array("VideoCard","Видеокарта"),
+           array("EffectBlock","Блок эффектов"));
+
+       foreach($playerHardwareArr as $hardware)
+       {
+           echo '<tr>';
+           echo "<td>$hardware[1]</td>";
+           $getter = 'getPlayer'.$hardware[0];
+           echo '<td>'. $FullComplect[2]->$getter() .'</td>';
+           echo '</tr>';
+
+       }
+       echo '</tbody></table>';
+
+       echo '<table class="table">';
+       echo "<thead ><tr>";
+       echo "<th>Terminal</th>";
+       echo "<th> </th>";
+       echo "</tr></thead><tbody></b>";
+
+       $terminalHardwareArr = array(
+           array("Case","Корпус"),
+           array("Motherboard","Материнская плата"),
+           array("PowerUnit","Блок питания"),
+           array("CPU","Процессор"),
+           array("CoolingSystem","Система охлаждения"),
+           array("RAM","Оперативная память"),
+           array("HDD","Жесткий диск"),
+           array("VideoCapture","Видеозахват"),
+           array("Camera","Камера"));
+
+       foreach($terminalHardwareArr as $hardware)
+       {
+           echo '<tr>';
+           echo "<td>$hardware[1]</td>";
+           $getter = 'getTerminal'.$hardware[0];
+           echo '<td>'. $FullComplect[3]->$getter() .'</td>';
+           echo '</tr>';
+
+       }
+
+       echo '</tbody></table>';
+
+
+       echo '<table class="table">';
+       echo "<thead ><tr>";
+       echo "<th>Dynamic Module</th>";
+       echo "<th> </th>";
+       echo "</tr></thead><tbody></b>";
+
+       $dynamicModuleArr = array(
+           array("MotorModel","Модель мотора"),
+           array("PlugType","Тип вилки"),
+           array("BearingType","Тип опоры"),
+           array("SensorType","Тип датчиков"),
+           array("ArmLenght","Длина рычага"),
+           array("LinkageLenght","Длина тяги"));
+
+       foreach($dynamicModuleArr  as $hardware)
+       {
+           echo '<tr>';
+           echo "<td>$hardware[1]</td>";
+           $getter = 'getDynamicModule'.$hardware[0];
+           echo '<td>'. $FullComplect[4]->$getter() .'</td>';
+           echo '</tr>';
+
+       }
+
+
+
        echo '<div class="span3"> ';
        echo '</div>';
        echo '</div>';
