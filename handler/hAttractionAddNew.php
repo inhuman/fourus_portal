@@ -1,13 +1,11 @@
 <?php
 require_once __DIR__.'/../class/PDOConfig.php';
 require_once __DIR__.'/../class/FactoryAttraction.php';
-echo "Add new attr handler";
 
 $AttractionTownName     = $_POST['inputTownName'];
 $AttractionSerialID     = $_POST['inputAttrSerialId'];
 $AttractionMobility     = $_POST['inputType'];
 $AttractionComment      = $_POST['inputComment'];
-
 
 $PlayerCase             = $_POST['inputPlayerCase'];
 $PlayerMotherboard      = $_POST['inputPlayerMotherboard'];
@@ -34,8 +32,6 @@ $TerminalHDD            = $_POST['inputTerminalHDD'];
 $TerminalVideoCapture   = $_POST['inputTerminalVideoCapture'];
 $TerminalCamera         = $_POST['inputTerminalCamera'];
 
-
-
 $DynamicModuleMotorModel    = $_POST['inputDynamicModuleMotorModel'];
 $DynamicModulePlugType      = $_POST['inputDynamicModulePlugType'];
 $DynamicModuleBearingType   = $_POST['inputDynamicModuleBearingType'];
@@ -52,7 +48,7 @@ $AttractionTerminalID = FactoryAttraction::AddAttractionTerminalToDB($TerminalCa
 
 $AttractionDynamicModuleID =  FactoryAttraction::AddAttractionDynamicModuleToDB($DynamicModuleMotorModel, $DynamicModulePlugType,
                               $DynamicModuleBearingType, $DynamicModuleSensorType, $DynamicModuleArmLenght, $DynamicModuleLinkageLenght);
-echo "<br>vardump";
+
 
 FactoryAttraction::AddAttractionToDB($AttractionTownName,$AttractionSerialID,$AttractionMobility, $AttractionPlayerID, $AttractionTerminalID, $AttractionDynamicModuleID);
 /*

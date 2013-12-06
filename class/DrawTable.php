@@ -128,57 +128,16 @@ class DrawTable {
        $FullComplect = FactoryAttraction::findAttractionFullComplect($id);
        $townHistoryArr = $attr->getTownHistory();
 
-       self::AttrActionPanel($id);
-
-       // echo '<label align="right">'.$attr->getComment().'</label>';
-       /*
-               if($townHistoryArr){
-                    echo '<br><b>История перемещений</b>';
-                    foreach($townHistoryArr as $i)
-                    {
-                       echo '<br>' .' '. $i[0] .' '. $i[1];
-                    }
-               }
-             */
-
-       echo '<div class="container">';
-         echo '<div class="row">';
-       echo '<div class="span3"> ';
-       echo '</div>';
-           echo '<div class="span6"> ';
-             $licArr = FactoryLic::findOne($id);
-             echo '<table class="table">';
-             echo "<thead ><tr>";
-             echo "<th>#</th>";
-             echo "<th>Название райда</th>";
-             echo "<th>Дата</th>";
-             echo "</tr></thead><tbody></b>";
-             $i=0;
-             foreach($licArr as $lic)
-             {
-                echo '<tr>';
-                echo '<td>' . ++$i . '</td>';
-                echo '<td>' . $lic->getOfficialName() . '</td>';
-                echo '<td>' . $lic->getDate() . '</td>';
-                echo '</tr>';
-             }
-           echo '</div>';
-         echo '</div>';
-       echo '<div class="span3"> ';
-       echo '</div>';
-       echo '</div>';
-
-
-       echo '<div class="container">';
-       echo '<div class="row">';
-       echo '<div class="span3"> ';
-       echo '</div>';
-       echo '<div class="span6"> ';
-       echo '<table class="table">';
-       echo "<thead ><tr>";
-       echo "<th>Player</th>";
-       echo "<th> </th>";
-       echo "</tr></thead><tbody></b>";
+       $terminalHardwareArr = array(
+           array("Case","Корпус"),
+           array("Motherboard","Материнская плата"),
+           array("PowerUnit","Блок питания"),
+           array("CPU","Процессор"),
+           array("CoolingSystem","Система охлаждения"),
+           array("RAM","Оперативная память"),
+           array("HDD","Жесткий диск"),
+           array("VideoCapture","Видеозахват"),
+           array("Camera","Камера"));
 
        $playerHardwareArr = array(
            array("Case","Корпус"),
@@ -196,16 +155,75 @@ class DrawTable {
            array("VideoCard","Видеокарта"),
            array("EffectBlock","Блок эффектов"));
 
-       foreach($playerHardwareArr as $hardware)
-       {
-           echo '<tr>';
-           echo "<td>$hardware[1]</td>";
-           $getter = 'getPlayer'.$hardware[0];
-           echo '<td>'. $FullComplect[2]->$getter() .'</td>';
-           echo '</tr>';
+       $dynamicModuleArr = array(
+           array("MotorModel","Модель мотора"),
+           array("PlugType","Тип вилки"),
+           array("BearingType","Тип опоры"),
+           array("SensorType","Тип датчиков"),
+           array("ArmLenght","Длина рычага"),
+           array("LinkageLenght","Длина тяги"));
 
-       }
-       echo '</tbody></table>';
+
+       self::AttrActionPanel($id);
+
+       // echo '<label align="right">'.$attr->getComment().'</label>';
+       /*
+               if($townHistoryArr){
+                    echo '<br><b>История перемещений</b>';
+                    foreach($townHistoryArr as $i)
+                    {
+                       echo '<br>' .' '. $i[0] .' '. $i[1];
+                    }
+               }
+             */
+
+       echo '<div class="container">';
+         echo '<div class="row">';
+            echo '<div class="span3"> ';
+              echo '</div>';
+                 echo '<div class="span6"> ';
+                     $licArr = FactoryLic::findOne($id);
+                     echo '<table class="table">';
+                     echo "<thead ><tr>";
+                     echo "<th>#</th>";
+                     echo "<th>Название райда</th>";
+                     echo "<th>Дата</th>";
+                     echo "</tr></thead><tbody></b>";
+                     $i=0;
+                     foreach($licArr as $lic)
+                     {
+                        echo '<tr>';
+                        echo '<td>' . ++$i . '</td>';
+                        echo '<td>' . $lic->getOfficialName() . '</td>';
+                        echo '<td>' . $lic->getDate() . '</td>';
+                        echo '</tr>';
+                     }
+                 echo '</div>';
+              echo '</div>';
+            echo '<div class="span3"> ';
+         echo '</div>';
+       echo '</div>';
+
+       echo '<div class="container">';
+           echo '<div class="row">';
+               echo '<div class="span3"> ';
+                   echo '</div>';
+                   echo '<div class="span6"> ';
+                   echo '<table class="table">';
+                   echo "<thead ><tr>";
+                   echo "<th>Player</th>";
+                   echo "<th> </th>";
+                   echo "</tr></thead><tbody></b>";
+
+                   foreach($playerHardwareArr as $hardware)
+                   {
+                      echo '<tr>';
+                      echo "<td>$hardware[1]</td>";
+                      $getter = 'getPlayer'.$hardware[0];
+                      echo '<td>'. $FullComplect[2]->$getter() .'</td>';
+                      echo '</tr>';
+                   }
+                   echo '</tbody></table>';
 
        echo '<table class="table">';
        echo "<thead ><tr>";
@@ -213,16 +231,7 @@ class DrawTable {
        echo "<th> </th>";
        echo "</tr></thead><tbody></b>";
 
-       $terminalHardwareArr = array(
-           array("Case","Корпус"),
-           array("Motherboard","Материнская плата"),
-           array("PowerUnit","Блок питания"),
-           array("CPU","Процессор"),
-           array("CoolingSystem","Система охлаждения"),
-           array("RAM","Оперативная память"),
-           array("HDD","Жесткий диск"),
-           array("VideoCapture","Видеозахват"),
-           array("Camera","Камера"));
+
 
        foreach($terminalHardwareArr as $hardware)
        {
@@ -243,13 +252,7 @@ class DrawTable {
        echo "<th> </th>";
        echo "</tr></thead><tbody></b>";
 
-       $dynamicModuleArr = array(
-           array("MotorModel","Модель мотора"),
-           array("PlugType","Тип вилки"),
-           array("BearingType","Тип опоры"),
-           array("SensorType","Тип датчиков"),
-           array("ArmLenght","Длина рычага"),
-           array("LinkageLenght","Длина тяги"));
+
 
        foreach($dynamicModuleArr  as $hardware)
        {
@@ -310,6 +313,13 @@ class DrawTable {
    public static function AttractionEditCardTable($attrId)
    {
        self::AttrActionPanel($attrId);
+
+       echo '<div class="control-group">';
+       echo '<label class="control-label" for="inputAttrSerialId">Serial iD аттракциона</label>';
+       echo '<div class="controls">';
+       echo '<input type="text" id="inputAttrSerialId" name="inputAttrSerialId" placeholder="Serial iD аттракциона">';
+       echo '</div>';
+       echo '</div>';
 
 
    }
