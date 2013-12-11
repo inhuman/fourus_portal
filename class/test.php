@@ -1,5 +1,33 @@
 <?php
-require_once __DIR__.'/FactoryAttraction.php';
+
+class megaclass
+{
+    private $method;
+
+
+    public function __construct()
+    {
+
+        $method = "getName";
+
+        $this->$method();
+    }
+
+
+    private function getName()
+    {
+        echo $name='Igor';
+    }
+
+    private function getAge()
+    {
+        return $age=15;
+    }
+}
+$t = new megaclass();
+
+
+/*require_once __DIR__.'/FactoryAttraction.php';
 
 
 echo "--- Test ---";
@@ -29,5 +57,5 @@ $FullComplect = FactoryAttraction::findAttractionFullComplect(117);
 var_dump($FullComplect);
 echo '<br>AttractionPlayerID: '.$FullComplect[1]->AttractionPlayerID."<br>";
 echo '<br>vardump: ';
-
+*/
 

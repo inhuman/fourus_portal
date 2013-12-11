@@ -321,7 +321,6 @@ class DrawTable {
        echo '</div>';
        echo '</div>';
 
-
    }
 
     public static function AttractionAddNewCardTable()
@@ -661,6 +660,8 @@ class DrawTable {
 
        //$r = new TaskManager();
 
+       self::LicCreatorStatusPanel();
+
        echo '<table class="table table-bordered table-hover tbl_pointer">';
        echo "<thead style='background:#000000; color:#777777'  ><tr>";
        echo "<th>#</th>";
@@ -695,6 +696,56 @@ class DrawTable {
 
 
        echo "</tbody></table>";
+   }
+
+   public static function LicCreatorStatusPanel()
+   {
+       $rawPsDataArr = `ps aux | grep LicCreatorCron.php`;
+       $PsData = explode('php5',$rawPsDataArr);
+       if ($PsData[1] == '')
+       {
+           echo '<span class="label label-important"><b>Task Manager: OFFLINE</b></span>';
+       }
+       else{echo '<span class="label label-success"><b>Task Manager: ONLINE</b></span>';}
+
+
+
+       $CoreVMStatus = TaskManager::pingDomain('192.168.0.211');
+       if($CoreVMStatus == 'online')
+       {
+           echo '<span class="label label-success"><b>Core VM: ONLINE</b></span>';
+       }
+       elseif($CoreVMStatus == 'offline')
+       {
+           echo '<span class="label label-success"><b>Core VM: OFFLINE</b></span>';
+       }
+
+
+       $dbh = new PDOConfig();
+       $stmt = $dbh->prepare("SELECT Status FROM Transport WHERE Subject='Core'");
+       $stmt->execute();
+       $status = $stmt->fetch();
+       $stmt->closeCursor();
+       $CoreStatus = $status[0];
+
+       switch($CoreStatus)
+       {
+           case 'ready':
+               echo '<span class="label label-success"><b>Core: READY</b></span>'; break;
+
+           case 'busy':
+               echo '<span class="label label-warning"><b>Core: BUSY</b></span>'; break;
+
+           case 'unknown':
+               echo '<span class="label label-important"><b>Core: UNKNOWN</b></span>'; break;
+
+
+       }
+
+
+
+
+
    }
 
    public static function ContentTxtCreateCard()

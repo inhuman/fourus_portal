@@ -9,14 +9,16 @@ class TaskManager{
 
     public function __construct()
     {
-        $this->sendBlueprintsFromQueue();
 
+
+        //$this->sendBlueprintsFromQueue();
+        $this->CoreServer();
 
     }
-/*
+
     private function CoreServer()
     {
-        $ServerAddress = '127.0.0.1';
+        /*$ServerAddress = '127.0.0.1';
         $ServerPort = 1024;
         $Socket = socket_create_listen($ServerPort);
 
@@ -26,6 +28,9 @@ class TaskManager{
 
         while(true)
         {
+
+
+
             $Client = socket_accept($Socket);
             $buffer=socket_read($Client, 512);
 
@@ -78,9 +83,42 @@ class TaskManager{
             }
 
         }
-        socket_close($Socket);
+        socket_close($Socket);*/
+
+
+        while(true)
+        {
+
+          switch($this->getCoreStatus())
+          {
+            case "ready":
+                $this->setCoreStatusDB('ready');
+                $blueprintID = $this->getQueueFromDB();
+                if($blueprintID != ''){
+
+                    echo "<br>Blueprint: ".$blueprintID;
+                    echo "<br>Corestaus: ".$this->getCoreStatus();
+                    $this->sendBlueprint($blueprintID);
+                    echo "<br>Send blueprint #$blueprintID ";
+                    // $this->changeLicBlueprintStatus('in queue',$blueprintID);
+
+                }
+                break;
+
+            case "busy":
+                $this->setCoreStatusDB('busy');
+                break;
+
+              case "unknown":
+                  $this->setCoreStatusDB('unknown');
+                  break;
+
+          }
+
+        sleep(5);
+        }
     }
-*/
+
 
     private function sendBlueprint($blueprintId)
     {
@@ -98,24 +136,30 @@ class TaskManager{
         $sftp->put($remote_file_wmv, $local_file_wmv);
         $sftp->put($remote_file_prvk, $local_file_prvk);
 
-        $this->changeLicBlueprintStatus('in queue',$blueprintId);
+        $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+        socket_connect($sock, '192.168.0.211', 1024);
+        $msg = "create ".$blueprintId.' ';
+        socket_send($sock,$msg,strlen($msg),MSG_OOB);
+        socket_close($sock);
+
     }
 
     private function getQueueFromDB()
     {
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare("SELECT id FROM  LicBlueprint WHERE  status = 'added'; ");
+        $stmt = $dbh->prepare("SELECT id FROM  LicBlueprint WHERE  status = 'added' ORDER BY id ASC LIMIT 1; ");
 
         $stmt->execute();
         $idArr = $stmt->fetchAll();
-
+        $BlueprintID = $idArr[0][0];
         $stmt->closeCursor();
-        return $idArr;
+        return $BlueprintID;
 
     }
 
     private function sendBlueprintsFromQueue() // TODO: тут должен указываться тип блупринта wmv, prv, prvk
     {
+        /*
         foreach($this->getQueueFromDB() as $blueprintId)
         {
 
@@ -138,7 +182,7 @@ class TaskManager{
 
 
 
-        }
+        }*/
     }
 
     private function changeLicBlueprintStatus($status,$blueprintId)
@@ -153,6 +197,54 @@ class TaskManager{
 
     private function getCoreStatus()
     {
+
+        do
+        {
+            try{
+            $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+                    if(socket_connect($sock, '192.168.0.211', 1024)){
+                $msg = "getstatus ";
+                socket_send($sock,$msg,strlen($msg),MSG_OOB);}
+                else{return $CoreStatus='unknown';}
+            }
+            catch(Exception $e)
+            {return $CoreStatus='unknown';};
+
+
+
+            $ServerAddress = '127.0.0.1';
+            $ServerPort = 1024;
+            $Socket = socket_create_listen($ServerPort);
+            socket_getsockname($Socket, $ServerAddress, $ServerPort);
+
+            $Client = socket_accept($Socket);
+            $buffer=socket_read($Client, 512);
+            $bufferArr = explode('#',$buffer);
+
+            $CoreStatus = $bufferArr[0];
+            $blueprintId = $bufferArr[1];
+
+            socket_close($Socket);
+            sleep(5);
+        }
+        while($CoreStatus == '');
+
+        return $CoreStatus;
+
+
+    }
+
+    static public function setCoreStatusDB($status)
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare("UPDATE Transport SET Status=:status WHERE Subject='Core';");
+        $stmt->bindValue(':status',$status);
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
+
+    static public function getCoreStatusDB()
+    {
         $dbh = new PDOConfig();
         $stmt = $dbh->prepare("SELECT Status FROM Transport WHERE Subject='Core'");
         $stmt->execute();
@@ -160,8 +252,6 @@ class TaskManager{
         $stmt->closeCursor();
         return $status[0];
     }
-
-
 
     static public function getDBDataQueueLicBlueprints()
     {
@@ -174,16 +264,18 @@ class TaskManager{
     }
 
 
-    private function pingDomain($host)
+    public static function pingDomain($host)
     {
         $port = 22;
         $waitTimeoutInSeconds = 1;
         if($fp = fsockopen($host,$port,$errCode,$errStr,$waitTimeoutInSeconds)){
-            echo '<br>Core online';
+            fclose($fp);
+            return 'online';
         } else {
-            echo '<br>Core offline';
+            fclose($fp);
+            return 'offline';
         }
-        fclose($fp);
+
     }
 
 
