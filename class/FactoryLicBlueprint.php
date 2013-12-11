@@ -104,7 +104,7 @@ class FactoryLicBlueprint extends LicBlueprint {
 
     private function writeBlueprint($fileName,$dataToWrite)
     {
-        //$dataToWrite = mb_convert_encoding($dataToWrite,'UTF-8');
+        //$dataToWrite = mb_convert_encoding($dataToWrite,'UTF-8', 'auto');
         file_put_contents('../licences/blueprints/'.$fileName,$dataToWrite);
     }
 

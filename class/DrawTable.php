@@ -717,7 +717,7 @@ class DrawTable {
        }
        elseif($CoreVMStatus == 'offline')
        {
-           echo '<span class="label label-success"><b>Core VM: OFFLINE</b></span>';
+           echo '<span class="label label-important"><b>Core VM: OFFLINE</b></span>';
        }
 
 

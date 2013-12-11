@@ -9,11 +9,7 @@ class TaskManager{
 
     public function __construct()
     {
-
-
-        //$this->sendBlueprintsFromQueue();
         $this->CoreServer();
-
     }
 
     private function CoreServer()
@@ -88,33 +84,27 @@ class TaskManager{
 
         while(true)
         {
+           switch($this->getCoreStatus())
+           {
+              case "ready":
+                  $this->setCoreStatusDB('ready');
+                  $blueprintID = $this->getQueueFromDB();
+                  if($blueprintID != ''){
 
-          switch($this->getCoreStatus())
-          {
-            case "ready":
-                $this->setCoreStatusDB('ready');
-                $blueprintID = $this->getQueueFromDB();
-                if($blueprintID != ''){
+                      $this->sendBlueprint($blueprintID);
+                      $this->changeLicBlueprintStatus('in queue',$blueprintID);
+                  }
+                  break;
 
-                    echo "<br>Blueprint: ".$blueprintID;
-                    echo "<br>Corestaus: ".$this->getCoreStatus();
-                    $this->sendBlueprint($blueprintID);
-                    echo "<br>Send blueprint #$blueprintID ";
-                    // $this->changeLicBlueprintStatus('in queue',$blueprintID);
-
-                }
-                break;
-
-            case "busy":
-                $this->setCoreStatusDB('busy');
-                break;
+              case "busy":
+                  $this->setCoreStatusDB('busy');
+                  break;
 
               case "unknown":
                   $this->setCoreStatusDB('unknown');
                   break;
 
-          }
-
+           }
         sleep(5);
         }
     }
@@ -157,6 +147,17 @@ class TaskManager{
 
     }
 
+    private function changeLicBlueprintStatus($status,$blueprintId)
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare('SET NAMES utf8; UPDATE LicBlueprint SET status=:status WHERE id=:id');
+        $stmt->bindValue(':status',$status);
+        $stmt->bindValue(':id',$blueprintId);
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
+
+
     private function sendBlueprintsFromQueue() // TODO: тут должен указываться тип блупринта wmv, prv, prvk
     {
         /*
@@ -185,15 +186,6 @@ class TaskManager{
         }*/
     }
 
-    private function changeLicBlueprintStatus($status,$blueprintId)
-    {
-        $dbh = new PDOConfig();
-        $stmt = $dbh->prepare('SET NAMES utf8; UPDATE LicBlueprint SET status=:status WHERE id=:id');
-        $stmt->bindValue(':status',$status);
-        $stmt->bindValue(':id',$blueprintId);
-        $stmt->execute();
-        $stmt->closeCursor();
-    }
 
     private function getCoreStatus()
     {
@@ -256,7 +248,7 @@ class TaskManager{
     static public function getDBDataQueueLicBlueprints()
     {
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, createDate, dateTo, licOnly, status, location FROM LicBlueprint;');
+        $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, createDate, dateTo, licOnly, status, location FROM LicBlueprint ORDER BY id DESC;');
         $stmt->execute();
         $LicBlueprintsArr = $stmt->fetchAll();
         $stmt->closeCursor();

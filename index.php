@@ -55,12 +55,11 @@
         $(
             function()
             {
-                // При нажатии на кнопку "Старт"
-                $("#start").click
+                $("#startTaskManager").click
                 (
                     function()
                     {
-                        $.get("handler/hStartTaskManager.php", {}, function(data){ alert("Запрос успешно отправлен"); });
+                        $.get("handler/hStartTaskManager.php", {}, function(data){ });
                     }
                 );
             }
@@ -71,18 +70,31 @@
         $(
             function()
             {
-                // При нажатии на кнопку "Старт"
-                $("#stop").click
+                $("#stopTaskManager").click
                 (
                     function()
                     {
-                        $.get("handler/hStopTaskManager.php", {}, function(data){ alert("Запрос успешно отправлен"); });
+                        $.get("handler/hStopTaskManager.php", {}, function(data){ });
                     }
                 );
             }
         );
     </script>
 
+    <script>
+        $(
+            function()
+            {
+                $("#restartVM").click
+                (
+                    function()
+                    {
+                        $.get("handler/hRestartVM.php", {}, function(data){  });
+                    }
+                );
+            }
+        );
+    </script>
 
 </head>
 <body>
