@@ -17,7 +17,7 @@
                 <li class="dropdown" id="settingsmenu">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-wrench"></i> Настройки<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="?page=ride_card">Factory Liciense</a></li>
+                        <li><a href="?page=settings">License Factory</a></li>
 
                     </ul>
                 </li>

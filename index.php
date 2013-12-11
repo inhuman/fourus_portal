@@ -51,6 +51,39 @@
         });
     </script>
 
+    <script>
+        $(
+            function()
+            {
+                // При нажатии на кнопку "Старт"
+                $("#start").click
+                (
+                    function()
+                    {
+                        $.get("handler/hStartTaskManager.php", {}, function(data){ alert("Запрос успешно отправлен"); });
+                    }
+                );
+            }
+        );
+    </script>
+
+    <script>
+        $(
+            function()
+            {
+                // При нажатии на кнопку "Старт"
+                $("#stop").click
+                (
+                    function()
+                    {
+                        $.get("handler/hStopTaskManager.php", {}, function(data){ alert("Запрос успешно отправлен"); });
+                    }
+                );
+            }
+        );
+    </script>
+
+
 </head>
 <body>
 <div id="back-to-page-top">
