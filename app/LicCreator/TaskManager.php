@@ -92,7 +92,8 @@ class TaskManager{
                   if($blueprintID != ''){
 
                       $this->sendBlueprint($blueprintID);
-                      $this->changeLicBlueprintStatus('in queue',$blueprintID);
+                      $this->changeLicBlueprintStatus('in progress',$blueprintID);
+
                   }
                   break;
 
@@ -100,10 +101,11 @@ class TaskManager{
                   $this->setCoreStatusDB('busy');
                   break;
 
+              case "done":
+
               case "unknown":
                   $this->setCoreStatusDB('unknown');
                   break;
-
            }
         sleep(5);
         }
@@ -147,7 +149,7 @@ class TaskManager{
 
     }
 
-    private function changeLicBlueprintStatus($status,$blueprintId)
+    public static function changeLicBlueprintStatus($status,$blueprintId)
     {
         $dbh = new PDOConfig();
         $stmt = $dbh->prepare('SET NAMES utf8; UPDATE LicBlueprint SET status=:status WHERE id=:id');
@@ -157,7 +159,7 @@ class TaskManager{
         $stmt->closeCursor();
     }
 
-
+                                                //чета может удалить ее уже
     private function sendBlueprintsFromQueue() // TODO: тут должен указываться тип блупринта wmv, prv, prvk
     {
         /*
@@ -192,16 +194,12 @@ class TaskManager{
 
         do
         {
-            try{
+
             $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
                     if(socket_connect($sock, '192.168.0.211', 1024)){
                 $msg = "getstatus ";
                 socket_send($sock,$msg,strlen($msg),MSG_OOB);}
                 else{return $CoreStatus='unknown';}
-            }
-            catch(Exception $e)
-            {return $CoreStatus='unknown';};
-
 
 
             $ServerAddress = '127.0.0.1';

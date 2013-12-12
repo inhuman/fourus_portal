@@ -708,6 +708,17 @@ class DrawTable {
        }
        else{echo '<span class="label label-success"><b>Task Manager: ONLINE</b></span>';}
 
+       //TODO: проверка запущен ли LicChecker.php
+       $rawPsDataArr = `ps aux | grep LicChecker.php`;
+       $PsData = explode('php5',$rawPsDataArr);
+       if ($PsData[1] == '')
+       {
+           echo '<span class="label label-important"><b>Lic Checker: OFFLINE</b></span>';
+       }
+       else{echo '<span class="label label-success"><b>Lic Checker: ONLINE</b></span>';}
+
+
+
 
 
        $CoreVMStatus = TaskManager::pingDomain('192.168.0.211');
