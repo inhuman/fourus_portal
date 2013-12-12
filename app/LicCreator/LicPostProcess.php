@@ -2,6 +2,7 @@
 require_once __DIR__."/../../class/PDOConfig.php";
 require_once __DIR__."/../../class/FactoryRide.php";
 require_once __DIR__."/../../class/FactoryAttraction.php";
+require_once __DIR__."/../../class/Net/SFTP.php";
 class LicPostProcess {
 
 
@@ -24,7 +25,6 @@ class LicPostProcess {
 
         echo "attr_id: ".$status['attr_id'];
         echo "<br>ride_id: ".$status['ride_id'];
-        echo "<br>licOnly: ".$status['licOnly'];
 
         $ride = FactoryRide::findRide($status['ride_id']);
         $attr = FactoryAttraction::findOne($status['attr_id']);
@@ -39,14 +39,26 @@ class LicPostProcess {
            $remoteFileNameWmv = '/processing/'.$ride->getFileName().'.lic';
            $remoteFileNamePrvk = '/processing/'.$ride->getPrvkName().'.lic';
 
-           mkdir("/var/www/city/$attr->getSerialId() - $attr->getTown()/$blueprintID/", 0775, true);
+           $attrFolder = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID;
+
+           echo "attrFolder: ".$attrFolder;
+           mkdir($attrFolder, 0775, true);
+
 
            $localFileNameWmv = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic';
            $localFileNamePrvk = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getPrvkName().'.lic';
 
+            $sftp = new Net_SFTP('192.168.0.211');
+            if (!$sftp->login('id', 'id1@')) {
+                exit('Login Failed');
+            }
+
+            $sftp->get($remoteFileNameWmv, $localFileNameWmv);
+            $sftp->get($remoteFileNamePrvk, $localFileNamePrvk);
+
+
             $link = '<a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic">wmv.lic</a>
                      <a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getPrvkName().'.lic">prvk.lic</a>';
-
 
             $dbh = new PDOConfig();
             $stmt = $dbh->prepare('UPDATE LicBlueprint SET location=:location WHERE id=:id');
@@ -55,7 +67,7 @@ class LicPostProcess {
             $stmt->execute();
             $stmt->closeCursor();
 
-
+/*
 
             echo "<br>remote wmv: $remoteFileNameWmv" ;
             echo "<br>remote prvk: $remoteFileNamePrvk" ;
@@ -64,6 +76,7 @@ class LicPostProcess {
             echo "<br>local wmv: $localFileNamePrvk" ;
 
             echo "<br>link wmv: $link" ;
+*/
         }
 
 
@@ -84,5 +97,3 @@ class LicPostProcess {
 */
     }
 }
-
-$r = new LicPostProcess($argv[1]);
