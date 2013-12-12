@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__."/TaskManager.php";
+require_once __DIR__."/LicPostProcess.php";
 class LicChecker{
 //----------------------------------------------------------------------------------------------------------------------
     public function __construct()
@@ -38,7 +39,7 @@ class LicChecker{
 
                     case "done ":
                         TaskManager::changeLicBlueprintStatus("done",$blueprintId);
-
+                        `php5 /var/www/portal/app/LicCreator/LicPostProcess.php $blueprintId`;
                         break;
 
 

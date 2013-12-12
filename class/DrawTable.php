@@ -687,7 +687,7 @@ class DrawTable {
            echo '<td>' . $LicBlueprint[4] . '</td>';
            echo '<td>' . $LicBlueprint[5] . '</td>';
            echo '<td>' . $LicBlueprint[6] . '</td>';
-
+           echo '<td>' . $LicBlueprint[7] . '</td>';
 
 
 
