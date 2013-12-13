@@ -11,3 +11,11 @@ echo "<input type='button' class='btn btn-danger' id='stopTaskManager' value='St
 
 echo "<br><br>";
 echo "<input type='button' class='btn btn-danger' id='restartVM' value='Restart VM'>";
+
+echo "<br><br>";
+echo "<input type='button' class='btn btn-success' id='startLicChecker' value='Start Lic Checker'>";
+
+echo "<br><br>";
+echo "<input type='button' class='btn btn-danger' id='stopLicChecker' value='Stop Lic Checker'>";
+
+

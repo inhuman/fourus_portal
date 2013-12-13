@@ -85,6 +85,38 @@
         $(
             function()
             {
+                $("#stopLicChecker").click
+                (
+                    function()
+                    {
+                        $.get("handler/hStopLicChecker.php", {}, function(data){ });
+                    }
+                );
+            }
+        );
+    </script>
+
+    <script>
+        $(
+            function()
+            {
+                $("#startLicChecker").click
+                (
+                    function()
+                    {
+                        $.get("handler/hStartLicChecker.php", {}, function(data){ });
+                    }
+                );
+            }
+        );
+    </script>
+
+
+
+    <script>
+        $(
+            function()
+            {
                 $("#restartVM").click
                 (
                     function()

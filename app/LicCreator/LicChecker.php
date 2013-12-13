@@ -12,7 +12,7 @@ class LicChecker{
     {
 
         $ServerAddress = '127.0.0.1';
-        $ServerPort = 512;
+        $ServerPort = 1025;
         $SocketLicChecker = socket_create_listen($ServerPort);
 
 
@@ -40,6 +40,7 @@ class LicChecker{
                     case "done ":
                         TaskManager::changeLicBlueprintStatus("done",$blueprintId);
                         $r = new LicPostProcess($blueprintId);
+
                         break;
 
 

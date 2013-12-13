@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__.'/LicCreator/TaskManager.php';
-require_once __DIR__.'/LicCreator/LicChecker.php';
+
 $TaskManager = new TaskManager();
 
 
