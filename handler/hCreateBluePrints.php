@@ -11,6 +11,7 @@ $licDateArr = $_POST['inputLicDate'];
 $volumeArr  = $_POST['volume'];
 $licOnlyArr = $_POST['LicOnly'];
 
+
 $i=0;
 while($i < 20)
 {
@@ -19,7 +20,8 @@ while($i < 20)
     {
        if($licDateArr[$i])
        {
-           //echo '<br>'.$attr_id.','.$rideIdArr[$i].','.$licDateArr[$i].','.$volumeArr[$i].','.$licOnlyArr[$i].'';
+           echo '<br>'.$attr_id.','.$rideIdArr[$i].','.$licDateArr[$i].','.$volumeArr[$i].','.$licOnlyArr[$i].'';
+           if($licOnlyArr[$i] == ''){$licOnlyArr[$i] = 0;}
            $lic[$i] = new FactoryLicBlueprint($attr_id, $rideIdArr[$i], $licDateArr[$i], $volumeArr[$i], $licOnlyArr[$i]);
        }
 
@@ -27,6 +29,5 @@ while($i < 20)
 }
 
 
-//$r = new TaskManager();
 
 header('Location: /portal');

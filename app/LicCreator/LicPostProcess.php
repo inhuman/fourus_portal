@@ -34,7 +34,7 @@ class LicPostProcess {
         echo "<br>";
         var_dump($attr);
 
-        if($status['licOnly'] == '1')
+        if($status['licOnly'] == 1)
         {
            $remoteFileNameWmv = '/processing/'.$ride->getFileName().'.lic';
            $remoteFileNamePrvk = '/processing/'.$ride->getPrvkName().'.lic';
@@ -78,7 +78,10 @@ class LicPostProcess {
             echo "<br>link wmv: $link" ;
 */
         }
-
+        elseif($status['licOnly'] == 0)
+        {
+            //TODO: что делать если снята галка "только лицензия"
+        }
 
 /*
         $local_file_wmv = file_get_contents('/var/www/portal/licences/blueprints/blueprint['.$blueprintId.']._wmv');
