@@ -17,7 +17,7 @@ class LicPostProcess {
     {
 
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare("SELECT attr_id, ride_id, licOnly FROM LicBlueprint WHERE id=:id");
+        $stmt = $dbh->prepare("SELECT attr_id, ride_id, licOnly, volume FROM LicBlueprint WHERE id=:id");
         $stmt->bindValue(":id",$blueprintID);
         $stmt->execute();
         $status = $stmt->fetch();
@@ -56,6 +56,9 @@ class LicPostProcess {
             $sftp->get($remoteFileNameWmv, $localFileNameWmv);
             $sftp->get($remoteFileNamePrvk, $localFileNamePrvk);
 
+            $sftp->delete($remoteFileNameWmv);
+            $sftp->delete($remoteFileNamePrvk);
+
 
             $link = '<a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic">wmv.lic</a>
                      <a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getPrvkName().'.lic">prvk.lic</a>';
@@ -81,6 +84,50 @@ class LicPostProcess {
         elseif($status['licOnly'] == 0)
         {
             //TODO: что делать если снята галка "только лицензия"
+            $remoteFileNameWmvLic   = '/processing/'.$ride->getFileName().'.lic';
+            $remoteFileNamePrvkLic  = '/processing/'.$ride->getPrvkName().'.lic';
+            $remoteFileNameWmvCab   = '/processing/'.$ride->getFileName().'_'.$ride->getRideName().'_'.$status['volume'].'.cab';
+            $remoteFileNamePrvkCab  = '/processing/'.$ride->getPrvkName().'_'.$ride->getRideName().'_'.$status['volume'].'.cab';;
+
+            $attrFolder = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID;
+
+            echo "attrFolder: ".$attrFolder;
+            mkdir($attrFolder, 0775, true);
+
+
+            $localFileNameWmvLic   = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic';
+            $localFileNamePrvkLic  = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getPrvkName().'.lic';
+            $localFileNameWmvCab   = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'_'.$ride->getRideName().'_'.$status['volume'].'.cab';
+            $localFileNamePrvkCab  = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getPrvkName().'_'.$ride->getRideName().'_'.$status['volume'].'.cab';
+
+            $sftp = new Net_SFTP('192.168.0.211');
+            if (!$sftp->login('id', 'id1@')) {
+                exit('Login Failed');
+            }
+
+            $sftp->get($remoteFileNameWmvLic, $localFileNameWmvLic);
+            $sftp->get($remoteFileNamePrvkLic, $localFileNamePrvkLic);
+            $sftp->get($remoteFileNamePrvkCab, $localFileNamePrvkCab);
+            $sftp->get($remoteFileNameWmvCab, $localFileNameWmvCab);
+
+            $sftp->delete($remoteFileNameWmvLic);
+            $sftp->delete($remoteFileNamePrvkLic);
+            $sftp->delete($remoteFileNamePrvkCab);
+            $sftp->delete($remoteFileNameWmvCab);
+
+
+            $link = '<a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic">wmv.lic</a>
+                     <a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getPrvkName().'.lic">prvk.lic</a>
+                     <a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'_'.$ride->getRideName().'_'.$status['volume'].'.cab">wmv.cab</a>
+                     <a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getPrvkName().'_'.$ride->getRideName().'_'.$status['volume'].'.cab">prvk.cab</a>';
+
+            $dbh = new PDOConfig();
+            $stmt = $dbh->prepare('UPDATE LicBlueprint SET location=:location WHERE id=:id');
+            $stmt->bindValue(':location',$link);
+            $stmt->bindValue(':id',$blueprintID);
+            $stmt->execute();
+            $stmt->closeCursor();
+
         }
 
 /*
