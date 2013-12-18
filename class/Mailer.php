@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/PDOConfig.php';
 class Mailer {
 
     public $message, $subj, $attach, $to, $addrCopy, $headers;
@@ -94,12 +95,21 @@ class Mailer {
     }
 
 
+    static public function getRecipients($FactoryID)
+    {
 
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare("SELECT attr_id, ride_id, licOnly, volume FROM LicBlueprint WHERE id=:id");
+        $stmt->bindValue(":id",$blueprintID);
+        $stmt->execute();
+        $status = $stmt->fetch();
+        $stmt->closeCursor();
 
+    }
 
 }
 
-$mail = new Mailer();
+
 
 
 
@@ -107,4 +117,4 @@ $mail = new Mailer();
 //$mail->subject = 'Ваш аккаунт под угрозой!';
 //$mail->message = 'Это фейковое сообщение!!  ';
 
-$mail->XMail('Портал Fourus <noreply@studio-fourus.ru>','adm.fourus@gmail.com','Лицензии','Инструкция хуем буем','/data/city/test/test.txt');
+//$mail->XMail('Портал Fourus <noreply@studio-fourus.ru>','adm.fourus@gmail.com','Лицензии','Инструкция хуем буем','/data/city/test/test.txt');

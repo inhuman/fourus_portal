@@ -205,6 +205,21 @@ class DrawTable {
        echo '</div>';
 
        echo '<div class="container">';
+       echo '<div class="row">';
+       echo '<div class="span3"> ';
+       echo '</div>';
+       echo '<div class="span6"> ';
+
+      // TODO: инфо по тому куда отсылать лицензии, имя телефон мыло
+
+       echo '</div>';
+       echo '</div>';
+       echo '<div class="span3"> ';
+       echo '</div>';
+       echo '</div>';
+
+
+       echo '<div class="container">';
            echo '<div class="row">';
                echo '<div class="span3"> ';
                    echo '</div>';
@@ -648,6 +663,9 @@ class DrawTable {
                echo "</div>";
              echo "</div>";
            }
+
+           //TODO: имя и мыло кому отправить лицензии - чекбоксы
+
            echo "<button type='submit' class='btn btn-block btn-primary'>Создать лицензии</button>";
 
          echo "</div>";
