@@ -657,9 +657,6 @@ class DrawTable {
 
    public static function LicQueueCard()
    {
-
-       //$r = new TaskManager();
-
        self::LicCreatorStatusPanel();
 
        echo '<table class="table table-bordered table-hover tbl_pointer">';
@@ -668,11 +665,10 @@ class DrawTable {
        echo "<th>Город</th>";
        echo "<th>Имя райда</th>";
        echo "<th>Дата</th>";
-       echo "<th>Только лицензия?</th>";
+       echo "<th>Состав</th>";
        echo "<th>Статус</th>";
        echo "<th>Расположение</th>";
        echo "</tr></thead><tbody></b>";
-
 
        foreach(TaskManager::getDBDataQueueLicBlueprints() as $LicBlueprint)
        {
@@ -685,15 +681,15 @@ class DrawTable {
            echo '<td>' . $attr->getTown() . '</td>';
            echo '<td>' . $ride->getRideName() . '</td>';
            echo '<td>' . $LicBlueprint[4] . '</td>';
-           echo '<td>' . $LicBlueprint[5] . '</td>';
+
+           if($LicBlueprint[5] == 1)    {echo '<td>Лицензия</td>';}
+           elseif($LicBlueprint[5] == 0){echo '<td>Лицензия, райд</td>';}
+
            echo '<td>' . $LicBlueprint[6] . '</td>';
            echo '<td>' . $LicBlueprint[7] . '</td>';
 
-
-
            echo '</tr>';
        }
-
 
        echo "</tbody></table>";
    }
@@ -702,34 +698,19 @@ class DrawTable {
    {
        $rawPsDataArr = `ps aux | grep LicCreatorCron.php`;
        $PsData = explode('php5',$rawPsDataArr);
-       if ($PsData[1] == '')
-       {
-           echo '<span class="label label-important"><b>Task Manager: OFFLINE</b></span>';
-       }
-       else{echo '<span class="label label-success"><b>Task Manager: ONLINE</b></span>';}
+       if ($PsData[1] == '') {echo '<span class="label label-important"><b>Task Manager: OFFLINE</b></span>';}
+       else                  {echo '<span class="label label-success"><b>Task Manager: ONLINE</b></span>';}
 
 
        $rawPsDataArr = `ps aux | grep LicChecker.php`;
        $PsData = explode('php5',$rawPsDataArr);
-       if ($PsData[1] == '')
-       {
-           echo '<span class="label label-important"><b>Lic Checker: OFFLINE</b></span>';
-       }
-       else{echo '<span class="label label-success"><b>Lic Checker: ONLINE</b></span>';}
-
-
-
+       if ($PsData[1] == ''){echo '<span class="label label-important"><b>Lic Checker: OFFLINE</b></span>';}
+       else                 {echo '<span class="label label-success"><b>Lic Checker: ONLINE</b></span>';}
 
 
        $CoreVMStatus = TaskManager::pingDomain('192.168.0.211');
-       if($CoreVMStatus == 'online')
-       {
-           echo '<span class="label label-success"><b>Core VM: ONLINE</b></span>';
-       }
-       elseif($CoreVMStatus == 'offline')
-       {
-           echo '<span class="label label-important"><b>Core VM: OFFLINE</b></span>';
-       }
+       if($CoreVMStatus == 'online')        {echo '<span class="label label-success"><b>Core VM: ONLINE</b></span>';}
+       elseif($CoreVMStatus == 'offline')   {echo '<span class="label label-important"><b>Core VM: OFFLINE</b></span>';}
 
 
        $dbh = new PDOConfig();
@@ -741,22 +722,10 @@ class DrawTable {
 
        switch($CoreStatus)
        {
-           case 'ready':
-               echo '<span class="label label-success"><b>Core: READY</b></span>'; break;
-
-           case 'busy':
-               echo '<span class="label label-warning"><b>Core: BUSY</b></span>'; break;
-
-           case 'unknown':
-               echo '<span class="label label-important"><b>Core: UNKNOWN</b></span>'; break;
-
-
+           case 'ready':    echo '<span class="label label-success"><b>Core: READY</b></span>'; break;
+           case 'busy':     echo '<span class="label label-warning"><b>Core: BUSY</b></span>'; break;
+           case 'unknown':  echo '<span class="label label-important"><b>Core: UNKNOWN</b></span>'; break;
        }
-
-
-
-
-
    }
 
    public static function ContentTxtCreateCard()

@@ -56,8 +56,7 @@ class LicPostProcess {
             $sftp->get($remoteFileNameWmv, $localFileNameWmv);
             $sftp->get($remoteFileNamePrvk, $localFileNamePrvk);
 
-            $sftp->delete($remoteFileNameWmv);
-            $sftp->delete($remoteFileNamePrvk);
+
 
 
             $link = '<a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic">wmv.lic</a>
@@ -70,16 +69,10 @@ class LicPostProcess {
             $stmt->execute();
             $stmt->closeCursor();
 
-/*
+          $sftp->delete($remoteFileNameWmv);
+            $sftp->delete($remoteFileNamePrvk);
 
-            echo "<br>remote wmv: $remoteFileNameWmv" ;
-            echo "<br>remote prvk: $remoteFileNamePrvk" ;
 
-            echo "<br>local wmv: $localFileNameWmv" ;
-            echo "<br>local wmv: $localFileNamePrvk" ;
-
-            echo "<br>link wmv: $link" ;
-*/
         }
         elseif($status['licOnly'] == 0)
         {
@@ -104,16 +97,13 @@ class LicPostProcess {
             if (!$sftp->login('id', 'id1@')) {
                 exit('Login Failed');
             }
-
+/*
             $sftp->get($remoteFileNameWmvLic, $localFileNameWmvLic);
             $sftp->get($remoteFileNamePrvkLic, $localFileNamePrvkLic);
             $sftp->get($remoteFileNamePrvkCab, $localFileNamePrvkCab);
             $sftp->get($remoteFileNameWmvCab, $localFileNameWmvCab);
+*/
 
-            $sftp->delete($remoteFileNameWmvLic);
-            $sftp->delete($remoteFileNamePrvkLic);
-            $sftp->delete($remoteFileNamePrvkCab);
-            $sftp->delete($remoteFileNameWmvCab);
 
 
             $link = '<a href="/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic">wmv.lic</a>
@@ -127,23 +117,14 @@ class LicPostProcess {
             $stmt->bindValue(':id',$blueprintID);
             $stmt->execute();
             $stmt->closeCursor();
-
-        }
-
 /*
-        $local_file_wmv = file_get_contents('/var/www/portal/licences/blueprints/blueprint['.$blueprintId.']._wmv');
-        $remote_file_wmv = '/queue/blueprint['.$blueprintId.']._wmv';
-
-        $local_file_prvk = file_get_contents('/var/www/portal/licences/blueprints/blueprint['.$blueprintId.']._prvk');
-        $remote_file_prvk = '/queue/blueprint['.$blueprintId.']._prvk';
-
-        $sftp = new Net_SFTP('192.168.0.211');
-        if (!$sftp->login('id', 'id1@')) {
-            exit('Login Failed');
+            $sftp->delete($remoteFileNameWmvLic);
+            $sftp->delete($remoteFileNamePrvkLic);
+            $sftp->delete($remoteFileNamePrvkCab);
+            $sftp->delete($remoteFileNameWmvCab);
+*/
         }
 
-        $sftp->put($remote_file_wmv, $local_file_wmv);
-        $sftp->put($remote_file_prvk, $local_file_prvk);
-*/
+
     }
 }
