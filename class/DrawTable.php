@@ -4,6 +4,7 @@ require_once __DIR__."/FactoryRide.php";
 require_once __DIR__."/FactoryAttraction.php";
 require_once __DIR__."/FactoryLic.php";
 require_once __DIR__."/../app/LicCreator/TaskManager.php";
+require_once __DIR__."/FactoryMail.php";
 
 
 class DrawTable {
@@ -665,8 +666,33 @@ class DrawTable {
            }
 
            //TODO: имя и мыло кому отправить лицензии - чекбоксы
+            $recipientArr =  FactoryMail::getRecipient(0);
 
-           echo "<button type='submit' class='btn btn-block btn-primary'>Создать лицензии</button>";
+
+       echo '<div class="container">';
+       echo '<div class="row">';
+       echo '<div class="span3"> ';
+       echo '</div>';
+       echo '<div class="span6"> ';
+       echo 'Выслать письмо: <br>';
+       var_dump($recipientArr);
+
+       foreach($recipientArr as $recipient)
+       {
+                echo 1;
+       }
+       //echo "<input type='checkbox' checked='checked' name='Recipient' id='Recipient' value='1'> $recipient[0] ($recipient[1])";
+       echo '</div>';
+       echo '</div>';
+       echo '<div class="span3"> ';
+       echo '</div>';
+       echo '</div>';
+
+
+
+
+
+           echo "<br><button type='submit' class='btn btn-block btn-primary'>Создать лицензии</button>";
 
          echo "</div>";
        echo "</form>";

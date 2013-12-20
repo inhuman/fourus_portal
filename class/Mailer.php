@@ -94,19 +94,6 @@ class Mailer {
 
     }
 
-
-    static public function getRecipients($FactoryID)
-    {
-
-        $dbh = new PDOConfig();
-        $stmt = $dbh->prepare("SELECT attr_id, ride_id, licOnly, volume FROM LicBlueprint WHERE id=:id");
-        $stmt->bindValue(":id",$blueprintID);
-        $stmt->execute();
-        $status = $stmt->fetch();
-        $stmt->closeCursor();
-
-    }
-
 }
 
 
