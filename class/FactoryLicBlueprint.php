@@ -14,6 +14,7 @@ class FactoryLicBlueprint extends LicBlueprint {
 
         $this->createBlueprintWmv();
         $this->createBlueprintPrvk();
+
     }
 
     private function addLicBlueprintToQueue()
@@ -107,6 +108,8 @@ class FactoryLicBlueprint extends LicBlueprint {
         //$dataToWrite = mb_convert_encoding($dataToWrite,'UTF-8', 'auto');
         file_put_contents('../licences/blueprints/'.$fileName,$dataToWrite);
     }
+
+
 
 }
 

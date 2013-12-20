@@ -674,14 +674,16 @@ class DrawTable {
        echo '<div class="span3"> ';
        echo '</div>';
        echo '<div class="span6"> ';
-       echo 'Выслать письмо: <br>';
+       echo 'Выслать письмо:';
        var_dump($recipientArr);
-
+       $i=0;
        foreach($recipientArr as $recipient)
        {
-                echo 1;
+           $i++;
+           echo "<br>";
+           echo "<input type='checkbox'  name='Recipient[$i]' id='Recipient[$i]' value='$recipient[0]'> $recipient[1] ($recipient[2])";
        }
-       //echo "<input type='checkbox' checked='checked' name='Recipient' id='Recipient' value='1'> $recipient[0] ($recipient[1])";
+
        echo '</div>';
        echo '</div>';
        echo '<div class="span3"> ';

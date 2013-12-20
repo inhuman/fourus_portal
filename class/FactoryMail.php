@@ -9,13 +9,24 @@ class FactoryMail {
     {
 
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare("SELECT Name, Email, Phone FROM Accounting WHERE AttractionFactoryID=:AttractionFactoryID");
+        $stmt = $dbh->prepare("SELECT AccountID, Name, Email, Phone FROM Accounting WHERE AttractionFactoryID=:AttractionFactoryID");
         $stmt->bindValue(":AttractionFactoryID",$FactoryID);
         $stmt->execute();
-        $recipient = $stmt->fetch();
+        $recipientArr = $stmt->fetchAll();
         $stmt->closeCursor();
-        return $recipient;
+        return $recipientArr;
 
+    }
+
+    static public function addRecipientToDeliveryList($BlueprintID, $AccountID, $Status)
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare("INSERT INTO LicDeliveryList VALUES (:BlueprintID, :AccountID, :Status)");
+        $stmt->bindValue(":BlueprintID",$BlueprintID);
+        $stmt->bindValue(":AccountID",$AccountID);
+        $stmt->bindValue(":Status",$Status);
+        $stmt->execute();
+        $stmt->closeCursor();
     }
 
 
