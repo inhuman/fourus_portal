@@ -27,7 +27,7 @@ while($i < 20)
 
            foreach($recipientArr as $recipient)
            {
-               FactoryMail::addRecipientToDeliveryList($lic[$i]->getId(), $recipient[0], 'in queue');
+               FactoryMail::addRecipientToDeliveryList($lic[$i]->getId(), $recipient[0], 0);
 
            }
 

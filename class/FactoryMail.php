@@ -29,5 +29,32 @@ class FactoryMail {
         $stmt->closeCursor();
     }
 
+    static public function createEmail()
+    {
 
+    }
+
+    static public function createDeliveryPackage($AccountID, $BlueprintIDArr, $PackageType, $AttractionID)
+    {
+       $Attraction = FactoryAttraction::findOne($AttractionID);
+
+       switch($PackageType)
+       {
+            case "lic":
+                $Subject = "Лицензии - $Attraction->getTown()";
+                $Body = "";
+
+                break;
+
+            case "licnride":
+                $Subject = "Лицензии и райды - $Attraction->getTown()";
+                $Body = "";
+                break;
+
+            case "ride":
+                $Subject = "Райды - $Attraction->getTown()";
+                $Body = "";
+                break;
+       }
+    }
 }

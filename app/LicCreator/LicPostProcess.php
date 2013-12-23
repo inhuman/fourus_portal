@@ -42,7 +42,7 @@ class LicPostProcess {
            $attrFolder = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID;
 
            echo "attrFolder: ".$attrFolder;
-           mkdir($attrFolder, 0775, true);
+           mkdir($attrFolder, 0777, true);
 
 
            $localFileNameWmv = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic';
@@ -85,7 +85,7 @@ class LicPostProcess {
             $attrFolder = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID;
 
             echo "attrFolder: ".$attrFolder;
-            mkdir($attrFolder, 0775, true);
+            mkdir($attrFolder, 0777, true);
 
 
             $localFileNameWmvLic   = '/var/www/city/'.$attr->getSerialId().' - '.$attr->getTown().'/'.$blueprintID.'/'.$ride->getFileName().'.lic';

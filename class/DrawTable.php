@@ -728,8 +728,8 @@ class DrawTable {
            echo '<td>' . $ride->getRideName() . '</td>';
            echo '<td>' . $LicBlueprint[4] . '</td>';
 
-           if($LicBlueprint[5] == 1)    {echo '<td>Лицензия</td>';}
-           elseif($LicBlueprint[5] == 0){echo '<td>Лицензия, райд</td>';}
+           if($LicBlueprint[5] == 1)    {echo '<td><i class="icon-list"></i></td>';}
+           elseif($LicBlueprint[5] == 0){echo '<td><i class="icon-list"></i>, <i class="icon-film"></i></td>';}
 
            echo '<td>' . $LicBlueprint[6] . '</td>';
            echo '<td>' . $LicBlueprint[7] . '</td>';
