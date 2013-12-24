@@ -97,12 +97,12 @@ class LicPostProcess {
             if (!$sftp->login('id', 'id1@')) {
                 exit('Login Failed');
             }
-/*
+
             $sftp->get($remoteFileNameWmvLic, $localFileNameWmvLic);
             $sftp->get($remoteFileNamePrvkLic, $localFileNamePrvkLic);
             $sftp->get($remoteFileNamePrvkCab, $localFileNamePrvkCab);
             $sftp->get($remoteFileNameWmvCab, $localFileNameWmvCab);
-*/
+
 
 
 

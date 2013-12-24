@@ -246,7 +246,7 @@ class TaskManager{
     static public function getDBDataQueueLicBlueprints()
     {
         $dbh = new PDOConfig();
-        $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, createDate, dateTo, licOnly, status, location FROM LicBlueprint ORDER BY id DESC;');
+        $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, createDate, dateTo, licOnly, status, location FROM LicBlueprint ORDER BY id DESC LIMIT 50;');
         $stmt->execute();
         $LicBlueprintsArr = $stmt->fetchAll();
         $stmt->closeCursor();

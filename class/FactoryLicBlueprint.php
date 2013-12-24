@@ -27,7 +27,7 @@ class FactoryLicBlueprint extends LicBlueprint {
 
     }
 
-    private function  createBlueprintWmv()
+    private function createBlueprintWmv()
     {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
@@ -65,7 +65,7 @@ class FactoryLicBlueprint extends LicBlueprint {
 
     }
 
-    private function  createBlueprintPrvk()
+    private function createBlueprintPrvk()
     {
         $ride        = FactoryRide::findRide($this->getRideId());
         $attraction  = FactoryAttraction::findOne($this->getAttrId());
@@ -109,7 +109,16 @@ class FactoryLicBlueprint extends LicBlueprint {
         file_put_contents('../licences/blueprints/'.$fileName,$dataToWrite);
     }
 
-
+    static public function getBlueprint($BlueprintID)
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare('SELECT id, attr_id, ride_id, location FROM LicBlueprint WHERE id = :licblueprint_id;');
+        $stmt->bindValue(':licblueprint_id',$BlueprintID);
+        $stmt->execute();
+        $Blueprint = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $Blueprint;
+    }
 
 }
 

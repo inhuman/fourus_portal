@@ -675,7 +675,7 @@ class DrawTable {
        echo '</div>';
        echo '<div class="span6"> ';
        echo 'Выслать письмо:';
-       var_dump($recipientArr);
+
        $i=0;
        foreach($recipientArr as $recipient)
        {
