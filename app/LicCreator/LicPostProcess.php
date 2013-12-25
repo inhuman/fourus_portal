@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__."/../../class/PDOConfig.php";
 require_once __DIR__."/../../class/FactoryRide.php";
+require_once __DIR__."/../../class/FactoryMail.php";
 require_once __DIR__."/../../class/FactoryAttraction.php";
 require_once __DIR__."/../../class/Net/SFTP.php";
 class LicPostProcess {
@@ -122,9 +123,50 @@ class LicPostProcess {
             $sftp->delete($remoteFileNamePrvkLic);
             $sftp->delete($remoteFileNamePrvkCab);
             $sftp->delete($remoteFileNameWmvCab);
+
 */
+            if(self::DeliveryPackageEndDetector($blueprintID,$attr->getId()))
+            {
+                FactoryMail::DeliverPackages($attr->getId(), self::DeliveryPackageStartDetector($blueprintID,$attr->getId()), $blueprintID);
+            }
         }
 
 
+
+    }
+
+    public static function DeliveryPackageEndDetector($CurrentBlueprintID, $CurrentAttrID)
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare("SELECT id, attr_id, FROM LicBlueprint WHERE id=:id");
+        $stmt->bindValue(":id",++$CurrentBlueprintID);
+        $stmt->execute();
+        $status = $stmt->fetchAll();
+        $stmt->closeCursor();
+
+        if($status['attr_id'] == $CurrentAttrID)
+        {
+            return false;
+        }
+        elseif($status['attr_id'] != $CurrentAttrID)
+        {
+            return true;
+        }
+    }
+
+    public static function DeliveryPackageStartDetector($CurrentBlueprintID, $CurrentAttrID)
+    {
+        $dbh = new PDOConfig();
+        $stmt = $dbh->prepare("SELECT id, attr_id, FROM LicBlueprint WHERE id=:id");
+        do
+        {
+            $stmt->bindValue(":id",--$CurrentBlueprintID);
+            $stmt->execute();
+            $status = $stmt->fetchAll();
+            $FirstBlueprintID = $CurrentBlueprintID;
+        }
+        while($status['attr_id'] == $CurrentAttrID);
+        $stmt->closeCursor();
+        return $FirstBlueprintID;
     }
 }

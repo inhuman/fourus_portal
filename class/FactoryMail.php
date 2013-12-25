@@ -161,4 +161,10 @@ class FactoryMail {
         $stmt->closeCursor();
         return $Package;
     }
+
+    static public function DeliverPackages($FactoryID, $FirstBlueprintID, $LastBlueprintID)
+    {
+
+
+    }
 }
